@@ -1,0 +1,37 @@
+abuocc                  Abundance/Occurrence Graphical Analysis
+brycesite               Site Data for Bryce Canyon National Park
+bryceveg                Bryce Canyon Vegetation Data
+confus                  Confusion Matrix
+const                   Constancy Table
+dga                     Direct Gradient Analysis
+disana                  Dissimilarity Analysis
+dsvdis                  Dissimilarity Indices and Distance Measures
+duarm                   Indicator Species Analysis Minimizing Partial
+                        Occurrences
+duleg                   Dufrene-Legendre Indicator Species Analysis
+envrtest                Environmental Distribution Test
+euclidify               Nearest Euclidean Space Representation of a
+                        Dissimilarity Object
+importance              Importance Table
+indspc                  Compositional Indicator Species Analysis
+labdsv.internal         LabDSV Internal Funcctions
+metrify                 Nearest Metric Space Representation of a
+                        Dissimilarity Object
+nmds                    Nonmetric Multidimensional Scaling
+ordcomp                 Ordination to Dissimilarity Comparison
+ordpart                 Ordination Partitioning
+ordtest                 Ordination Distribution Test
+pca                     Principal Components Analysis
+pco                     Principal Coordinates Analysis
+plot.nmds               Plotting Routines For Nonmetric
+                        Multi-dimensional Scaling Ordinations
+plot.pca                Plotting Routines For Principal Components
+                        Ordinations
+plot.pco                Plotting Routines For Principal Coordinates
+                        Ordinations
+rndveg                  Randomize a Vegetation Data Frame
+spcdisc                 Species Discrimination Analysis
+tabdev                  Table Deviance
+vardist                 Variable Pairwise Difference
+vegtab                  Vegetation Table
+vegtrans                Vegetation Transformation and Standardization
