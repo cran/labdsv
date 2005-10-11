@@ -3,7 +3,7 @@ c
 c* passed
 c
       double precision ord(nrow,ncol)
-      integer nrow,ncol,ndim
+      integer nrow,ncol,ndim,size
       double precision dist(size)
 c
 c* local

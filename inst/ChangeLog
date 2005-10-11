@@ -1,0 +1,132 @@
+labdsv 1.2-0
+
+A couple of general changes were made to many functions.
+
+1) in several functions the dataframe "veg" was changed to "taxa"
+   to better represent the full range of community ecology the code
+   is suitable for
+
+2) in functions that used classified types or community types the
+   vector specifying that was changed from "class" to "clustering"
+   to avoid conflict with a reserved word, and to integrate better
+   with code from package "cluster".
+
+3) the package was checked and built on both linux and Windows to
+   help ensure better utility on windows
+
+In addition, a number of small changes were made to several functions,
+listed below:
+
+abuocc.R
+	changed veg to taxa in function and documentation
+confus.R
+	added a correction for plotting factors correctly
+	example changed to "\dontrun" because it requires library tree
+const.R
+	changed veg to taxa in function and documentation
+	changed class to clustering in function and documentation
+	changed class test to inheritance
+	generally improved documentation
+dga.R
+	added an invisible return
+	improved the example in the documentation
+disana.R
+	eliminated null class test
+	eliminated FORTRAN call by usin apply with na.rm
+	corrected point labels to "attr(x,'Labels')"
+dissim.R
+	removed function dissim
+dsvdis.R
+	changed an attribute label from "index" to "method" to
+		match dist()
+	changed the test of step from > to >= so that step=1.0 works
+duarm.R
+	changed veg to taxa in function and documentation
+	changed class to clustering
+	simplified the presentation of results
+duleg.R
+	changed veg to taxa in function and documentation
+	changed class to clustering
+	enforced better casting of variable types in FORTRAN call
+	added numitr to FORTRAN call and return
+	improved the labeling of row and column names in output
+	fixed possible bugs from unitiated values in FORTRAN code
+envrtest.R
+	added an argument to function call to control plotting
+	improved the default title on the plot
+euclidify.R
+	cast the input object to class "dist"
+	improved the information in the attributes of the output object
+hilight.R
+	converted hilight to a generic function and wrote separate 
+		methods for PCA. PCO, and NMDS
+importance.R
+	changed veg to taxa
+	changed class to clustering
+	changed class test to inheritance
+metrify.R
+	cast the input object as class "dist"
+	changed the output attribute from "index" to "method" to
+		match dist()
+nmds.R
+	deleted test for null class
+	changed the name of the overlayed object in the 
+		points.nmds function from "overlay" to "which"
+	added "cex=0.8" as the default to function surf.nmds and jsurf.nmds
+	corrected logical values from "T" to "TRUE"	
+	improved the bestnmds function
+	improved the hilight function by adding better control of colors
+		and glyphs
+	added a convex hull function called chullord.nmds()
+npmmds.R
+	dropped function npmmds()
+ordcomp.R
+	deleted the test of NULL class and the option to submit a matrix
+		instead of a "dist" object
+	added an invisible return
+orddist.R
+	cast the input object to double in FORTRAN call
+ordpart.R
+	added default axes to the plot, and renamed axes to ax and ay
+	cast the values to double in FORTRAN call
+        significantly improved the documentation
+ordtest.R
+	added an inheritance test for object of class "pco", "nmds" and 
+		"metaMDS"
+ordutils.R
+	added hilight() and chullord() as generic functions
+pca.R
+	added an explicit "cex = 1" as the default in points.pca()
+	corrected logicals from "T" to "TRUE"
+	corrected the scaling on variance accounted for in varplot()
+	added a jsurf.pca() function to jitter coordinates if necessary
+	added hilight.pca() as a method
+	added chullord.pca() as a method
+	improved the documentation
+pco.R
+	eliminated NULL class test
+	corrected logical "T" to "TRUE"
+	added hilight.pco() as a method
+	added chullord.pco() as a method
+refine.R
+	dropped function refine()
+rndveg.R
+	renamed rndveg() to rndtaxa()
+	changed veg to taxa in function
+simenv.R
+	dropped function simenv(), replaced by envrtest()
+spcdisc.R
+	corrected logical "F" to "FALSE"
+tabdev.R
+	changed veg to taxa
+	cast most variables as double in FORTRAN call
+vardist.R
+	cast arguments as double in FORTRAN call
+vegtab.R
+	changed veg to taxa
+vegtrans.R
+	eliminated FORTRAN call by conversion of algorithm to pure R
+	eliminated function stdveg() to standardize by plot or
+		species max
+zzz.R
+	no longer require stats (now included in base)

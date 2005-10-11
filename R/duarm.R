@@ -1,10 +1,9 @@
-duarm <- function (veg,class,sort=FALSE) 
+duarm <- function (taxa,clustering,sort=FALSE) 
 {
-    tmp <- const(veg,class)
+    tmp <- const(taxa,clustering)
+    result <- apply(tmp,1,function(x){2*sum(abs(x-0.5))/ncol(tmp)})
     if (sort) 
-        result <- rev(sort(apply(tmp,1,function(x){2*sum(abs(x-0.5))/ncol(tmp)})))
-    else
-        result <- apply(tmp,1,function(x){2*sum(abs(x-0.5))/ncol(tmp)})
-    result <- data.frame(result)
+        result <- rev(sort(result))
     result
 }
+

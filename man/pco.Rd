@@ -2,7 +2,7 @@
 \alias{pco}
 \title{Principal Coordinates Analysis}
 \description{Principal coordinates analysis is an eigenanalysis of 
-    of distance or metric dissimilarity matrices.
+    distance or metric dissimilarity matrices.
 }
 \usage{pco(dis, k=2)
 }
@@ -22,7 +22,9 @@
 \item{points}{the coordinates of samples on eigenvectors}
 }
 \references{Gower, J.C. (1966)  Some distance properties of latent root
-and vector methods used in multivariate analysis.  Biometrika 53:325-328.}
+and vector methods used in multivariate analysis.  Biometrika 53:325-328.
+
+\url{http://ecology.msu.montana.edu/labdsv/R}}
 
 \note{Principal Coordinates Analysis was pioneered by Gower (1966)
     as an alternative to PCA better suited to ecological datasets.}
@@ -32,7 +34,7 @@ of the \sQuote{cmdscale} function: Venebles and Ripley
 of the wrapper function
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[MASS]{cmdscale}}, \code{\link[labdsv]{pca}}, 
           \code{\link[labdsv]{nmds}}, \code{\link[vegan]{cca}}
@@ -40,7 +42,7 @@ of the wrapper function
 \examples{
         data(bryceveg) # returns a vegetation dataframe
         dis.bc <- dsvdis(bryceveg,'bray/curtis') 
-                  # returns an object of class sQuote{dist}
+                  # returns an object of class \sQuote{dist}
         veg.pco <- pco(dis.bc,k=4) # returns first 4 dimensions
 }
 \keyword{multivariate}

@@ -1,0 +1,153 @@
+<html><head><title>R: Dufrene-Legendre Indicator Species Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for duleg {unknown}"><tr><td>duleg {unknown}</td><td align="right">R Documentation</td></tr></table>
+<h2>Dufrene-Legendre Indicator Species Analysis</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates the indicator value (fidelity and relative abundance) of
+species in clusters or types.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+duleg(taxa,clustering,numitr=1000)
+## S3 method for class 'duleg':
+summary(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>taxa</code></td>
+<td>
+a matrix or data.frame of samples with species as columns and
+samples as rows</td></tr>
+<tr valign="top"><td><code>clustering</code></td>
+<td>
+a vector of numeric cluster memberships for samples, or a
+classification object returned from <code><a href="../../cluster/html/pam.html">pam</a></code>, 
+or <code><a href="../../labdsv/html/partana.html">partana</a></code></td></tr>
+<tr valign="top"><td><code>numitr</code></td>
+<td>
+the number of ramdomizations to iterate to calculate
+probabilities</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+an object of class &lsquo;duleg&rsquo;</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+additional arguments to the summary function</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Calculates the indicator value $d$ of species as the product of the 
+relative frequency and relative average abundance in clusters.  Specifically,
+</p>
+<p>
+where:<br>
+<i>p_{i,j} = </i> presence/absence (1/0) of species $i$ in 
+sample $j$; <br>
+<i>x_{i,j}</i> =  abundance of species $i$ in sample <i>j</i>; <br>
+<i>n_c = $</i> number of samples in cluster <i>c</i>;<br>
+for cluster <i>c</i> in set <i>K</i>; <br> 
+</p>
+<p align="center"><i>f_{i,c} = {sum_{j in c} p_{i,j} over n_c}</i></p><p><br>
+</p><p align="center"><i>a_{i,c} = {(sum_{j in c} x_{i,j}) / n_c over sum_{k=1}^K ((sum_{j in k} x_{i,j}) / n_k)}</i></p><p><br>
+</p><p align="center"><i>d_{i,c} = f_{i,c} times a_{i,c}</i></p><p><br>
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+a list with components:
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>relfrq</code></td>
+<td>
+relative frequency of species in classes</td></tr>
+<tr valign="top"><td><code>relabu</code></td>
+<td>
+relative abundance of species in classes</td></tr>
+<tr valign="top"><td><code>indval</code></td>
+<td>
+the indicator value for each species</td></tr>
+<tr valign="top"><td><code>maxcls</code></td>
+<td>
+the class each species has maximum indicator value for</td></tr>
+<tr valign="top"><td><code>indcls</code></td>
+<td>
+the indicator value for each species to its maximum class</td></tr>
+<tr valign="top"><td><code>pval</code></td>
+<td>
+the probability of obtaining as high an indicator values as
+observed over the specified iterations</td></tr>
+</table>
+<p>
+  
+<br>
+The &lsquo;summary&rsquo; function simply returns the sum of probabilities for
+the species.</p>
+
+<h3>Note</h3>
+
+<p>
+Indicator value analysis was proposed by Dufrene and Legendre (1997) as a
+source of possible stopping rules for clustering, but has been used by
+ecologists for a variety of analyses.  Dufrene and Legendre's nomenclature in
+the paper is somewhat ambiguous, but the equations above are taken from the 
+worked example in the paper, not the equations on page 350 which 
+appear to be in error.  Dufrene and Legendre, however, multiply $d$ 
+by 100; this function does not.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+David W. Roberts
+<a href="mailto:droberts@montana.edu">droberts@montana.edu</a>
+<a href="http://ecology.msu.montana.edu/labdsv">http://ecology.msu.montana.edu/labdsv</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Dufrene, M. and Legendre, P.  1997.  Species assemblages and indicator species:
+the need for a flexible asymmetrical approach.  Ecol. Monogr. 67(3):345-366.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="../../labdsv/html/duarm.html">duarm</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    data(bryceveg) # returns a vegetation dataframe
+    dis.bc &lt;- dsvdis(bryceveg,'bray/curtis') # returns a dissimilarity matrix
+    clust &lt;- sample(1:5,nrow(bryceveg),replace=TRUE)
+    duleg(bryceveg,clust)
+</pre>
+
+
+
+<hr><div align="center">[Package <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,22 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2003.9.1)  9 FEB 2005 05:26
+**\end
+
+*\end
+! TeX capacity exceeded, sorry [parameter stack size=1500].
+\end #1->
+         \csname end#1\endcsname \@checkend {#1}\expandafter \endgroup \if@e...
+<*> \end
+        
+If you really absolutely need more capacity,
+you can ask a wizard to enlarge me.
+
+ 
+Here is how much of TeX's memory you used:
+ 1 string out of 20887
+ 10 string characters out of 197364
+ 44118 words of memory out of 350001
+ 3028 multiletter control sequences out of 10000+15000
+ 3640 words of font info for 14 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 1500i,0n,1501p,10b,7s stack positions out of 3000i,100n,1500p,50000b,4000s
+No pages of output.

@@ -42,5 +42,6 @@ dga <- function(z,x,y,step=25,pres="+",abs="-",labcex=1,
         points(x[z>quant[2]&z<=quant[4]],
                y[z>quant[2]&z<=quant[4]],pch=pch)
         points(x[z>quant[4]],y[z>quant[4]],cex=1.5,pch=pch)
+        invisible()
     }
 }

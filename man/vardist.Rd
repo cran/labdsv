@@ -16,14 +16,14 @@
 
 \value{an object of class \code{dist}}
 
-\references{\url{http://ecology.montana.msu.edu/labdsv/}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{This function can be used to compare the compositional differences
     among samples to the environmental differences by correlation or 
     regression, or perhaps other routines.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \examples{
     data(bryceveg) # returns a vegetation data.frame called bryceveg

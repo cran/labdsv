@@ -7,28 +7,30 @@
 species in clusters or types.} 
 
 \usage{
-duleg(veg,class,numitr=1000)
-method{summary}{dga}(object, \dots)
+duleg(taxa,clustering,numitr=1000)
+\method{summary}{duleg}(object, \dots)
 }
 
 \arguments{
-    \item{veg}{a matrix or data.frame of samples with species as columns and
+    \item{taxa}{a matrix or data.frame of samples with species as columns and
                samples as rows}
-    \item{class}{a vector of numeric class memberships for samples, or a
+    \item{clustering}{a vector of numeric cluster memberships for samples, or a
                  classification object returned from \code{\link[cluster]{pam}}, 
-                 or \code{\link[labdsv]{partana}}}
-    \item{numitr}{the number of ramdomizations to iterate to calculate
+                 or \code{\link[optpart]{partana}}}
+    \item{numitr}{the number of randomizations to iterate to calculate
                   probabilities}
     \item{object}{an object of class \sQuote{duleg}}
+    \item{\dots}{additional arguments to the summary function}
 }
-\details{Calculates the indicator value $d$ of species as the product of the 
+\details{Calculates the indicator value \eqn{d} of species as the product of the 
 relative frequency and relative average abundance in clusters.  Specifically,
 
 where:\cr
-$p_{i,j} = $ presence/absence (1/0) of species $i$ in sample $j$; \cr
-$x_{i,j} = $ abundance of species $i$ in sample $j$; \cr
-$n_c = $ number of samples in cluster $c$;\cr
-for cluster $c$ in set $K$; \cr 
+\eqn{p_{i,j} = } presence/absence (1/0) of species \eqn{i} in 
+   sample \eqn{j}; \cr
+\eqn{x_{i,j}} =  abundance of species \eqn{i} in sample \eqn{j}; \cr
+\eqn{n_c = } number of samples in cluster \eqn{c};\cr
+for cluster \eqn{c} in set \eqn{K}; \cr 
 
 \deqn{f_{i,c} = {\sum_{j \in c} p_{i,j} \over n_c}}\cr
 \deqn{a_{i,c} = {(\sum_{j \in c} x_{i,j}) / n_c \over \sum_{k=1}^K ((\sum_{j \in k} x_{i,j}) / n_k)}}\cr
@@ -42,7 +44,7 @@ for cluster $c$ in set $K$; \cr
     \item{maxcls}{the class each species has maximum indicator value for}
     \item{indcls}{the indicator value for each species to its maximum class}
     \item{pval}{the probability of obtaining as high an indicator values as
-                observed over the specified interations}  
+                observed over the specified iterations}  
 
 The \sQuote{summary} function simply returns the sum of probabilities for
 the species.
@@ -53,8 +55,8 @@ source of possible stopping rules for clustering, but has been used by
 ecologists for a variety of analyses.  Dufrene and Legendre's nomenclature in
 the paper is somewhat ambiguous, but the equations above are taken from the 
 worked example in the paper, not the equations on page 350 which 
-appear to be in error.  Dufrene and Legendre, however, multiply $d$ by 100;
-this function does not.}
+appear to be in error.  Dufrene and Legendre, however, multiply \eqn{d} 
+by 100; this function does not.}
 
 \author{
     David W. Roberts

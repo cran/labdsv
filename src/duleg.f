@@ -1,5 +1,6 @@
       subroutine duleg(veg,numplt,numspc,class,clstab,
-     +      numcls,maxcls,relfrq,relabu,indval,indcls,pval,numitr)
+     +      numcls,numitr,relfrq,relabu,indval,pval,
+     +      indcls,maxcls,tmpfrq,tmpabu,pclass)
 c
 c* passed in
 c
@@ -22,7 +23,7 @@ c
 c
 c* relfrq, relabu, and indval all initialized to zero by R
 c
-c* d local
+c* scratch
 c
       double precision tmpfrq(numcls)
       double precision tmpabu(numcls)

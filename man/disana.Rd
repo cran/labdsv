@@ -2,7 +2,7 @@
 \alias{disana}
 \title{Dissimilarity Analysis}
 \description{Dissimilarity analysis is a graphical analysis of the 
-distribution of values in a dissimilaritiy matrix}
+distribution of values in a dissimilarity matrix}
 }
 \usage{disana(x)
 }
@@ -22,18 +22,18 @@ Optionally, you can identify sample plots in the last panel with the mouse.
 \value{Plots three graphs to the current graphical device, and returns
    an (invisible) list with four components:
 \item{min}{the minimum dissimilarity of each sample to all others}
-\item{mean}{the mean dissimilarity of each sampleto all others}
+\item{mean}{the mean dissimilarity of each sample to all others}
 \item{max}{the maximum dissimilarity of each sample to all others}
 \item{plots}{a vector of samples identified in the last panel}
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv/disana}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Dissimilarity matrices are often large, and difficult to visualize
 directly.  \sQuote{disana} is designed to highlight aspects of interest in these
 large matrices. }
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \examples{
     data(bryceveg) # returns a data.frame called veg

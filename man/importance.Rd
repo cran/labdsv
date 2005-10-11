@@ -5,12 +5,12 @@
 a importance table lists for a each species 
 the average abundance (ignoring zeros) of each species in each class.
 }
-\usage{importance(veg,class,minval,digits,spcord)
+\usage{importance(taxa,clustering,minval,digits,spcord)
 }
 \arguments{
-    \item{veg}{a data.frame of species abundances with samples as rows and 
+    \item{taxa}{a data.frame of species abundances with samples as rows and 
 species as columns}
-    \item{class}{a vector of (integer) class memberships}
+    \item{clustering}{a vector of (integer) class memberships}
     \item{minval}{the minimum importance a species must have in at least one class
 to be included in the output}
     \item{digits}{the number of digits to report in the table}
@@ -21,7 +21,7 @@ should be listed in the table}
 \value{a data.frame with species as rows, classes as columns, with 
     average abundance of species in classes.}
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Importance tables are often used in vegetation classification to
 calculate or present characteristic species for specific classes or types.
 Importance may be combined with \code{\link[labdsv]{const}} and 
@@ -30,7 +30,7 @@ Importance may be combined with \code{\link[labdsv]{const}} and
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[labdsv]{const}}, \code{\link[labdsv]{vegtab}}
 
