@@ -1,42 +1,17 @@
-vegtrans <- function (x,a,b)
+vegtrans <- function (taxa,code,value)
 {
-    y <- matrix(-1,nrow=nrow(x),ncol=ncol(x))
-    if (length(a) != length(b)) stop ("Transformation vectors must be the same length")
-    if (!is.numeric(a) | !is.numeric(b) | !is.numeric(x)) stop
-        ("All values must be numeric")
-    numplt <- nrow(x)
-    numspc <- ncol(x)
-    numval <- length(a)
-    tmp <-.Fortran("vegtrans",
-        as.matrix(x),
-        y=y,
-        a,
-        b,
-        as.integer(numplt),
-        as.integer(numspc),
-        as.integer(numval),
-        PACKAGE='labdsv')$y
-    if (any(tmp<0)) {
-        cat(paste("Value ",veg[tmp==-1],"not converted.  Set to NA\n"))
-        tmp[tmp==-1] <- NaN
-    }
-    tmp <- as.data.frame(tmp)
-    names(tmp) <- names(x)
-    row.names(tmp) <- row.names(x)
-    tmp
+    if (length(code) != length(value))
+        stop("code and value vectors must be of the same length")
+    if (is.numeric(code)) code <- c(0,code)
+    else code <- c('0',code)
+    if (is.numeric(value)) value <- c(0,value)
+    else value <- c('0',value)
+    newtaxa <- matrix(NA,nrow=nrow(taxa),ncol=ncol(taxa))
+    for (i in 1:length(code)) newtaxa[taxa==code[i]] <- value[i]
+    newtaxa <- data.frame(newtaxa)
+    names(newtaxa) <- names(taxa)
+    row.names(newtaxa) <- row.names(taxa)
+    if (any(is.na(newtaxa))) 
+        print("WARNING, not all values specified")
+    newtaxa
 }
-
-stdveg <- function (x,pltsum=NULL,spcmax=NULL) 
-{
-    if (!is.null(pltsum)) {
-       tmp <- apply(x,1,sum)
-       x <- sweep(x,1,tmp,"/")
-       x <- sweep(x,1,pltsum,"*")
-    }
-    if (!is.null(spcmax)) {
-       tmp <- apply(x,2,max)
-       x <- sweep(x,2,tmp,"/")
-    } 
-    x
-}
-

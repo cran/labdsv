@@ -6,12 +6,12 @@
     weighting by species (columns) and 
     shortest-path adjustment for dissimilarity indices.}
 
-\usage{dsvdis(x,index="steinhaus",weight=rep(1,ncol(x)),step=0.0,
-       diag=FALSE, upper=FALSE))}
+\usage{dsvdis(x,index,weight=rep(1,ncol(x)),step=0.0,
+       diag=FALSE, upper=FALSE)}
 
 \arguments{
     \item{x}{a matrix of observations, samples as rows and variables as columns}
-    \item{index}{a specific dissimilarity or distance index (see deuails below)}
+    \item{index}{a specific dissimilarity or distance index (see details below)}
     \item{weight}{a vector of weights for species (columns)}
     \item{step}{a threshold dissimilarity to initiate shortest-path adjustment}
     \item{diag}{a switch to control returning diagonal (default=FALSE)}
@@ -65,14 +65,15 @@
     much greater than 1.0.
 
     The chi-square distance is not usually employed directly in cluster analysis or 
-    ordination, but is provided so that you can calculate correpondence analysis
+    ordination, but is provided so that you can calculate correspondence analysis
     as a principal coordinates analysis (using \code{cmdscale}) from a simple
     distance matrix.}
 
 \author{David W. Roberts 
         \email{droberts@montana.edu} 
-        \url{http://ecology.msu.montana.edu/labdsv}
+        \url{http://ecology.msu.montana.edu/droberts}
 }
+\references{\url{http://ecology.msu.montana.edu:/labdsv/R}}
 
 \seealso{\code{\link[mva]{dist}}, \code{\link[vegan]{vegdist}}}
 

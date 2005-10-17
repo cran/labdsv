@@ -12,13 +12,13 @@ or adding fitted surfaces to PCOs.}
 \usage{
 \method{plot}{pco}(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, \dots)
 \method{points}{pco}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, \dots)
-\method{plotid}{pco}(ord, ids = seq(1:nrow(ord\$points)), ax = 1, ay = 2, 
+\method{plotid}{pco}(ord, ids = seq(1:nrow(ord$points)), ax = 1, ay = 2, 
     col = 1, \dots)
 \method{hilight}{pco}(ord, factor, ax = 1, ay = 2, \dots)
 \method{surf}{pco}(ord, var, ax = 1, ay = 2, col = 2, labcex = 0.8, 
-    family = gaussian)
+    family = gaussian, \dots)
 \method{jsurf}{pco}(ord, var, ax = 1, ay = 2, col = 2, labcex = 0.8, 
-    family = gaussian)
+    family = gaussian, \dots)
 }
 
 \arguments{
@@ -33,6 +33,11 @@ or adding fitted surfaces to PCOs.}
     \item{family}{controls the link function passed to \sQuote{gam}: 
           one of \sQuote{gaussian}, \sQuote{binomial}, or \sQuote{poisson}}
     \item{ids}{identifier labels for samples.  Defaults to 1:n}
+    \item{col}{a color index for surface contours}
+    \item{labcex}{size of contour interval labels}
+    \item{pch}{plot chartacter: glyph to plot}
+    \item{cex}{character expansion factor: size of plotted characters}
+    \item{\dots}{arguments to pass to the underlying functions}
 }
 
 \details{
@@ -47,7 +52,7 @@ match the underlying plot exactly.
 Function \sQuote{plotid} identifies 
 and labels samples (optionally with values from a third vector) 
 in the PCO, and requires interaction with the mouse: 
-left button identifies, right button exits}
+left button identifies, right button exits.
 
 Function \sQuote{points} is passed a logical 
 vector to identify a set of samples by color of glyph.  It can be used
@@ -61,7 +66,7 @@ Functions \sQuote{surf} and \sQuote{jsurf} calculate and plot fitted
 surfaces for logical or quantitative
 variables; \sQuote{jsurf} jitters the coordinates to avoid problems with 
 identical values in fitting the surface.  The functions are simply
-wrappers for the \code{\link[mgcv]{gam}}} function, and send the 
+wrappers for the \code{\link[mgcv]{gam}} function, and send the 
 sample coordinates and the \sQuote{var} variable 
 to \sQuote{gam} to model.  The coordinates and the fitted values from 
 \sQuote{gam} are then passed to \code{\link[akima]{interp}}, which plots the 
@@ -97,3 +102,6 @@ points(pco.1,brycesite$elev>8000)
 surf(pco.1,brycesite$elev)
 \dontrun{plotid(pco.1,ids=row.names(bryceveg))}
 }
+\keyword{hplot}
+\keyword{aplot}
+\keyword{iplot}

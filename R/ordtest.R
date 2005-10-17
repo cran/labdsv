@@ -1,5 +1,7 @@
 ordtest <- function (ord,var,dim=c(1:ncol(ord$points)),index='euclidean',nitr=1000) 
 {
+    if (!inherits(ord, c("pco", "nmds", "metaMDS"))) 
+        stop('ordtest is only defines for pco, nmds, and metaMDS objects')
     tdist <- 0
     observed <- 0
     reps <- rep(0,nitr-1)

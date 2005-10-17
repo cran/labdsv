@@ -20,16 +20,16 @@ third.
 
 \value{a object of class \sQuote{dist}}
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv/}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Many multivariate statistical methods are designed for metric spaces,
 and yet the direct calculation of distance is often inappropriate due
 to problems with joint absences.  metrify takes any dissimilarity matrix and
-converts it to the closest metric space represenation, generally to avoid negative
+converts it to the closest metric space representation, generally to avoid negative
 eigenvalues in an eigenanalysis of the matrix.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[labdsv]{euclidify}}}
 

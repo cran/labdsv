@@ -5,6 +5,7 @@ pca <- function(mat, cor=FALSE, dim=min(nrow(mat),ncol(mat)))
     out$scores <- tmp$x[,1:dim]
     out$loadings <- tmp$rotation[,1:dim]
     out$sdev <- tmp$sdev[1:dim]
+    out$totdev <- sum(tmp$sdev^2)
     class(out) <- "pca"
     return(out)
 }
@@ -12,9 +13,8 @@ pca <- function(mat, cor=FALSE, dim=min(nrow(mat),ncol(mat)))
 
 plot.pca <- function(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
 {
-    if(missing(x)) {
-        stop("You must specify a PCA")
-    }
+    if (class(x) != 'pca')
+        stop("You must specify a an object of class pca")
     oldpin <- par("pin")
     par(pin = c(min(oldpin[1], oldpin[2]), min(oldpin[1], oldpin[2])))
     xlim <- range(x$scores[, ax])
@@ -37,33 +37,30 @@ plot.pca <- function(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
     invisible()
 }
 
-points.pca <- function(x, which, ax = 1, ay = 2, col = 2,  pch = 1, ...)
+points.pca <- function(x, which, ax = 1, ay = 2, col = 2,  pch = 1, cex = 1, ...)
 {
-    if(missing(x)) {
+    if (class(x) != 'pca')
         stop("You must specify a list object from pca")
-    }
-    if(missing(which)) {
+    if (missing(which)) {
         stop("You must specify a logical subscript")
     }
     if (length(which) != nrow(x$scores)) {
         stop("Points specifier must be of the same length as the number of samples")
     }
-    points(x$scores[, ax][which], x$scores[, ay][which],col=col,pch=pch) 
+    points(x$scores[, ax][which], x$scores[, ay][which],col=col,pch=pch,cex=cex) 
 }
 
 plotid.pca <- function(ord, ids=seq(1:nrow(ord$scores)), ax = 1,  ay = 2, col = 1, ...)
 {
-    if(missing(ord)) {
+    if (class(ord) != 'pca')
         stop("You must specify a list object from princomp()")
-    }
     identify(ord$scores[, ax],ord$scores[, ay],ids)
 }
 
 surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...)
 {
-    if(missing(ord)) {
+    if (class(ord) != 'pca') 
         stop("You must specify an object of class pca")
-    }
     if(missing(var)) {
         stop("You must specify a variable to surface")
     }
@@ -81,9 +78,8 @@ surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, .
 }
 
 jsurf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...){
-    if(missing(ord)) {
+    if (class(ord) != 'pca')
         stop("You must specify an object of class pca")
-    }
     if(missing(var)) {
         stop("You must specify a variable to surface")
     }
@@ -103,7 +99,7 @@ jsurf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, 
 summary.pca <- function(object, dim=length(object$sdev), ...)
 {
     vars <- object$sdev^2
-    vars <- vars/sum(vars)
+    vars <- vars/object$totdev
     cat("Importance of components:\n")
     print(rbind("Standard deviation" = object$sdev[1:dim],
         "Proportion of Variance" = vars[1:dim],
@@ -141,32 +137,58 @@ varplot.pca <- function(x,dim=length(x$sdev))
     var <- x$sdev^2
     barplot(var[1:dim],ylab="Variance")
     readline("Hit Return to Continue\n")
-    barplot((cumsum(var/sum(var)))[1:dim],ylab="Cumulative Variance")
+    barplot(cumsum(var/x$totdev)[1:dim],ylab="Cumulative Variance")
 }
 
-hilight.pca <- function (ord, factor, ax=1, ay=2, ...)
+hilight.pca <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), origpch=1, blank='#FFFFFF', ...)
 {
-    if (is.null(class(ord)))
+    if (class(ord) != 'pca')
        stop("You must pass an object of class pca")
-    if (!is.null(class(factor))) {
-        if (class(factor) == 'partana' ||
-            class(factor) == 'pam' ||
-            class(factor) == 'slice')  factor <- factor$clustering
-    }
-    else if (is.logical(factor)) {
-        factor <- as.numeric(factor)
-    }
-    col <- 1
-    pch <- 1
-    for (i in 1:max(factor)) {
-        if (i >= 8)
-            points(ord, factor == i, ax, ay, col = 8, pch = 1)
-        points(ord, factor == i, ax, ay, col = col, pch = pch)
-        col <- col + 1
-        if (col == 8) {
-            col <- 1
-            pch <- pch + 2
+    if (inherits(overlay,c('partana','pam','slice')))
+       factor <- factor$clustering
+    if (is.logical(overlay) || is.factor(overlay))
+        overlay <- as.numeric(overlay)
+    layer <- 0
+    pass <- 1
+    for (i in 1:max(overlay,na.rm=TRUE)) {
+        points(ord, overlay == i, ax, ay, col = blank, pch = origpch)
+        layer <- layer + 1
+        if (layer > length(cols)) {
+          layer <- 1
+          pass <- pass + 1
         }
+        col <- cols[layer]
+        pch <- glyph[pass]
+        points(ord, overlay == i, ax, ay, col = col, pch = pch)
+    }
+}
+
+chullord.pca <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys=c(1,2,3),
+...)
+{
+    if (class(ord) != 'pca')
+        stop("You must pass an object of class pco")
+    if (inherits(overlay,c('partana','pam','slice')))
+       overlay <- overlay$clustering
+    else if (is.logical(overlay))
+        overlay <- as.numeric(overlay)
+    else if (is.factor(overlay))
+        overlay <- as.numeric(overlay)
+    pass <- 1
+    layer <- 0
+    lty <- ltys[pass]
+    for (i in 1:max(overlay,na.rm=TRUE)) {
+        x <- ord$scores[,ax][overlay==i & !is.na(overlay)]
+        y <- ord$scores[,ay][overlay==i & !is.na(overlay)]
+        pts <- chull(x,y)
+        layer <- layer + 1
+        if (layer > length(cols)) {
+          layer <- 1
+          pass <- min(pass + 1,length(ltys))
+        }
+        col <- cols[layer]
+        lty = ltys[pass]
+        polygon(x[pts],y[pts],col=col,density=0,lty=lty)
     }
 }
 

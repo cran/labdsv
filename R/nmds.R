@@ -7,13 +7,8 @@ nmds <- function(dis,k=2,y=cmdscale(d=dis,k=k),maxit=50)
 
 plot.nmds <- function(x,ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
 {
-    if (is.null(class(x))) {
+    if (class(x) != 'nmds') 
         stop("You must supply an object of class nmds from nmds")
-    } else {
-        if (class(x) != "nmds") {
-            stop("You must supply an object of class nmds from nmds")
-        }
-    }
     oldpin <- par("pin")
     par(pin=c(min(oldpin[1],oldpin[2]),min(oldpin[1],oldpin[2])))
     xlim <- range(x$points[,ax])
@@ -38,13 +33,8 @@ plot.nmds <- function(x,ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
 
 points.nmds <- function(x, which, ax = 1, ay = 2, col = 2,  pch = 1, cex=1, ...)
 {
-    if (is.null(class(x))) {
+    if (class(x) != "nmds")
         stop("You must supply an object of class nmds from nmds")
-    } else {
-        if (class(x) != "nmds") {
-            stop("You must supply an object of class nmds from nmds")
-        }
-    }
     if (is.logical(which)) {
         points(x$points[, ax][which], x$points[, ay][which],
             col = col, pch = pch, cex = cex, ...)
@@ -62,27 +52,17 @@ points.nmds <- function(x, which, ax = 1, ay = 2, col = 2,  pch = 1, cex=1, ...)
 
 plotid.nmds <- function(ord, ids=seq(1:nrow(ord$points)), ax = 1, ay = 2, col = 1, ...)
 {
-    if (is.null(class(ord))) {
+    if (class(ord) != 'nmds') 
         stop("You must supply an object of class nmds from nmds")
-    } else {
-        if (class(ord) != "nmds") {
-            stop("You must supply an object of class nmds from nmds")
-        }
-    }
     identify(ord$points[, ax],ord$points[, ay],ids,col=col)
 }
 
 surf.nmds <- function(ord, var, ax=1, ay=2, col=2, 
      labcex = 0.8, family=gaussian, ...)
 {
-    if (is.null(class(ord))) {
+    if (class(ord) != 'nmds')
         stop("You must supply an object of class nmds from nmds")
-    } else {
-        if (class(ord) != "nmds") {
-            stop("You must supply an object of class nmds from nmds")
-        }
-    }
-    if(missing(var)) {
+    if (missing(var)) {
         stop("You must specify a variable to surface")
     }
     x <- ord$points[,ax]
@@ -108,16 +88,10 @@ surf.nmds <- function(ord, var, ax=1, ay=2, col=2,
 jsurf.nmds <- function(ord, var, ax=1, ay=2, col=2, 
       labcex = 0.8, family=gaussian, ...)
 {
-    if (is.null(class(nmds))) {
+    if (class(nmds) != 'nmds')
         stop("You must supply an object of class nmds from nmds")
-    } else {
-        if (class(nmds) != "nmds") {
-            stop("You must supply an object of class nmds from nmd")
-        }
-    }
-    if(missing(var)) {
+    if (missing(var)) 
         stop("You must specify a variable to surface")
-    }
     x <- ord$points[,ax]
     y <- ord$points[,ay]
     if (any(is.na(var))) {
@@ -140,42 +114,72 @@ jsurf.nmds <- function(ord, var, ax=1, ay=2, col=2,
  
 bestnmds <- function (dis,k=2,itr=20,maxit=100)
 {
-    out <- list()
     best <- 0
+    strss <- rep(0,itr)
     minstr <- 99999
     for (i in 1:itr) {
-        out[[i]] <- nmds(dis,k=k,y=matrix(runif(k*attr(dis,'Size')),ncol=k),maxit=maxit)
-        if (out[[i]]$stress < minstr) {
-            minstr <- out[[i]]$stress
+        tmp <- nmds(dis,k=k,y=matrix(runif(k*attr(dis,'Size')),ncol=k),maxit=maxit)
+        strss[i] <- tmp$stress
+        if (tmp$stress < minstr) {
+            minstr <- tmp$stress
             best <- i
+            out <- tmp
         }
     }
+    print(strss)
     print(paste("best result = ",best))
-    out[[best]]
+    out
 }
 
-hilight.nmds <- function (ord, factor, ax=1, ay=2, ...)
+hilight.nmds <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), origpch=1, blank='#FFFFFF', ...)
 {
-    if (is.null(class(ord))) 
+    if (class(ord) != 'nmds')
        stop("You must pass an object of class nmds")
-    if (!is.null(class(factor))) {
-        if (class(factor) == 'partana' ||
-            class(factor) == 'pam' ||
-            class(factor) == 'slice')  factor <- factor$clustering
-    }
-    else if (is.logical(factor)) {
-        factor <- as.numeric(factor)
-    }
-    col <- 1
-    pch <- 1
-    for (i in 1:max(factor)) {
-        if (i >= 8)
-            points(ord, factor == i, ax, ay, col = 8, pch = 1)
-        points(ord, factor == i, ax, ay, col = col, pch = pch)
-        col <- col + 1
-        if (col == 8) {
-            col <- 1
-            pch <- pch + 2
+    if (inherits(overlay,c('partana','pam','slice')))
+       overlay <- overlay$clustering
+    if (is.logical(overlay) || is.factor(overlay))
+        overlay <- as.numeric(overlay)
+    layer <- 0
+    pass <- 1
+    for (i in 1:max(overlay,na.rm=TRUE)) {
+        points(ord, overlay == i, ax, ay, col = blank, pch = origpch)
+        layer <- layer + 1
+        if (layer > length(cols)) {
+          layer <- 1
+          pass <- pass + 1
         }
+        col <- cols[layer]
+        pch <- glyph[pass]
+        points(ord, overlay == i, ax, ay, col = col, pch = pch)
     }
 }
+
+
+chullord.nmds<- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys=c(1,2,3), ...)
+{
+    if (class(ord) != 'nmds')
+        stop("You must pass an object of class nmds")
+    if (inherits(overlay,c('partana','pam','slice')))
+       overlay <- overlay$clustering
+    else if (is.logical(overlay))
+        overlay <- as.numeric(overlay)
+    else if (is.factor(overlay))
+        overlay <- as.numeric(overlay)
+    pass <- 1
+    layer <- 0
+    lty <- ltys[pass]
+    for (i in 1:max(overlay,na.rm=TRUE)) {
+        x <- ord$points[,ax][overlay==i & !is.na(overlay)]
+        y <- ord$points[,ay][overlay==i & !is.na(overlay)]
+        pts <- chull(x,y)
+        layer <- layer + 1
+        if (layer > length(cols)) {
+          layer <- 1
+          pass <- min(pass + 1,length(ltys))
+        }
+        col <- cols[layer]
+        lty = ltys[pass]
+        polygon(x[pts],y[pts],col=col,density=0,lty=lty)
+    }
+}
+

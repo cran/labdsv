@@ -14,7 +14,7 @@ c* local
 c
       real expect
       real xdiff,ydiff
-      real pxmin,pxmax,pymin,pymax
+      real pxmin,pxmax
       integer count
 c
       do 10 i=1,lenvec

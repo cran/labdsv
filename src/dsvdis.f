@@ -30,7 +30,7 @@ c
       if (stepx .gt. 0.0) then
         do 10 i=1,nrow-1
           do 11 j=i+1,nrow
-          if (dis(i,j) .gt. stepx) then
+          if (dis(i,j) .ge. stepx) then
             dis(i,j) = 9999.9
             dis(j,i) = 9999.9
           endif
@@ -176,11 +176,11 @@ c
             c = c + weight(k) 
           endif
    12     continue
+        temp = (a+b) * (a+c)
         if (temp .eq. 0) then
           dis(i,j) = 0.0
           dis(j,i) = 0.0
         else
-          temp = (a+b) * (a+c)
           dis(i,j) = 1.0 - a / sqrt(temp)
           dis(j,i) = dis(i,j)
         endif

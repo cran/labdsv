@@ -1,5 +1,5 @@
       subroutine tabdev(tab,nrow,ncol,mu,ntypes,devian,
-     +                  totdev,pval,nitr)
+     +     totdev,pval,nitr,relsum,colsum,spcsum,tmpdev,pclass)
 c
 c* passed in
 c
@@ -16,7 +16,7 @@ c
       double precision totdev
       double precision pval(ncol)
 c
-c* local
+c* scratch
 c
       double precision relsum(ntypes)
       double precision colsum(ntypes)
@@ -74,7 +74,7 @@ c
           pval(i) = pval(i) + 1
         endif
    21   continue
-      pval(i) = (pval(i)+1) / (nitr+1) 
+      pval(i) = (pval(i)+1) / nitr 
    20 continue
 c
       return

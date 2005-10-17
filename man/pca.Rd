@@ -15,7 +15,7 @@ pca(mat, cor = FALSE, dim = min(nrow(mat),ncol(mat)))
 \method{loadings}{pca}(x, dim = length(x$sdev), digits = 3, cutoff = 0.1)
 }
 \arguments{
-    \item{mat}{a matrix or dataframe of intertest, samples as rows, 
+    \item{mat}{a matrix or dataframe of interest, samples as rows, 
              attributes as columns}
     \item{cor}{logical: whether to use a correlation matrix (if TRUE),
                or covariance matrix (if FALSE)}
@@ -24,7 +24,7 @@ pca(mat, cor = FALSE, dim = min(nrow(mat),ncol(mat)))
     \item{x}{an object of class \sQuote{pca}}
     \item{labels}{an (optional) vector of labels to identify points}
     \item{digits}{number of digits to report}
-    \item{cutoff}{threshold to supress printing small values}
+    \item{cutoff}{threshold to suppress printing small values}
     \item{\dots}{arguments to pass to function summary}
 }
 \details{PCA is a common multivariate technique.  The version here is simply
@@ -38,7 +38,7 @@ plotting consistent with the other LabDSV functions}
          the reduced space.}
    \item{sdev}{a vector of standard deviations for each dimension}
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv/}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 
 \note{The current version of pca is based on the \code{\link[MASS]{prcomp}}
     function, as opposed to the princomp function.  Nonetheless, 
@@ -51,7 +51,7 @@ plotting consistent with the other LabDSV functions}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{
     \code{\link[mva]{princomp}}, \code{\link[MASS]{prcomp}},

@@ -22,3 +22,8 @@ hilight <- function(ord, ...)
 {
     UseMethod("hilight")
 }
+
+chullord <- function(ord, ...)
+{
+    UseMethod("chullord")
+}

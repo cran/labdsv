@@ -33,7 +33,7 @@ symbols as described above.}
 \value{a graph of the distribution of the z variable on a grid of
 x and y is displayed}
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{
 Direct gradient analysis was promoted by Robert Whittaker and
 followers as a preferred method of vegetation analysis.
@@ -41,14 +41,17 @@ followers as a preferred method of vegetation analysis.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[mgcv]{gam}}}
 
 }
 \examples{
     data(bryceveg) # returns a data.frame called bryceveg
+    x <- c(0.2,0.5,1.0,2.0,3.0,4.0,5.0,6.0)
+    y <- c(0.2,0.5,3.0,15.0,37.5,62.5,85.0,97.5)
+    cover <- vegtrans(bryceveg,x,y)
     data(brycesite)
-    dga(bryceveg$arcpat,brycesite$elev,brycesite$grorad)
+    dga(round(cover$arcpat),brycesite$elev,brycesite$av)
 }
 \keyword{multivariate}

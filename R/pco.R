@@ -54,13 +54,9 @@ plotid.pco <- function(ord, ids=seq(1:nrow(ord$points)), ax = 1, ay = 2, col = 1
 
 surf.pco <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...) 
 {
-    if (is.null(class(ord))) {
+    if (class(ord) != 'pco')
         stop("You must supply an object of class pco from pco()")
-    }
-    else if(class(ord) != "pco") {
-        stop("You must specify a pco object from pco()")
-    }
-    if(missing(var)) {
+    if (missing(var)) {
         stop("You must specify a variable to surface")
     }
     x <- ord$points[,ax]
@@ -84,13 +80,9 @@ surf.pco <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, .
 
 jsurf.pco <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...)
 {
-    if (is.null(class(ord))) {
+    if (class(ord) != 'pco')
         stop("You must supply an object of class pco from pco()")
-    }
-    else if(class(ord) != "pco") {
-        stop("You must specify a pco object from pco()")
-    }
-    if(missing(var)) {
+    if (missing(var)) {
         stop("You must specify a variable to surface")
     }
     x <- ord$points[,ax]
@@ -112,29 +104,54 @@ jsurf.pco <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, 
     cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
 }
 
-hilight.pco <- function (ord, factor, ax=1, ay=2, ...)
+hilight.pco <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), origpch=1, blank='#FFFFFF', ...)
 {
-    if (is.null(class(ord)))
+    if (class(ord) != 'pco')
        stop("You must pass an object of class pco")
-    if (!is.null(class(factor))) {
-        if (class(factor) == 'partana' ||
-            class(factor) == 'pam' ||
-            class(factor) == 'slice')  factor <- factor$clustering
-    }
-    else if (is.logical(factor)) {
-        factor <- as.numeric(factor)
-    }
-    col <- 1
-    pch <- 1
-    for (i in 1:max(factor)) {
-        if (i >= 8)
-            points(ord, factor == i, ax, ay, col = 8, pch = 1)
-        points(ord, factor == i, ax, ay, col = col, pch = pch)
-        col <- col + 1
-        if (col == 8) {
-            col <- 1
-            pch <- pch + 2
+    if (inherits(overlay,c('partana','pam','slice')))
+       overlay <- overlay$clustering
+    if (is.logical(overlay) || is.factor(overlay))
+        overlay <- as.numeric(overlay)
+    layer <- 0
+    pass <- 1
+    for (i in 1:max(overlay,na.rm=TRUE)) {
+        points(ord, overlay == i, ax, ay, col = blank, pch = origpch)
+        layer <- layer + 1
+        if (layer > length(cols)) {
+          layer <- 1
+          pass <- pass + 1
         }
+        col <- cols[layer]
+        pch <- glyph[pass]
+        points(ord, overlay == i, ax, ay, col = col, pch = pch)
+    }
+}
+
+chullord.pco <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys=c(1,2,3), ...)
+{
+    if (class(ord) != 'pco')
+        stop("You must pass an object of class pco")
+    if (inherits(overlay,c('partana','pam','slice')))
+       overlay <- overlay$clustering
+    else if (is.logical(overlay))
+        overlay <- as.numeric(overlay)
+    else if (is.factor(overlay))
+        overlay <- as.numeric(overlay)
+    pass <- 1
+    layer <- 0
+    lty <- ltys[pass]
+    for (i in 1:max(overlay,na.rm=TRUE)) {
+        x <- ord$points[,ax][overlay==i & !is.na(overlay)]
+        y <- ord$points[,ay][overlay==i & !is.na(overlay)]
+        pts <- chull(x,y)
+        layer <- layer + 1
+        if (layer > length(cols)) {
+          layer <- 1
+          pass <- min(pass + 1,length(ltys))
+        }
+        col <- cols[layer]
+        lty = ltys[pass]
+        polygon(x[pts],y[pts],col=col,density=0,lty=lty)
     }
 }
 

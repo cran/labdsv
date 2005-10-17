@@ -2,23 +2,23 @@
 \alias{const}
 \title{Constancy Table}
 \description{For a classified set of vegetation samples, 
-lists for a each species the fraction of samples in each 
+lists for each species the fraction of samples in each 
 class the species occurs in.}
-\usage{const(veg, class, minval = 0, digits = 2, spcord)}
+\usage{const(taxa, clustering, minval = 0, digits = 2, spcord = NULL)}
 \arguments{
-    \item{veg}{a data.frame of species abundances with samples as rows and 
+    \item{taxa}{a data.frame of species abundances with samples as rows and 
 species as columns}
-    \item{class}{a vector of (integer) class memberships}
-    \item{minval}{the minimum constance a species must have in at least 
+    \item{clustering}{a vector of (integer) cluster memberships}
+    \item{minval}{the minimum constancy a species must have in at least 
          one class to be included in the output}
     \item{digits}{the number of digits to report in the table}
     \item{spcord}{a vector of integers to specify the order in which species 
          should be listed in the table}
 }
-\details{Produces a table with samples as rows, and species constancy in clusters
+\details{Produces a table with species as rows, and species constancy in clusters
     as columns.
 
-The \sQuote{class} vector represents a classification of the samples that
+The \sQuote{clustering} vector represents a classification of the samples that
 the table summarizes.  It may result from a cluster analysis, partitioning
 an ordination, subjective partitioning of a vegetation table, or other source.
 
@@ -27,26 +27,26 @@ suppress the rare species.  Vegetation tables are often very sparse, and
 this argument simplifies making them more compact.
 
 The \sQuote{digits} argument limits the reported precision of the calculations.
-Generally, relatively low precicion is adequate and perhaps more realsitic.
+Generally, relatively low precision is adequate and perhaps more realistic.
 
 The \sQuote{spcord} argument specifies the order species are listed in a table.
 You can use the reverse of the number of occurrences to get dominant species
-at the top to rarer at the bottom, use fidelty values for the ordered clusters,
+at the top to rarer at the bottom, use fidelity values for the ordered clusters,
 or possibly the order of species centroids in an ordination. 
 }
 
-\value{a data.frame with species as rows, classes as columns, with fraction 
+\value{a dataframe with species as rows, classes as columns, with fraction 
 of occurrrence of species in classes.}
 
-\references{\url{http://ecology.montana.msu.edu/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Constancy tables are often used in vegetation classification to
 calculate or present characteristic species for specific classes or types.
-\sQuote{const} may be combined with sQuote{importance} and \sQuote{vegtab} to achieve a 
+\sQuote{const} may be combined with \sQuote{importance} and \sQuote{vegtab} to achieve a 
 vegetation table-oriented analysis.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{
 \code{\link[labdsv]{importance}}, 

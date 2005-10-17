@@ -4,7 +4,6 @@ c
       integer nrow
 c
       integer flag
-      double precision newmax,oldmax
 c 
       do 12 i=1,nrow
       flag = 0

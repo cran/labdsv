@@ -4,9 +4,9 @@
 \description{Produces an ordered table of abundance of species in samples,
 subsampled by (an optional) classification of the samples
 }
-\usage{vegtab(veg,set,minval=1,pltord,spcord,pltlbl,trans=FALSE)}
+\usage{vegtab(taxa,set,minval=1,pltord,spcord,pltlbl,trans=FALSE)}
 \arguments{
-    \item{veg}{a vegetation data.frame }
+    \item{taxa}{a vegetation (or other taxon) data.frame }
     \item{set}{a logical variable specifying which samples to include}
     \item{minval}{a minimum abundance threshold to include in the table}
     \item{pltord}{a numeric vector specifying the order of rows in the output}
@@ -19,20 +19,20 @@ subsampled by (an optional) classification of the samples
 }
 
 \value{a data.frame with specified rows, columns, and row.names)}
-\references{\url{http://ecology.montana.msu.edu/labdsv/}}
-\note{Vegetation tables are a common tool in vegetation alaysis.  In recent
-years analysis has tended to become more quantitaive, and less oriented to
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
+\note{Vegetation tables are a common tool in vegetation analysis.  In recent
+years analysis has tended to become more quantitative, and less oriented to
 sorted tables, but even still presenting the results from these analyses
 often involves a sorted vegetation table.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv}
+    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[vegan]{vegemite}}}
 \examples{
     data(bryceveg) # returns a vegetation data frame called bryceveg
-    data(brycesite) # returns an envrironmental data frame called brycesite
+    data(brycesite) # returns an environmental data frame called brycesite
     vegtab(bryceveg,minval=10,pltord=brycesite$elev) 
         # produces a sorted table for species whose abundance sums 
         # to 10, with rows in order of elevation.
