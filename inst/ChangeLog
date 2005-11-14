@@ -1,3 +1,12 @@
+labdsv 1.2-1
+
+function tabdev.R was deleted to temporarily solve inscutable
+problems with Windows server.  tabdev.R worked under linux
+and Windows XP, so there may be no need to update on your system.
+
+In addition, the URL in the decsription file was updated to 
+point to the current location of the lab manual for LabDSV.
+
 labdsv 1.2-0
 
 A couple of general changes were made to many functions.
