@@ -26,7 +26,7 @@ abuocc <- function(taxa,minabu=0)
         main="Abundance vs Occurrence")
     yorn <- readline("Do you want to identify individual species? Y/N : ")
     if (yorn == 'Y' || yorn == 'y') 
-        identify(plt.spc[mean.abu>minabu],mean.abu[mean.abu>minabu],names(taxa))
+        identify(plt.spc[mean.abu>minabu],mean.abu[mean.abu>minabu],names(taxa)[mean.abu>minabu])
     readline("Press return for next plot ")
 
     plot(spc.plt,apply(taxa,1,sum),xlab="Number of Species/Plot",

@@ -1,6 +1,16 @@
+labdsv 1.2-2
+
+fixed a bug in jsurf.nmds where the ordination was not called
+correctly
+
+deleted extraneous files in the man directory (don't know why 
+they were there in the first place)
+
+moved confus to package optpart
+
 labdsv 1.2-1
 
-function tabdev.R was deleted to temporarily solve inscutable
+function tabdev.R was deleted to temporarily solve inscrutable
 problems with Windows server.  tabdev.R worked under linux
 and Windows XP, so there may be no need to update on your system.
 
@@ -41,7 +51,7 @@ dga.R
 	improved the example in the documentation
 disana.R
 	eliminated null class test
-	eliminated FORTRAN call by usin apply with na.rm
+	eliminated FORTRAN call by using apply with na.rm
 	corrected point labels to "attr(x,'Labels')"
 dissim.R
 	removed function dissim
