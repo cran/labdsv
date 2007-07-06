@@ -31,7 +31,7 @@ plot.nmds <- function(x,ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
     invisible()
 }
 
-points.nmds <- function(x, which, ax = 1, ay = 2, col = 2,  pch = 1, cex=1, ...)
+points.nmds <- function(x, which, ax = 1, ay = 2, col = 2,  pch = 1, cex=1, breaks=FALSE, ...)
 {
     if (class(x) != "nmds")
         stop("You must supply an object of class nmds from nmds")
@@ -39,7 +39,7 @@ points.nmds <- function(x, which, ax = 1, ay = 2, col = 2,  pch = 1, cex=1, ...)
         points(x$points[, ax][which], x$points[, ay][which],
             col = col, pch = pch, cex = cex, ...)
     } else if (is.numeric(which)) {
-        if (!is.null(breaks)) {
+        if (breaks) {
             mask <- !is.na(which)
             cex = (which-min(which[mask])) / (max(which[mask])-min(which[mask])) * 5
         } else {
@@ -57,8 +57,8 @@ plotid.nmds <- function(ord, ids=seq(1:nrow(ord$points)), ax = 1, ay = 2, col = 
     identify(ord$points[, ax],ord$points[, ay],ids,col=col)
 }
 
-surf.nmds <- function(ord, var, ax=1, ay=2, col=2, 
-     labcex = 0.8, family=gaussian, ...)
+surf.nmds <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2, 
+     labcex = 0.8, family=gaussian, gamma=1.0, grid=50, ...)
 {
     if (class(ord) != 'nmds')
         stop("You must supply an object of class nmds from nmds")
@@ -75,42 +75,28 @@ surf.nmds <- function(ord, var, ax=1, ay=2, col=2,
     }
     if (is.logical(var)) {
         tvar <- as.numeric(var)
-        tmp <- gam(tvar~s(x)+s(y),family=binomial)
+        if (thinplate) tmp <- gam(tvar+s(x,y),family=binomial,gamma=gamma)
+        else  tmp <- gam(tvar~s(x)+s(y),family=binomial, gamma=gamma)
     } else {
-        tmp <- gam(var~s(x)+s(y),family=family)
+        if (thinplate) tmp <- gam(var~s(x,y),family=family, gamma=gamma)
+        else tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
     }
-    contour(interp(x,y,fitted(tmp)),add=TRUE,col=col)
+   
+    new.x <- seq(min(x),max(x),len=grid)
+    new.y <- seq(min(y),max(y),len=grid)
+    xy.hull <- chull(x,y)
+    xy.hull <- c(xy.hull,xy.hull[1])
+    new.xy <- expand.grid(x=new.x,y=new.y)
+    inside <- as.logical(pip(new.xy$x,new.xy$y,x[xy.hull],y[xy.hull]))
+    fit <- predict(tmp, type="response", newdata=as.data.frame(new.xy))
+    fit[!inside] <- NA
+    contour(x=new.x,y=new.y,z=matrix(fit,nrow=grid),
+        add=TRUE,col=col)
     print(tmp)
     d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
     cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
 }
 
-jsurf.nmds <- function(ord, var, ax=1, ay=2, col=2, 
-      labcex = 0.8, family=gaussian, ...)
-{
-    if (class(nmds) != 'nmds')
-        stop("You must supply an object of class nmds from nmds")
-    if (missing(var)) 
-        stop("You must specify a variable to surface")
-    x <- ord$points[,ax]
-    y <- ord$points[,ay]
-    if (any(is.na(var))) {
-        cat("Omitting plots with missing values \n")
-        x <- x[!is.na(var)]
-        y <- y[!is.na(var)]
-        var <- var[!is.na(var)]
-    }
-    if (is.logical(var)) {
-        tvar <- as.numeric(var)
-        tmp <- gam(tvar~s(x)+s(y),family=binomial)
-    } else {
-        tmp <- gam(var~s(x)+s(y),family=family)
-    }
-    contour(interp(jitter(x),jitter(y),fitted(tmp)),add=TRUE,col=col)
-    print(tmp)
-    d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
-    cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
-}
  
 bestnmds <- function (dis,k=2,itr=20,maxit=100)
 {
@@ -135,7 +121,7 @@ hilight.nmds <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c
 {
     if (class(ord) != 'nmds')
        stop("You must pass an object of class nmds")
-    if (inherits(overlay,c('partana','pam','slice')))
+    if (inherits(overlay,c('partana','pam','clustering')))
        overlay <- overlay$clustering
     if (is.logical(overlay) || is.factor(overlay))
         overlay <- as.numeric(overlay)
@@ -159,7 +145,7 @@ chullord.nmds<- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 {
     if (class(ord) != 'nmds')
         stop("You must pass an object of class nmds")
-    if (inherits(overlay,c('partana','pam','slice')))
+    if (inherits(overlay,c('partana','pam','clustering')))
        overlay <- overlay$clustering
     else if (is.logical(overlay))
         overlay <- as.numeric(overlay)
@@ -183,3 +169,43 @@ chullord.nmds<- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
     }
 }
 
+density.nmds <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5, 
+    6, 7), ltys = c(1, 2, 3), niter, ...) 
+{
+    if (class(ord) != "nmds") 
+        stop("You must pass an object of class nmds")
+    if (inherits(overlay, c("partana", "pam", "clustering"))) 
+        overlay <- overlay$clustering
+    else if (is.logical(overlay)) 
+        overlay <- as.numeric(overlay)
+    else if (is.factor(overlay)) 
+        overlay <- as.numeric(overlay)
+    
+    densi <- function(xpts,ypts,overlay) {
+        x <- xpts[overlay==1 & !is.na(overlay)]
+        y <- ypts[overlay==1 & !is.na(overlay)]
+        pts <- chull(x,y)
+        a <- c(x,x[1])
+        b <- c(y,y[1])
+        inside <- pip(xpts,ypts,a,b)
+        test <- pmax(inside,overlay==1)
+        out <- sum(overlay)/sum(test)
+        return(out)
+    }
+
+    out <- list()
+    for (i in 1:max(overlay, na.rm = TRUE)) {
+        obs <- densi(ord$points[, ax],ord$points[, ay], overlay==i)
+        pval <- 0
+        for (j in 1:(niter-1)) {
+            rnd <- sample(1:length(overlay),sum(overlay==i),replace=FALSE)
+            rndvec <- rep(0,length(overlay))
+            rndvec[rnd] <- 1
+            tmp <- densi(ord$points[, ax],ord$points[, ay], rndvec)
+            if (tmp >= obs) pval <- pval + 1
+        }
+        pval <- (pval+1)/niter
+        print(paste('d = ',obs,'p = ',pval))
+    }
+
+}

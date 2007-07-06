@@ -19,6 +19,7 @@ metrify                 Nearest Metric Space Representation of a
                         Dissimilarity Object
 nmds                    Nonmetric Multidimensional Scaling
 ordcomp                 Ordination to Dissimilarity Comparison
+ordist			Calculation of pair-wise distances in an ordination
 ordpart                 Ordination Partitioning
 ordtest                 Ordination Distribution Test
 pca                     Principal Components Analysis
@@ -31,7 +32,5 @@ plot.pco                Plotting Routines For Principal Coordinates
                         Ordinations
 rndveg                  Randomize a Vegetation Data Frame
 spcdisc                 Species Discrimination Analysis
-tabdev                  Table Deviance
-vardist                 Variable Pairwise Difference
 vegtab                  Vegetation Table
 vegtrans                Vegetation Transformation and Standardization

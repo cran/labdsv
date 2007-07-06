@@ -1,12 +1,12 @@
 \name{abuocc}
 \alias{abuocc}
 \title{Abundance/Occurrence Graphical Analysis}
-\description{Calculates and plots summary statistics about species 
+\description{Calculates and plots summary statistics about species
 occurrences in a data frame}
-}
+
 \usage{abuocc(taxa,minabu=0)}
 \arguments{
-    \item{taxa}{a vegetation (or other taxon) dataframe with samples as rows 
+    \item{taxa}{a vegetation (or other taxon) data.frame with samples as rows 
      and species as columns}
     \item{minabu}{a minimum abundance threshold species must exceed to be 
      included in the calculations (default=0)}
@@ -37,7 +37,7 @@ the fourth plot allows you to identify individual samples with the mouse.
 }
 
 \references{
-\url{http://ecology.msu.montana.edu/labdsv/R}
+\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}
 }
 \note{It's common in niche theory analyses to calculate the rank abundances 
 of taxa in a site.  This function is similar, but works on multiple samples simultaneously.
@@ -48,13 +48,12 @@ calculations of sample similarity using \code{\link[labdsv]{dsvdis}} among other
 \author{
 	David W. Roberts
 	\email{droberts@montana.edu}
-	\url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[vegan]{fisherfit}}, 
          \code{\link[vegan]{prestonfit}},
          \code{\link[vegan]{radfit}}}
 \examples{
-    \dontrun{data(bryceveg)} # produces a data.frame called bryceveg
-    \dontrun{abuocc(bryceveg)}
+    data(bryceveg) # produces a data.frame called bryceveg
+    abuocc(bryceveg)
 }
 \keyword{multivariate}

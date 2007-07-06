@@ -5,7 +5,7 @@
 
 \description{This function is simply a wrapper for the isoMDS function in the
     MASS package by Venables and Ripley.  The purpose is to establish a
-    nmds class to simplify plotting and additional graphical analysis as
+    \sQuote{nmds} class to simplify plotting and additional graphical analysis as
     well as a summary.}
 
 \usage{
@@ -14,7 +14,7 @@ bestnmds(dis,k=2,itr=20,maxit=100)
 }
 
 \arguments{
-    \item{dis}{a dist object returned from \code{dist()} or a full symmetric
+    \item{dis}{a dist object returned from \code{dist} or a full symmetric
         dissimilarity or distance matrix}
     \item{k}{the desired number of dimensions for the result}
     \item{y}{a matrix of initial locations (objects as rows, coordinates as columns,
@@ -24,9 +24,9 @@ bestnmds(dis,k=2,itr=20,maxit=100)
     \item{itr}{number of random starts to find best result}
 }
 
-\details{The nmds function simply calls the \code{isoMDS()} function of the 
+\details{The nmds function simply calls the \code{isoMDS} function of the 
     MASS library, but converts the result from a list to an object of
-    class "nmds."  The only purpose for the function is to allow \sQuote{plot},
+    class sQuote{nmds}.  The only purpose for the function is to allow \sQuote{plot},
     \sQuote{identify},
     \sQuote{surf}, and other additional methods to be defined for the 
     nmds class, to simplify the analysis of the result.
@@ -47,7 +47,7 @@ Psychometrics 29:115-129.
 
 T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hall.
 
-\url{http://ecology.msu.montana.edu:/labdsv/R}
+\url{http://ecology.msu.montana.edu:/labdsv/R/labdsv}
 }
 
 \note{nmds is included as part of the LabDSV package to provide a consistent interface and 
@@ -69,8 +69,8 @@ T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hal
         method to identify points with a mouse, the \sQuote{points} method to 
         identify points meeting a logical condition, the \sQuote{hilight} method
         to color-code points according to a factor, 
-        the \sQuote{chullord} method to add convex hulls for a factor, or 
-        the \sQuote{surf} and \sQuote{jsurf} methods to add surface contours for 
+        the \sQuote{chullord} method to add convex hulls for a factor, or the 
+        the \sQuote{surf} method to add surface contours for 
         continuous variables.  
 
    \code{\link[vegan]{initMDS}} for an alternative way to automate random starts

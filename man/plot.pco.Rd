@@ -4,8 +4,8 @@
 \alias{plotid.pco}
 \alias{hilight.pco}
 \alias{chullord.pco}
+\alias{density.pco}
 \alias{surf.pco}
-\alias{jsurf.pco}
 
 \title{Plotting Routines For Principal Coordinates Ordinations}
 \description{A set of routines for plotting, highlighting points,
@@ -13,15 +13,15 @@ or adding fitted surfaces to PCOs.}
 \usage{
 \method{plot}{pco}(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, \dots)
 \method{points}{pco}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, \dots)
-\method{plotid}{pco}(ord, ids = seq(1:nrow(ord$points)), ax = 1, ay = 2, 
+\method{plotid}{pco}(ord, ids = seq(1:nrow(ord$points)), ax = 1, ay = 2,
     col = 1, \dots)
-\method{hilight}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), 
+\method{hilight}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5),
     origpch = 1, blank = '#FFFFFF', \dots)
 \method{chullord}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys = c(1,2,3), \dots)
-\method{surf}{pco}(ord, var, ax = 1, ay = 2, col = 2, labcex = 0.8, 
-    family = gaussian, \dots)
-\method{jsurf}{pco}(ord, var, ax = 1, ay = 2, col = 2, labcex = 0.8, 
-    family = gaussian, \dots)
+\method{density}{pco}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
+    6, 7), ltys = c(1, 2, 3), niter=100, ...)
+\method{surf}{pco}(ord, var, ax = 1, ay = 2, thinplate=TRUE, col = 2, labcex = 0.8,
+    family = gaussian, grid=50, gamma=1, \dots)
 }
 
 \arguments{
@@ -37,9 +37,17 @@ or adding fitted surfaces to PCOs.}
     \item{origpch}{the pch number of the glyph employed in the original plot (to be obliterated by blank)}
     \item{blank}{the color to use to erase the glyphs of the original plot}
     \item{ltys}{the sequence of line types to be used}
+    \item{niter}{number of iterations to use in estimating the probility of obtaining
+           the observed density}
     \item{var}{a variable to be surfaced}
-    \item{family}{controls the link function passed to \sQuote{gam}: 
+    \item{thinplate}{a logical variable to control how the surface is fit: thinplate
+                     = TRUE (the default) fits a thinplate spline, thinplate = FALSE
+                     fits independent smooth splines}
+    \item{family}{controls the link function passed to \sQuote{gam}:
           one of \sQuote{gaussian}, \sQuote{binomial}, or \sQuote{poisson}}
+    \item{gamma}{controls the smoothness of the fit from \code{\link[mgcv]{gam}}}
+    \item{grid}{the number of X and Y points to use in establishing a grid
+          for surf}
     \item{ids}{identifier labels for samples.  Defaults to 1:n}
     \item{col}{color index for points or contours}
     \item{labcex}{size of contour interval labels}
@@ -53,53 +61,59 @@ Function \sQuote{plot} produces a scatterplot of sample
 scores for the specified axes, erasing or over-plotting
 on the current graphic device.  Axes dimensions are controlled to produce
 a graph with the correct aspect ratio.
-Functions \sQuote{points}, \sQuote{plotid}, \sQuote{hilight}, 
-\sQuote{chullord}, \sQuote{surf}, and 
-\sQuote{jsurf} add detail to an existing plot.  The axes specified must
-match the underlying plot exactly.  
+Functions \sQuote{points}, \sQuote{plotid}, \sQuote{hilight},
+\sQuote{chullord}, and \sQuote{surf}
+add detail to an existing plot.  The axes specified must
+match the underlying plot exactly.
 
-Function \sQuote{plotid} identifies 
-and labels samples (optionally with values from a third vector) 
-in the PCO, and requires interaction with the mouse: 
+Function \sQuote{plotid} identifies
+and labels samples (optionally with values from a third vector)
+in the PCO, and requires interaction with the mouse:
 left button identifies, right button exits.
 
-Function \sQuote{points} is passed a logical 
+Function \sQuote{points} is passed a logical
 vector to identify a set of samples by color of glyph.  It can be used
 to identify a single set meeting almost any criterion that can be
 stated as a logical expression.
 
 Function \sQuote{hilight} is passed a factor vector or integer vector,
-and identifies factor values by color and glyph.  By specifying values for 
+and identifies factor values by color and glyph.  By specifying values for
 arguments \sQuote{cols} and \sQuote{glyph} it is possible to control the sequence of colors and pch glyphs used in the hilight.
 
 Function \sQuote{chullord} is passed a factor vector or integer vector,
-and plots a convex hull around all points in each factor class.  
-By specifying values for arguments \sQuote{cols} and \sQuote{ltys} 
+and plots a convex hull around all points in each factor class.
+By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
 it is possible to control the sequence of colors and linetypes of the convex
 hulls.
 
-Functions \sQuote{surf} and \sQuote{jsurf} calculate and plot fitted 
-surfaces for logical or quantitative
-variables; \sQuote{jsurf} jitters the coordinates to avoid problems with 
-identical values in fitting the surface.  The functions are simply
-wrappers for the \code{\link[mgcv]{gam}} function, and send the 
-sample coordinates and the \sQuote{var} variable 
-to \sQuote{gam} to model.  The coordinates and the fitted values from 
-\sQuote{gam} are then passed to \code{\link[akima]{interp}}, which plots the 
-contours.  The default link function for fitting the GAMs is \sQuote{gaussian}, 
-suitable for unbounded continuous variables.  For logical variables you 
-should specify \sQuote{family = binomial} to get a logistic GAM, and 
-for integer counts you should specify \sQuote{family = poisson} to get 
-a Poisson GAM.
-}
+Function \sQuote{density} calculates the fraction of points within the convex
+hull that belong to the specified type.
+
+Function \sQuote{surf} calculates and plots fitted surfaces for logical or
+quantitative variables.  The function employs the \code{\link[mgcv]{gam}}
+function to fit a variable to the ordination coordinates, and to predict the
+values at all grid points.  The grid is established with the
+\sQuote{expand.grid} function, and the grid is then specified in a call to
+\sQuote{predict.gam}.  The predicted values are trimmed to the the convex hull
+of the data, and the contours are fit by \sQuote{contour}.  The default link
+function for fitting the GAMs is \sQuote{gaussian}, suitable for unbounded
+continuous variables.  For logical variables you should specify \sQuote{family
+= binomial} to get a logistic GAM, and for integer counts you should specify
+\sQuote{family = poisson} to get a Poisson GAM.  }
 
 \value{Function \sQuote{plotid} returns a vector of row numbers of
 identified plots}
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
+
+\note{Previous versions of surf relied on the \sQuote{interp} function of
+package \code{\link[akima]{akima}}.  The revised routine using
+\code{\link[mgcv]{predict.gam}} was suggested by Jari Oksanen as used in
+package\code{\link[vegan]{ordisurf}}.
+}
+
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
 \author{
 David W. Roberts
 \email{droberts@montana.edu}
-\url{http://ecology.msu.montana.edu/droberts}
 }
 
 \examples{

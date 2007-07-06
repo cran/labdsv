@@ -3,11 +3,6 @@ surf <- function(ord,...)
     UseMethod("surf")
 }
 
-jsurf <- function(ord,...)
-{
-    UseMethod("jsurf")
-}
-
 plotid <- function(ord,...)
 {
     UseMethod("plotid")
@@ -26,4 +21,9 @@ hilight <- function(ord, ...)
 chullord <- function(ord, ...)
 {
     UseMethod("chullord")
+}
+
+density <- function(ord, ...)
+{
+    UseMethod("density")
 }

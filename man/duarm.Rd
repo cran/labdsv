@@ -1,14 +1,14 @@
-\name{duarm}
-\alias{duarm}
+\name{isamic}
+\alias{isamic}
 
-\title{Indicator Species Analysis Minimizing Partial Occurrences}
+\title{Indicator Species Analysis Minimizing Intermediate Occurrences}
 
-\description{Calculates the degree to which species are either 
+\description{Calculates the degree to which species are either
 always present or always absent within clusters or types.}
-\usage{duarm(taxa,clustering,sort=FALSE)}
+\usage{isamic(taxa,clustering,sort=FALSE)}
 
 \arguments{
-    \item{taxa}{a matrix or dataframe of samples, species as columns, samples as
+    \item{taxa}{a matrix or data.frame of samples, species as columns, samples as
                rows}
     \item{clustering}{a vector of numeric cluster memberships for samples, or a
                  classification object returned from \code{\link[cluster]{pam}}, 
@@ -21,18 +21,21 @@ always present or always absent within clusters or types.}
 every type), and then calculates twice the the sum of the absolute values of the
 constancy - 0.5, normalized to the number of clusters (columns).}
 
-\value{a dataframe of species indicator values} 
+\value{a data.frame of species indicator values} 
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}
+Aho, K., D.W. Roberts, and T.W.Weaver.  2008. Using geometric and
+non-geometric internal evaluators to compare eight vegetation
+classification methods.  J. Veg. Sci. In press.}
 
-\note{The name duarm is a horrible pun on the name duleg, which is an
-abbreviation for Dufrene and Legendre who defined an alternative indicator
-species algorithm.}
+\note{This function was previously called \sQuote{duarm}, a horrible pun on the 
+name \code{duleg}, which is an abbreviation for Dufrene and Legendre who defined
+an alternative indicator species algorithm.  Following publication of Aho et al. 2008,
+it was renamed \sQuote{isamic} as decribed in that paper. }
 
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts}
 }
 
 \seealso{\code{\link[labdsv]{duleg}}}
@@ -41,6 +44,6 @@ species algorithm.}
     data(bryceveg)
     dis.bc <- dsvdis(bryceveg,'bray/curtis')
     clust <- sample(1:5,nrow(bryceveg),replace=TRUE)
-    duarm(bryceveg,clust)
+    isamic(bryceveg,clust)
 }
 \keyword{cluster}

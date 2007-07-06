@@ -1,5 +1,7 @@
 abuocc <- function(taxa,minabu=0)
 {
+    if (!is.data.frame(taxa)) taxa <- data.frame(taxa)
+
     spc.plt <- apply(taxa>minabu,1,sum)
     plt.spc <- apply(taxa>minabu,2,sum)
 

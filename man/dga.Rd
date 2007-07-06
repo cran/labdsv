@@ -28,12 +28,12 @@ gradients
 and fits a GAM (from \code{\link[mgcv]{mgcv}}) of the z variable to the grid.  
 The GAM surface is then represented by a contour map and abundance 
 symbols as described above.}
-}
+
 
 \value{a graph of the distribution of the z variable on a grid of
-x and y is displayed}
-}
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
+x and y is displayed on the current active device.}
+
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
 \note{
 Direct gradient analysis was promoted by Robert Whittaker and
 followers as a preferred method of vegetation analysis.
@@ -41,11 +41,10 @@ followers as a preferred method of vegetation analysis.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[mgcv]{gam}}}
 
-}
+
 \examples{
     data(bryceveg) # returns a data.frame called bryceveg
     x <- c(0.2,0.5,1.0,2.0,3.0,4.0,5.0,6.0)

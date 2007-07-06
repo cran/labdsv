@@ -52,7 +52,8 @@ plotid.pco <- function(ord, ids=seq(1:nrow(ord$points)), ax = 1, ay = 2, col = 1
     identify(ord$points[, ax],ord$points[, ay],ids)
 }
 
-surf.pco <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...) 
+surf.pco <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2, labcex=0.8, 
+             family=gaussian, grid=50, gamma=1.0, ...) 
 {
     if (class(ord) != 'pco')
         stop("You must supply an object of class pco from pco()")
@@ -68,37 +69,23 @@ surf.pco <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, .
         var <- var[!is.na(var)]
     }
     if (is.logical(var)) {
-        tmp <- gam(var~s(x)+s(y),family=binomial)
+        if (thinplate) tmp <- gam(var~s(x,y), gamma=gamma, family=binomial)
+        else tmp <- gam(var~s(x)+s(y),family=binomial,gamma=gamma)
     } else {
-        tmp <- gam(var~s(x)+s(y),family=family)
+        if (thinplate) tmp <- gam(var~s(x,y), gamma=gamma, family=family)
+        else tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
     }
-    contour(interp(x,y,fitted(tmp)),add=TRUE,col=col,labcex=labcex, ...)
-    print(tmp)
-    d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
-    cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
-}
 
-jsurf.pco <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...)
-{
-    if (class(ord) != 'pco')
-        stop("You must supply an object of class pco from pco()")
-    if (missing(var)) {
-        stop("You must specify a variable to surface")
-    }
-    x <- ord$points[,ax]
-    y <- ord$points[,ay]
-    if (any(is.na(var))) {
-        cat("Omitting plots with missing values \n")
-        x <- x[!is.na(var)]
-        y <- y[!is.na(var)]
-        var <- var[!is.na(var)]
-    }
-    if (is.logical(var)) {
-        tmp <- gam(var~s(x)+s(y),family=binomial)
-    } else {
-        tmp <- gam(var~s(x)+s(y),family=family)
-    }
-    contour(interp(jitter(x),jitter(y),fitted(tmp)),add=TRUE,col=col,labcex=labcex, ...)
+    new.x <- seq(min(x),max(x),len=grid)
+    new.y <- seq(min(y),max(y),len=grid)
+    xy.hull <- chull(x,y)
+    xy.hull <- c(xy.hull,xy.hull[1])
+    new.xy <- expand.grid(x=new.x,y=new.y)
+    inside <- as.logical(pip(new.xy$x,new.xy$y,x[xy.hull],y[xy.hull]))
+    fit <- predict(tmp, type="response", newdata=as.data.frame(new.xy))
+    fit[!inside] <- NA
+    contour(x=new.x,y=new.y,z=matrix(fit,nrow=grid),
+        add=TRUE,col=col)
     print(tmp)
     d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
     cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
@@ -108,7 +95,7 @@ hilight.pco <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(
 {
     if (class(ord) != 'pco')
        stop("You must pass an object of class pco")
-    if (inherits(overlay,c('partana','pam','slice')))
+    if (inherits(overlay,c('partana','pam','clustering')))
        overlay <- overlay$clustering
     if (is.logical(overlay) || is.factor(overlay))
         overlay <- as.numeric(overlay)
@@ -131,7 +118,7 @@ chullord.pco <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 {
     if (class(ord) != 'pco')
         stop("You must pass an object of class pco")
-    if (inherits(overlay,c('partana','pam','slice')))
+    if (inherits(overlay,c('partana','pam','clustering')))
        overlay <- overlay$clustering
     else if (is.logical(overlay))
         overlay <- as.numeric(overlay)
@@ -155,3 +142,47 @@ chullord.pco <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
     }
 }
 
+density.pco <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5, 
+    6, 7), ltys = c(1, 2, 3), niter=100, ...) 
+{
+    if (class(ord) != "pco") 
+        stop("You must pass an object of class nmds")
+    if (inherits(overlay, c("partana", "pam", "clustering"))) 
+        overlay <- overlay$clustering
+    else if (is.logical(overlay)) 
+        overlay <- as.numeric(overlay)
+    else if (is.factor(overlay)) 
+        overlay <- as.numeric(overlay)
+    
+    densi <- function(xpts,ypts,overlay) {
+        x <- xpts[overlay==1 & !is.na(overlay)]
+        y <- ypts[overlay==1 & !is.na(overlay)]
+        pts <- chull(x,y)
+        a <- x[pts]
+        a <- c(a,a[1])
+        b <- y[pts]
+        b <- c(b,b[1])
+        inside <- pip(xpts,ypts,a,b)
+        test <- pmax(inside,overlay==1)
+        out <- sum(overlay)/sum(test)
+        return(out)
+    }
+
+    out <- list()
+    for (i in 1:max(overlay, na.rm = TRUE)) {
+        obs <- densi(ord$points[, ax],ord$points[, ay], overlay==i)
+        pval <- 0
+        if (niter > 0) {
+            for (j in 1:(niter-1)) {
+                rnd <- sample(1:length(overlay),sum(overlay==i),replace=FALSE)
+                rndvec <- rep(0,length(overlay))
+                rndvec[rnd] <- 1
+                tmp <- densi(ord$points[, ax],ord$points[, ay], rndvec)
+                if (tmp >= obs) pval <- pval + 1
+            }
+        }
+        pval <- (pval+1)/niter
+        print(paste('d = ',obs,'p = ',pval))
+    }
+
+}

@@ -2,12 +2,12 @@
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
       integer index
-      real dis(nrow,nrow)
-      real stepx
+      double precision dis(nrow,nrow)
+      double precision stepx
 c
 c* local
 c
@@ -63,10 +63,10 @@ c
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
-      real dis(nrow,nrow)
+      double precision dis(nrow,nrow)
 c
 c* local
 c
@@ -107,10 +107,10 @@ c
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
-      real dis(nrow,nrow)
+      double precision dis(nrow,nrow)
 c
 c* local
 c
@@ -151,15 +151,15 @@ c
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
-      real dis(nrow,nrow)
+      double precision dis(nrow,nrow)
 c
 c* local
 c
       integer a,b,c
-      real temp
+      double precision temp
 c
       do 10 i=1,nrow-1
       dis(i,i) = 0.0
@@ -199,14 +199,14 @@ c
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
-      real dis(nrow,nrow)
+      double precision dis(nrow,nrow)
 c
 c* local
 c
-      real numer,denom 
+      double precision numer,denom 
 c
       do 10 i=1,nrow-1
       dis(i,i) = 0.0
@@ -239,14 +239,14 @@ c
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
-      real dis(nrow,nrow)
+      double precision dis(nrow,nrow)
 c
 c* local
 c
-      real numer,denom
+      double precision numer,denom
 c
       do 10 i=1,nrow-1
       dis(i,i) = 0.0
@@ -279,14 +279,14 @@ c
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
-      real dis(nrow,nrow)
+      double precision dis(nrow,nrow)
 c
 c* local
 c
-      real numer,denom
+      double precision numer,denom
 c
       do 10 i=1,nrow-1
       dis(i,i) = 0.0
@@ -321,17 +321,17 @@ c
 c
 c* passed
 c
-      real mat(nrow,ncol)
-      real weight(ncol)
+      double precision mat(nrow,ncol)
+      double precision weight(ncol)
       integer nrow,ncol
-      real dis(nrow,nrow)
+      double precision dis(nrow,nrow)
 c
 c* local
 c
-      real colsum(10000)
-      real rowsum(10000)
-      real totsum
-      real temp
+      double precision colsum(10000)
+      double precision rowsum(10000)
+      double precision totsum
+      double precision temp
 c
       do 10 i=1,ncol
       colsum(i) = 0.0

@@ -1,15 +1,15 @@
 \name{pco}
 \alias{pco}
 \title{Principal Coordinates Analysis}
-\description{Principal coordinates analysis is an eigenanalysis of 
+\description{Principal coordinates analysis is an eigenanalysis of
     distance or metric dissimilarity matrices.
 }
 \usage{pco(dis, k=2)
 }
 \arguments{
     \item{dis}{the distance or dissimilarity matrix object of
-         class "dist" returned from 
-        \code{\link[mva]{dist}}, \code{\link[vegan]{vegdist}}, or 
+         class "dist" returned from
+        \code{\link[mva]{dist}}, \code{\link[vegan]{vegdist}}, or
         \code{\link[labdsv]{dsvdis}}}
     \item{k}{the number of dimensions to return}
 }
@@ -24,24 +24,23 @@
 \references{Gower, J.C. (1966)  Some distance properties of latent root
 and vector methods used in multivariate analysis.  Biometrika 53:325-328.
 
-\url{http://ecology.msu.montana.edu/labdsv/R}}
+\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
 
 \note{Principal Coordinates Analysis was pioneered by Gower (1966)
     as an alternative to PCA better suited to ecological datasets.}
 \author{
-of the \sQuote{cmdscale} function: Venebles and Ripley 
+of the \sQuote{cmdscale} function: Venebles and Ripley
 
 of the wrapper function
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts}
 }
-\seealso{\code{\link[MASS]{cmdscale}}, \code{\link[labdsv]{pca}}, 
+\seealso{\code{\link[MASS]{cmdscale}}, \code{\link[labdsv]{pca}},
           \code{\link[labdsv]{nmds}}, \code{\link[vegan]{cca}}
 }
 \examples{
-        data(bryceveg) # returns a vegetation dataframe
-        dis.bc <- dsvdis(bryceveg,'bray/curtis') 
+        data(bryceveg) # returns a vegetation data.frame
+        dis.bc <- dsvdis(bryceveg,'bray/curtis')
                   # returns an object of class \sQuote{dist}
         veg.pco <- pco(dis.bc,k=4) # returns first 4 dimensions
 }
