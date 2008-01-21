@@ -5,19 +5,19 @@ dsvdis <- function(x, index, weight = rep(1,ncol(x)), step = 0., diag=FALSE, upp
     if(is.na(i))
         stop(paste(index, "is not a valid index:", paste(choices, 
             collapse = ", ")))
-    if (!is.loaded(symbol.For("dsvdis"))) {
+    if (!is.loaded("dsvdis")) {
         dyn.load("labdsv")
     }
     x <- as.matrix(x)
     y <- matrix(0,nrow=nrow(x),ncol=nrow(x))
     dis <- .Fortran("dsvdis",
-        as.single(x),
-        as.single(weight),
+        x,
+        weight,
         as.integer(nrow(x)),
         as.integer(ncol(x)),
         as.integer(i),
-        out = as.single(y),
-        as.single(step),
+        out = y,
+        step,
         PACKAGE='labdsv')
     tmp <- matrix(dis$out, nrow = nrow(x))
     tmp2 <- tmp[row(tmp)>col(tmp)]

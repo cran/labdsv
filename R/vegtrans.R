@@ -1,5 +1,6 @@
 vegtrans <- function (taxa,code,value)
 {
+    if (!is.data.frame(taxa)) taxa <- data.frame(taxa)
     if (length(code) != length(value))
         stop("code and value vectors must be of the same length")
     if (is.numeric(code)) code <- c(0,code)

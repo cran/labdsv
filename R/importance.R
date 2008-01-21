@@ -2,9 +2,10 @@ importance <- function (taxa, clustering, minval = 0, digits = 2, spcord)
 {
     chop <- function(x) (as.integer(sum(x) * 10^digits/sum(clustering == 
         i))/10^digits)
-    if (inherits(clustering,c('partana','partition','slice'))) 
+    if (inherits(clustering,c('partana','partition','clustering'))) 
         clustering <- clustering$clustering
     namlst <- NULL
+    if (!is.data.frame(taxa)) taxa <- data.frame(taxa)
     if (missing(clustering)) 
         clustering <- rep(1, nrow(taxa))
     clustering <- clustering[!is.na(clustering)]

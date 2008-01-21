@@ -1,3 +1,79 @@
+labdsv 1.3-0
+
+A number of small changes, and a couple of larger ones were made in
+the revision to 1.3-0.
+
+1) A bug was fixed in the duleg FORTRAN code that compared a four-byte
+floating point number to an eight-byte number.  This bug would only
+appear in relatively few cases, and affected the calculated
+probability of some observations, not the indicator value itself.  I
+also improved the permutation code used in the probability estimates.
+
+2) Subsequent to the discovery of duleg bug, all remaining four-byte
+floating points (FORTRAN REAL) were converted to eight-byte floating
+point (FORTRAN DOUBLE PRECISION) to achieve better correspondence with
+R and avoid problems.  It does increase the storage requirement of
+some programs, but this seems to rarely be a problem on modern
+computers.
+
+3) I discovered that I was using specialized FORTRAN code in several
+places where the base package "dist()" function would work.  I
+replaced all of those instances.  This resulted in dropping function
+"vardist," and modifying internal function "orddist."
+
+4) I modified function "ordcomp," changing the default
+dimensionality to full dimensionality, rather than n=2.  It is still
+possible to specify any desired dimensionality through the "dim="
+argument; I only changed the default.
+
+5) While updating function "ordcomp" I realized that it would be just
+as easy to have function "ordcomp" avoid the call to internal function
+"orddist" and do the calculations directly.  Consequently, function
+"orddist" is now a stand-alone function useful for calculating the
+pair-wise distances in an ordination for any purpose.  Function
+"orddist" returns an object of class "dist."
+
+6) I changed the surface fitting routine in all versions of the "surf"
+functions (for pca, pco, and nmds) to use the "predict.gam" function
+of package "mgcv" in place of the function "interp" from package
+"akima."  This resulted in smoother, better fit surfaces, and allowed
+me to no longer require package "akima" to load labdsv.  This change
+was suggested and first implemented by Jari Oksanen for function
+"ordisurf" in package "vegan."  Again, following the lead of vegan, I
+made the default surface fitter a thin plate spline, rather then
+additive independent smooth splines.  The original behavior is still
+available by specifying thinplate=FALSE.  Finally, I added a
+gamma argument to the surf function to allow users to control the 
+smoothness of the surface by passing gamma tot he underlying gam 
+function.
+
+7) In response to a problem identified by P. Legendre, I inserted
+checks to see that "taxa" is converted to a dataframe, rather than a
+matrix, wherever necessary.
+
+8) I added two new routines to simplify working with large sparse
+data sets: "matrify" and "dematrify".  "matrify" takes data in three
+column database format (sample_id, taxon, abundance) and converts it
+into an expanded sparse matrix data.frame.  This routine allows users
+to store their data in a compacted, three column form for exchange
+with other programs.  "dematrify" takes a data.frame of taxa abundance
+in sparse matrix form and writes it out three column database format
+(sample_id, taxon, abundance).  
+
+9) I added a new routine to nmds() and pco() called "density" which
+calculates the fraction of plots within a convex hull that belong to 
+the same type as the type that defines the convex hull.
+
+10) Once again, I had to re-organize the web server that supports labdsv
+and other activities.  The general site for all material is
+
+http://ecology.msu.montana.edu/labdsv/
+
+The material specifically relevant to this pacakage is at
+
+http://ecology.msu.montana.edu/labdsv/R/labdsv
+
+
 labdsv 1.2-2
 
 fixed a bug in jsurf.nmds where the ordination was not called

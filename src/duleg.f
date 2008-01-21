@@ -1,6 +1,6 @@
       subroutine duleg(veg,numplt,numspc,class,clstab,
      +      numcls,numitr,relfrq,relabu,indval,pval,
-     +      indcls,maxcls,tmpfrq,tmpabu,pclass)
+     +      indcls,maxcls,tmpfrq,tmpabu,pclass,tclass)
 c
 c* passed in
 c
@@ -29,11 +29,13 @@ c
       double precision tmpabu(numcls)
       double precision tmpind
       integer pclass(numplt)
-      real maxval
-      real tmpcls
-      real totveg
-      real sumrab
-      real tmpsum
+      double precision maxval
+      double precision tmpcls
+      double precision totveg
+      double precision sumrab
+      double precision tmpsum
+      integer tclass(numplt)
+
 c
 c*********************************** one *********************************
 c
@@ -70,12 +72,12 @@ c
 c*********************************** two ************************************
 c
       do 20 i=1,numspc
-        do 21 j=1,numitr
+        do 21 j=1,numitr-1
         tmpcls = 0
         tmpind = 0
         totveg = 0
         maxval = 0
-        call permute(class,pclass,numplt)
+        call permute(class,pclass,numplt,tclass)
           do 22 k=1,numcls 
           tmpfrq(k) = 0
           tmpabu(k) = 0
@@ -107,7 +109,7 @@ c
             pval(i) = pval(i) + 1
           endif
    21   continue
-      pval(i) = (pval(i)+1) / (numitr + 1)
+      pval(i) = (pval(i)+1) / numitr
    20 continue
 c
       return
@@ -116,7 +118,7 @@ c
 c
 c************************************************************
 c
-      subroutine permute(class,pclass,numplt)
+      subroutine permute(class,pclass,numplt,tclass)
 c
       integer class(numplt)
       integer pclass(numplt)
@@ -125,17 +127,19 @@ c
 c* local
 c
       integer tclass(numplt)
+      integer pool
 c
+      pool = numplt
       do 10 i=1,numplt
       tclass(i) = class(i)
    10 continue
 c
-      do 11 i=1,numplt-1
-      index = rand()*(numplt-i)+2
+      do 11 i=1,numplt
+      index = rand()*(pool)+1
       pclass(i) = tclass(index)
-      tclass(index) = tclass(numplt-i+1)
+      tclass(index) = tclass(pool)
+      pool = pool - 1
    11 continue
-      pclass(numplt) = tclass(1)
 c
       return
 c

@@ -12,7 +12,7 @@ ordtest(ord, var, dim=c(1:ncol(ord$points)), index = 'euclidean',
 \item{var}{a logical or factor vector used to organize the calculation
      of within-set distances}
 \item{dim}{the number of dimensions to use in the calculation}
-\item{index}{the distance metric for the calculation of within-set distances.  
+\item{index}{the distance metric for the calculation of within-set distances.
    Currently only euclidean is accepted}
 \item{nitr}{the number of iteration to perform to establish p-values}
 }
@@ -21,7 +21,7 @@ Calculates the sum of within-set pair-wise distances and compares to \sQuote{nit
 permutations of the same distribution to calculate the probability of observing
 clusters as tight as observed or tighter.  The p-value is calculated by
 running nitr-1 permutations and counting the number of cases where the sum of
-pair-wise distances is as small as smaller than observed.  
+pair-wise distances is as small as smaller than observed.
 That count is increased by one and divided by nitr to estimate p.
 }
 \value{
@@ -29,12 +29,11 @@ Produces a list with components:
 \item{obs}{the observed sum of within-set distances}
 \item{p}{the probability of obtaining a value that small}
 \item{reps}{the sum of within-set pairwise distances for all permutations}
-} 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
+}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[vegan]{anosim}}}
 \examples{

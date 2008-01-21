@@ -2,5 +2,4 @@
   library.dynam("labdsv", pkg, lib)
   require(MASS)
   require(mgcv)
-  require(akima)
 }

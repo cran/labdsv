@@ -1,17 +1,24 @@
-orddist <- function(x,dim=2)
+orddist <- function (x, dim)
 {
-    x <- as.matrix(x)
-    size <- (nrow(x)*(nrow(x)-1))/2
-    dist <- rep(0.0,size)
-    tmp <- .Fortran("orddist",
-        as.double(x),
-        nrow(x),
-        ncol(x),
-        as.integer(dim),
-        as.integer(size),
-        out = dist,
-        PACKAGE='labdsv')$out
-    attr(tmp,"Size") <- nrow(x)
-    class(tmp) <- "dist"
-    return(tmp)
+    if (class(x) == "pca") {
+        z <- x$scores
+    }
+    else if (inherits(x, c("pco", "nmds", "metaMDS"))) {
+        z <- x$points
+    }
+    else if (class(x) == "fso") {
+        z <- as.matrix(x$mu)
+    }
+
+    if (missing(dim)) dim <- ncol(z)
+    if (dim != ncol(z))
+        cat(paste("Only comparing first",dim,"dimensions\n"))
+    if (dim > ncol(z)) {
+        dim <- ncol(z)
+        cat(paste("The ordination is only",dim,"dimensionsal."))
+    }
+
+    tmp <- dist(z[, 1:dim])
+    tmp
 }
+

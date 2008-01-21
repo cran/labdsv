@@ -3,7 +3,7 @@
 \alias{brycesite}
 \title{Site Data for Bryce Canyon National Park}
 \description{Environmental variables recorded at or calculated for each of 160
-sample plots in Bryce Canyon National Park, Utah, U.S.}
+sample plots in Bryce Canyon National Park, Utah, U.S.A.}
 \usage{data(brycesite)}
 \format{a data.frame with plots as rows and site variables as columns.
 Variables are:

@@ -57,7 +57,8 @@ plotid.pca <- function(ord, ids=seq(1:nrow(ord$scores)), ax = 1,  ay = 2, col = 
     identify(ord$scores[, ax],ord$scores[, ay],ids)
 }
 
-surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...)
+surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, 
+                   family=gaussian, thinplate=TRUE, grid=50, gamma=1.0, ...)
 {
     if (class(ord) != 'pca') 
         stop("You must specify an object of class pca")
@@ -67,34 +68,28 @@ surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, .
     x <- ord$scores[, ax]
     y <- ord$scores[, ay]
     if (is.logical(var)) {
-        tmp <- gam(var~s(x)+s(y),family=binomial)
+        if (thinplate) tmp <- gam(var~s(x,y),family=binomial,gamma=gamma)
+        tmp <- gam(var~s(x)+s(y),family=binomial,gamma-gamma)
     } else {
-        tmp <- gam(var~s(x)+s(y),family=family)
+        if (thinplate) tmp <- gam(var~s(x,y),family=family,gamma=gamma)
+        tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
     }
-    contour(interp(x,y,fitted(tmp)),add=TRUE,col=col,labcex=labcex,...)
+    new.x <- seq(min(x),max(x),len=grid)
+    new.y <- seq(min(y),max(y),len=grid)
+    xy.hull <- chull(x,y)
+    xy.hull <- c(xy.hull,xy.hull[1])
+    new.xy <- expand.grid(x=new.x,y=new.y)
+    inside <- as.logical(pip(new.xy$x,new.xy$y,x[xy.hull],y[xy.hull]))
+    fit <- predict(tmp, type="response", newdata=as.data.frame(new.xy))
+    fit[!inside] <- NA
+    contour(x=new.x,y=new.y,z=matrix(fit,nrow=grid),
+        add=TRUE,col=col)
+
     print(tmp)
     d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
     cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
 }
 
-jsurf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8, family=gaussian, ...){
-    if (class(ord) != 'pca')
-        stop("You must specify an object of class pca")
-    if(missing(var)) {
-        stop("You must specify a variable to surface")
-    }
-    x <- jitter(ord$scores[, ax])
-    y <- jitter(ord$scores[, ay])
-   if (is.logical(var)) {
-        tmp <- gam(var~s(x)+s(y),family=binomial)
-    } else {
-        tmp <- gam(var~s(x)+s(y),family=family)
-    }
-    contour(interp(x,y,fitted(tmp)),add=TRUE,col=col,labcex=labcex,...)
-    print(tmp)
-    d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
-    cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
-}
 
 summary.pca <- function(object, dim=length(object$sdev), ...)
 {
@@ -144,7 +139,7 @@ hilight.pca <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(
 {
     if (class(ord) != 'pca')
        stop("You must pass an object of class pca")
-    if (inherits(overlay,c('partana','pam','slice')))
+    if (inherits(overlay,c('partana','pam','clustering')))
        factor <- factor$clustering
     if (is.logical(overlay) || is.factor(overlay))
         overlay <- as.numeric(overlay)
@@ -168,7 +163,7 @@ chullord.pca <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 {
     if (class(ord) != 'pca')
         stop("You must pass an object of class pco")
-    if (inherits(overlay,c('partana','pam','slice')))
+    if (inherits(overlay,c('partana','pam','clustering')))
        overlay <- overlay$clustering
     else if (is.logical(overlay))
         overlay <- as.numeric(overlay)

@@ -2,11 +2,12 @@
 \docType{data}
 \alias{bryceveg}
 \title{Bryce Canyon Vegetation Data}
-\description{Estimates of cover class for all vascular plant species in 160 375\eqn{m^2}
+\description{Estimates of cover class for all non-tree vascular plant 
+species in 160 375\eqn{m^2}
 circular sample plots. Species codes are first three letters of genus + 
 first three letters of specific epithet.} 
 \usage{data(bryceveg)}
-\format{a data.frame of 160 rows (samples) and 169 species (columns).
+\format{a data.frame of 160 samples (rows) and 169 species (columns).
 Cover is estimated in codes as follows:
 \describe{
 \item{0.2}{present in the stand but not the plot}

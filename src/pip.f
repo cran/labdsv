@@ -12,9 +12,9 @@ c
 c
 c* local
 c
-      real expect
-      real xdiff,ydiff
-      real pxmin,pxmax
+      double precision expect
+      double precision xdiff,ydiff
+      double precision pxmin,pxmax
       integer count
 c
       do 10 i=1,lenvec

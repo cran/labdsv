@@ -14,18 +14,17 @@ vegtrans(taxa,code,value)
 \details{Performs a respective substitution to transform specific values
     in an initial data.frame to other specified values.}
 
-\value{a data.frame of transformed vegetation} 
+\value{a data.frame of transformed vegetation}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
 \note{Vegetation data are often collected in arbitrary abundance schemes
-(e.g. Braun-Blanquet, Domin, etc.) which have no direct algebraic 
-transformation (e.g. log).  This function transforms coded abundances to 
+(e.g. Braun-Blanquet, Domin, etc.) which have no direct algebraic
+transformation (e.g. log).  This function transforms coded abundances to
 arbitrary importance values as specified.}
 
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts}
 }
 \seealso{\code{\link[vegan]{decostand}}, \code{\link[vegan]{wisconsin}}}
 \examples{
