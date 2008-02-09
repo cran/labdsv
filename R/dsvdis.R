@@ -11,13 +11,13 @@ dsvdis <- function(x, index, weight = rep(1,ncol(x)), step = 0., diag=FALSE, upp
     x <- as.matrix(x)
     y <- matrix(0,nrow=nrow(x),ncol=nrow(x))
     dis <- .Fortran("dsvdis",
-        x,
-        weight,
+        as.double(x),
+        as.double(weight),
         as.integer(nrow(x)),
         as.integer(ncol(x)),
         as.integer(i),
-        out = y,
-        step,
+        out = as.double(y),
+        as.double(step),
         PACKAGE='labdsv')
     tmp <- matrix(dis$out, nrow = nrow(x))
     tmp2 <- tmp[row(tmp)>col(tmp)]

@@ -1,3 +1,9 @@
+labdsv 1.3-1
+
+This is a bug fix for 1.3-0.  dsvdis.R was missing a cast of the 
+taxon data.frame to "as.double" and would fail on taxon matrices that
+are strictly integers.  Taxon matrices with real numbers worked.
+
 labdsv 1.3-0
 
 A number of small changes, and a couple of larger ones were made in
