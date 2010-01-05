@@ -9,25 +9,9 @@ plot.nmds <- function(x,ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
 {
     if (class(x) != 'nmds') 
         stop("You must supply an object of class nmds from nmds")
-    oldpin <- par("pin")
-    par(pin=c(min(oldpin[1],oldpin[2]),min(oldpin[1],oldpin[2])))
-    xlim <- range(x$points[,ax])
-    ylim <- range(x$points[,ay])
-    tol <- 0.04
-    midx <- 0.5 * (xlim[2] + xlim[1])
-    midy <- 0.5 * (ylim[2] + ylim[1])
-    if (xlim[2]-xlim[1] > ylim[2]-ylim[1]) {
-        xlim <- midx + (1 + tol) * 0.5 * c(-1, 1) * (xlim[2] - xlim[1])
-        ylim <- midy + (1 + tol) * 0.5 * c(-1, 1) * (xlim[2] - xlim[1])
-    }
-    else {
-        xlim <- midx + (1 + tol) * 0.5 * c(-1, 1) * (ylim[2] - ylim[1])
-        ylim <- midy + (1 + tol) * 0.5 * c(-1, 1) * (ylim[2] - ylim[1])
-    }
-    plot(x$points[, ax], x$points[, ay], xlim = xlim, ylim = ylim, 
+    plot(x$points[, ax], x$points[, ay], asp = 1,
         col = col, xlab = paste("NMDS", ax), ylab = paste("NMDS", ay),
         pch = pch, main = title, ...)
-    par(pin=oldpin)
     invisible()
 }
 
@@ -75,7 +59,7 @@ surf.nmds <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2,
     }
     if (is.logical(var)) {
         tvar <- as.numeric(var)
-        if (thinplate) tmp <- gam(tvar+s(x,y),family=binomial,gamma=gamma)
+        if (thinplate) tmp <- gam(tvar~s(x,y),family=binomial,gamma=gamma)
         else  tmp <- gam(tvar~s(x)+s(y),family=binomial, gamma=gamma)
     } else {
         if (thinplate) tmp <- gam(var~s(x,y),family=family, gamma=gamma)
@@ -113,11 +97,12 @@ bestnmds <- function (dis,k=2,itr=20,maxit=100)
         }
     }
     print(strss)
-    print(paste("best result = ",best))
+    cat(paste("\nbest result =", best))
+    cat(paste("\nwith stress =",format(out$stress,4),"\n"))
     out
 }
 
-hilight.nmds <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), origpch=1, blank='#FFFFFF', ...)
+hilight.nmds <- function (ord, overlay, ax=1, ay=2, title="", cols=c(2,3,4,5,6,7), glyph=c(1,3,5), ...)
 {
     if (class(ord) != 'nmds')
        stop("You must pass an object of class nmds")
@@ -125,10 +110,11 @@ hilight.nmds <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c
        overlay <- overlay$clustering
     if (is.logical(overlay) || is.factor(overlay))
         overlay <- as.numeric(overlay)
+    plot(ord,ax=ax,ay=ay,type='n')
+    title(title)
     layer <- 0
     pass <- 1
     for (i in 1:max(overlay,na.rm=TRUE)) {
-        points(ord, overlay == i, ax, ay, col = blank, pch = origpch)
         layer <- layer + 1
         if (layer > length(cols)) {
           layer <- 1
@@ -170,7 +156,7 @@ chullord.nmds<- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 }
 
 density.nmds <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5, 
-    6, 7), ltys = c(1, 2, 3), niter, ...) 
+    6, 7), ltys = c(1, 2, 3), numitr, ...) 
 {
     if (class(ord) != "nmds") 
         stop("You must pass an object of class nmds")
@@ -197,15 +183,36 @@ density.nmds <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     for (i in 1:max(overlay, na.rm = TRUE)) {
         obs <- densi(ord$points[, ax],ord$points[, ay], overlay==i)
         pval <- 0
-        for (j in 1:(niter-1)) {
+        for (j in 1:(numitr-1)) {
             rnd <- sample(1:length(overlay),sum(overlay==i),replace=FALSE)
             rndvec <- rep(0,length(overlay))
             rndvec[rnd] <- 1
             tmp <- densi(ord$points[, ax],ord$points[, ay], rndvec)
             if (tmp >= obs) pval <- pval + 1
         }
-        pval <- (pval+1)/niter
+        pval <- (pval+1)/numitr
         print(paste('d = ',obs,'p = ',pval))
     }
 
+}
+
+rgl.nmds <- function (ord,ax=1,ay=2,az=3,radius=0.01,col=0) 
+{
+    require(rgl)
+    if (ncol(ord$points) < 3) stop("Must be 3-D")
+    tmp <- ord$points[,c(ax,ay,az)]
+
+    midp <- c(0,0,0)
+
+    rgl.clear()
+    rgl.lines(range(ord$points[,ax]),c(midp[2],midp[2]),c(midp[3],midp[3]))
+    rgl.lines(c(midp[1],midp[1]),range(ord$points[,ay]),c(midp[3],midp[3]))
+    rgl.lines(c(midp[1],midp[1]),c(midp[2],midp[2]),range(ord$points[,az]))
+     
+    rgl.texts(1.01 * max(tmp[, 1]), midp[2], midp[3], as.character(ax), adj = 0.5)
+    rgl.texts(midp[1], 1.01 * max(tmp[, 2]), midp[3], as.character(ay), adj = 0.5)
+    rgl.texts(midp[1], midp[2],1.01 * max(tmp[, 3]), as.character(az), adj = 0.5)
+
+    rgl.points(tmp)
+    rgl.spheres(tmp,radius=radius,col=col)
 }

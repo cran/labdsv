@@ -24,7 +24,7 @@ A vector of discrimination values.
     \email{droberts@montana.edu}
 }
 \seealso{\code{\link[labdsv]{const}}, \code{\link[labdsv]{importance}},
-        \code{\link[labdsv]{duleg}}, \code{\link[labdsv]{isamic}}
+        \code{\link[labdsv]{indval}}, \code{\link[labdsv]{isamic}}
 }
 \examples{
 data(bryceveg)

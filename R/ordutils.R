@@ -23,7 +23,17 @@ chullord <- function(ord, ...)
     UseMethod("chullord")
 }
 
+thull <- function(ord, ...)
+{
+    UseMethod("thull")
+}
+
 density <- function(ord, ...)
 {
     UseMethod("density")
+}
+
+thull <- function(ord, ...)
+{
+    UseMethod("thull")
 }

@@ -43,7 +43,7 @@ or adding fitted surfaces to PCAs.}
     \item{dim}{number of dimensions to include in barplot}
     \item{col}{color index for points or contours}
     \item{labcex}{size of contour interval labels}
-    \item{thinplate}{a logical swith to control using thinplate splines versus independent additive fits}
+    \item{thinplate}{a logical switch to control using thinplate splines versus independent additive fits}
     \item{gamma}{controls the smoothness of the fit from \code{\link[mgcv]{gam}}}
     \item{grid}{the number of X and Y values used in establishing a grid}
     \item{pch}{plot character: glyph to plot}
@@ -105,7 +105,7 @@ by eigenvector up to the specified number of dimensions
 \note{Previous versions of surf relied on the \sQuote{interp} function of
 package \code{\link[akima]{akima}}.  The revised routine using
 \code{\link[mgcv]{predict.gam}} was suggested by Jari Oksanen as used in
-package\code{\link[vegan]{vegan}}.
+package vegan.
 }
 
 \references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}

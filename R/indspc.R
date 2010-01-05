@@ -50,19 +50,27 @@ indspc <- function (taxa, dis, numitr = 100)
     out
 }
 
-plot.indspc <- function(x, ...)
+plot.indspc <- function (x, ...) 
 {
-    if (class(x) != 'indspc')
+    if (class(x) != "indspc") 
         stop("only defined for objects of class indspc")
-    plot(x$vals$numocc[x$vals$numocc>1],x$vals$indval[x$vals$numocc>1],log='x')
-    abline(x$mean,0,col=2)
-    lines(2:max(x$vals$numocc),smooth(x$quantiles$q01[2:max(x$vals$numocc)]),col=2)
-    lines(2:max(x$vals$numocc),smooth(x$quantiles$q05[2:max(x$vals$numocc)]),col=2)
-    lines(2:max(x$vals$numocc),smooth(x$quantiles$q95[2:max(x$vals$numocc)]),col=2)
-    lines(2:max(x$vals$numocc),smooth(x$quantiles$q99[2:max(x$vals$numocc)]),col=2)
+    maxval <- max(x$vals$numocc)
+    plot(x$vals$numocc[x$vals$numocc > 1], x$vals$indval[x$vals$numocc > 
+        1], log = "x", xlim=c(2,maxval),xlab='Number of Occurrences',
+        ylab='Similarity')
+    abline(x$mean, 0, col = 2)
+    lines(2:maxval, smooth(x$quantiles$q01[2:maxval],endrule='copy'), 
+        col = 2)
+    lines(2:maxval, smooth(x$quantiles$q05[2:maxval],endrule='copy'), 
+        col = 2)
+    lines(2:maxval, smooth(x$quantiles$q95[2:maxval],endrule='copy'), 
+        col = 2)
+    lines(2:maxval, smooth(x$quantiles$q99[2:maxval],endrule='copy'), 
+        col = 2)
     yorn <- readline("Do you want to identify species [Y or N] : ")
-    if (yorn == 'Y' || yorn == 'y') {
-        identify(x$vals$numocc,x$vals$indval,row.names(x$vals))
+    if (yorn == "Y" || yorn == "y") {
+        identify(x$vals$numocc, x$vals$indval, row.names(x$vals))
     }
     invisible()
 }
+
