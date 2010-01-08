@@ -28,7 +28,7 @@ pca(mat, cor = FALSE, dim = min(nrow(mat),ncol(mat)))
     \item{\dots}{arguments to pass to function summary}
 }
 \details{PCA is a common multivariate technique.  The version here is simply
-a wrapper for the \code{\link[MASS]{prcomp}} function to make its use and
+a wrapper for the \code{prcomp} function to make its use and
 plotting consistent with the other LabDSV functions.
 }
 
@@ -40,22 +40,22 @@ plotting consistent with the other LabDSV functions.
 }
 \references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
 
-\note{The current version of pca is based on the \code{\link[MASS]{prcomp}}
-    function, as opposed to the \code{\link[mva]{princomp}} function.  Nonetheless,
+\note{The current version of pca is based on the \code{prcomp}
+    function, as opposed to the \code{princomp} function.  Nonetheless,
     it maintains the more conventional labels "scores" and "loadings",
     rather than x and rotation.  prcomp is based on a
     singular value decomposition algorithm, as has worked better in our
     experience.  In the rare cases where it fails, you may want to try
-    \code{\link[mva]{princomp}}.
+    \code{princomp}.
 }
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
 }
 \seealso{
-    \code{\link[mva]{princomp}}, \code{\link[MASS]{prcomp}},
+    \code{princomp}, \code{prcomp},
     \code{\link[labdsv]{pco}}, \code{\link[labdsv]{nmds}},
-    \code{\link[labdsv]{fso}}, \code{\link[vegan]{cca}}
+    \code{\link[fso]{fso}}, \code{\link[vegan]{cca}}
 
 }
 \examples{

@@ -9,11 +9,11 @@
 \arguments{
     \item{dis}{the distance or dissimilarity matrix object of
          class "dist" returned from
-        \code{\link[mva]{dist}}, \code{\link[vegan]{vegdist}}, or
+        \code{dist}, \code{\link[vegan]{vegdist}}, or
         \code{\link[labdsv]{dsvdis}}}
     \item{k}{the number of dimensions to return}
 }
-\details{pco is simply a wrapper for the \code{\link[MASS]{cmdscale}} function
+\details{pco is simply a wrapper for the \code{cmdscale} function
      of Venebles and Ripley to make plotting of the function similar to
      other LabDSV functions
 }
@@ -35,7 +35,7 @@ of the wrapper function
     David W. Roberts
     \email{droberts@montana.edu}
 }
-\seealso{\code{\link[MASS]{cmdscale}}, \code{\link[labdsv]{pca}},
+\seealso{\code{cmdscale}, \code{\link[labdsv]{pca}},
           \code{\link[labdsv]{nmds}}, \code{\link[vegan]{cca}}
 }
 \examples{

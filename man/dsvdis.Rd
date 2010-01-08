@@ -76,7 +76,7 @@
 }
 \references{\url{http://ecology.msu.montana.edu:/labdsv/R/labdsv}}
 
-\seealso{\code{\link[mva]{dist}}, \code{\link[vegan]{vegdist}}}
+\seealso{\code{dist}, \code{\link[vegan]{vegdist}}}
 
 \examples{
     data(bryceveg)   # returns a data.frame called "bryceveg"

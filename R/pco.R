@@ -10,25 +10,9 @@ plot.pco <- function(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
     if(missing(x)) {
         stop("You must specify an object of class pco from pco()")
     }
-    oldpin <- par("pin")
-    par(pin=c(min(oldpin[1],oldpin[2]),min(oldpin[1],oldpin[2])))
-    xlim <- range(x$points[,ax])
-    ylim <- range(x$points[,ay])    
-    tol <- 0.04
-        midx <- 0.5 * (xlim[2] + xlim[1])
-        midy <- 0.5 * (ylim[2] + ylim[1])
-    if (xlim[2]-xlim[1] > ylim[2]-ylim[1]) {
-        xlim <- midx + (1 + tol) * 0.5 * c(-1, 1) * (xlim[2] - xlim[1])
-        ylim <- midy + (1 + tol) * 0.5 * c(-1, 1) * (xlim[2] - xlim[1])
-    }
-    else {
-        xlim <- midx + (1 + tol) * 0.5 * c(-1, 1) * (ylim[2] - ylim[1])
-        ylim <- midy + (1 + tol) * 0.5 * c(-1, 1) * (ylim[2] - ylim[1])
-    }
-    plot(x$points[, ax], x$points[, ay], xlim = xlim, ylim = ylim, 
+    plot(x$points[, ax], x$points[, ay], asp = 1,
         col = col, xlab = paste("PCO", ax), ylab = paste("PCO", ay),
         pch = pch, main = title, ...)
-    par(pin=oldpin)
     invisible()
 }
 
@@ -91,7 +75,7 @@ surf.pco <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2, labcex=0.8,
     cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
 }
 
-hilight.pco <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), origpch=1, blank='#FFFFFF', ...)
+hilight.pco <- function (ord, overlay, ax=1, ay=2, title="", cols=c(2,3,4,5,6,7), glyph=c(1,3,5), ...)
 {
     if (class(ord) != 'pco')
        stop("You must pass an object of class pco")
@@ -99,10 +83,11 @@ hilight.pco <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(
        overlay <- overlay$clustering
     if (is.logical(overlay) || is.factor(overlay))
         overlay <- as.numeric(overlay)
+    plot(ord,ax=ax,ay=ay,type='n')
+    title(title)
     layer <- 0
     pass <- 1
     for (i in 1:max(overlay,na.rm=TRUE)) {
-        points(ord, overlay == i, ax, ay, col = blank, pch = origpch)
         layer <- layer + 1
         if (layer > length(cols)) {
           layer <- 1
@@ -143,7 +128,7 @@ chullord.pco <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 }
 
 density.pco <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5, 
-    6, 7), ltys = c(1, 2, 3), niter=100, ...) 
+    6, 7), ltys = c(1, 2, 3), numitr=100, ...) 
 {
     if (class(ord) != "pco") 
         stop("You must pass an object of class nmds")
@@ -172,8 +157,8 @@ density.pco <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     for (i in 1:max(overlay, na.rm = TRUE)) {
         obs <- densi(ord$points[, ax],ord$points[, ay], overlay==i)
         pval <- 0
-        if (niter > 0) {
-            for (j in 1:(niter-1)) {
+        if (numitr > 0) {
+            for (j in 1:(numitr-1)) {
                 rnd <- sample(1:length(overlay),sum(overlay==i),replace=FALSE)
                 rndvec <- rep(0,length(overlay))
                 rndvec[rnd] <- 1
@@ -181,7 +166,7 @@ density.pco <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
                 if (tmp >= obs) pval <- pval + 1
             }
         }
-        pval <- (pval+1)/niter
+        pval <- (pval+1)/numitr
         print(paste('d = ',obs,'p = ',pval))
     }
 

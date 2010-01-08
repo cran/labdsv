@@ -6,6 +6,7 @@
 \alias{chullord.pco}
 \alias{density.pco}
 \alias{surf.pco}
+\alias{thull.pco}
 
 \title{Plotting Routines For Principal Coordinates Ordinations}
 \description{A set of routines for plotting, highlighting points,
@@ -15,13 +16,14 @@ or adding fitted surfaces to PCOs.}
 \method{points}{pco}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, \dots)
 \method{plotid}{pco}(ord, ids = seq(1:nrow(ord$points)), ax = 1, ay = 2,
     col = 1, \dots)
-\method{hilight}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5),
-    origpch = 1, blank = '#FFFFFF', \dots)
+\method{hilight}{pco}(ord, overlay, ax = 1, ay = 2, title="", cols=c(2,3,4,5,6,7), glyph=c(1,3,5),
+    \dots)
 \method{chullord}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys = c(1,2,3), \dots)
 \method{density}{pco}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
-    6, 7), ltys = c(1, 2, 3), niter=100, ...)
+    6, 7), ltys = c(1, 2, 3), numitr=100, ...)
 \method{surf}{pco}(ord, var, ax = 1, ay = 2, thinplate=TRUE, col = 2, labcex = 0.8,
     family = gaussian, grid=50, gamma=1, \dots)
+\method{thull}{pco}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,numitr=100,...)
 }
 
 \arguments{
@@ -34,10 +36,8 @@ or adding fitted surfaces to PCOs.}
     \item{overlay}{a factor or integer vector to hilight or distinguish}
     \item{cols}{the sequence of color indices to be used}
     \item{glyph}{the sequence of glyphs (pch) to be ed}
-    \item{origpch}{the pch number of the glyph employed in the original plot (to be obliterated by blank)}
-    \item{blank}{the color to use to erase the glyphs of the original plot}
     \item{ltys}{the sequence of line types to be used}
-    \item{niter}{number of iterations to use in estimating the probility of obtaining
+    \item{numitr}{number of iterations to use in estimating the probability of obtaining
            the observed density}
     \item{var}{a variable to be surfaced}
     \item{thinplate}{a logical variable to control how the surface is fit: thinplate
@@ -53,6 +53,10 @@ or adding fitted surfaces to PCOs.}
     \item{labcex}{size of contour interval labels}
     \item{pch}{plot character: glyph to plot}
     \item{cex}{character expansion factor: size of plotted characters}
+    \item{grain}{the size of moving window to use in calculating the tensioned hull}
+    \item{nlevels}{the number of contour intervals to draw on the tensioned hull}
+    \item{levels}{specific levels to use in drawing the tensioned hull}
+    \item{lty}{the line type to use in drawing the tensioned hull contours}
     \item{\dots}{arguments to pass to the plot function}
 }
 

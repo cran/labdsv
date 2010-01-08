@@ -11,8 +11,8 @@ format, where the first column is the sample ID, the second column is the taxon
 ID, and the third sample is the abundance of that taxon in that sample.}
 }
 \details{The routine is pure R code to convert data from database form to the sparse
-matrix form required by multivariate analyses in \code{\link[labdsv]{}} and
-\code{\link[vegan]{}}, as well as \code{dist} and other routines.
+matrix form required by multivariate analyses in packages \sQuote{labdsv} and
+\sQuote{vegan}, as well as \code{dist} and other routines.
 }
 
 \value{a data.frame with samples as rows, taxa as columns, and abudance values

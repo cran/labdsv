@@ -105,7 +105,8 @@ c
             maxval = tmpind
           endif
    25     continue
-          if (maxval .ge. indval(i,maxcls(i))) then
+c          if (maxval .ge. indval(i,maxcls(i))) then
+          if (maxval - indval(i,maxcls(i)) .gt. -0.0001) then
             pval(i) = pval(i) + 1
           endif
    21   continue

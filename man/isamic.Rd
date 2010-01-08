@@ -12,7 +12,7 @@ always present or always absent within clusters or types.}
                rows}
     \item{clustering}{a vector of numeric cluster memberships for samples, or a
                  classification object returned from \code{\link[cluster]{pam}}, 
-                 or \code{\link[labdsv]{partana}}}
+                 or \code{\link[optpart]{partana}}}
     \item{sort}{if TRUE, return in order of highest value to lowest rather than
                 input order}
 }
@@ -38,7 +38,7 @@ it was renamed \sQuote{isamic} as decribed in that paper. }
     \email{droberts@montana.edu}
 }
 
-\seealso{\code{\link[labdsv]{duleg}}}
+\seealso{\code{\link[labdsv]{indval}}}
 
 \examples{
     data(bryceveg)

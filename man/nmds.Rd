@@ -26,7 +26,7 @@ bestnmds(dis,k=2,itr=20,maxit=100)
 
 \details{The nmds function simply calls the \code{isoMDS} function of the 
     MASS library, but converts the result from a list to an object of
-    class sQuote{nmds}.  The only purpose for the function is to allow \sQuote{plot},
+    class \sQuote{nmds}.  The only purpose for the function is to allow \sQuote{plot},
     \sQuote{identify},
     \sQuote{surf}, and other additional methods to be defined for the 
     nmds class, to simplify the analysis of the result.
@@ -63,7 +63,7 @@ T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hal
 }
 
 \seealso{
-    \code{\link[labdsv]{isoMDS}} for the original function
+    \code{isoMDS} for the original function
 
     \code{\link[labdsv]{plot.nmds}} for the \sQuote{plot} method, the \sQuote{plotid}
         method to identify points with a mouse, the \sQuote{points} method to 

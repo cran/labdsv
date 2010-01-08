@@ -11,7 +11,7 @@ Calculates the mean similarity of all plots in which a species occurs.
 \arguments{
 \item{taxa}{a data frame of taxa, samples as rows, species as columns}
 \item{dis}{an object of class \sQuote{dist} from 
-    \code{\link[mva]{dist}},
+    \code{dist},
     \code{\link[vegan]{vegdist}}, or
     \code{\link[labdsv]{dsvdis}}}
 \item{numitr}{the number of iterations to use to establish the quantiles
@@ -37,7 +37,7 @@ same number of occurrences.
         \email{droberts@montana.edu}
 }
 \seealso{
-\code{\link[labdsv]{duleg}},\code{\link[labdsv]{isamic}}
+\code{indval},\code{isamic}
 }
 \examples{
 data(bryceveg) # returns a vegetation data.frame
