@@ -36,6 +36,7 @@ a basis for null model tests in vegetation ecology.
     data(bryceveg) # returns a vegetation data.frame called bryceveg
     test <- rndtaxa(bryceveg,species=TRUE) # preserves species abundance
             # distribution
-    test2 <- rndtaxa(bryceveg,plots=TRUE) # preserves plot-level species richness}
+    test2 <- rndtaxa(bryceveg,plots=TRUE) # preserves plot-level 
+                                          # species richness}
 
 \keyword{datagen}

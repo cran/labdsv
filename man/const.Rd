@@ -4,7 +4,8 @@
 \description{For a classified set of vegetation samples,
 lists for each species the fraction of samples in each
 class the species occurs in.}
-\usage{const(taxa, clustering, minval = 0, show = minval, digits = 2, sort = FALSE, spcord = NULL)}
+\usage{const(taxa, clustering, minval = 0, show = minval, digits = 2, 
+             sort = FALSE, spcord = NULL)}
 \arguments{
     \item{taxa}{a data.frame of species abundances with samples as rows and
 species as columns}

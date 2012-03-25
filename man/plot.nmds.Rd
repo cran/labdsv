@@ -9,20 +9,23 @@
 \alias{thull.nmds}
 \alias{rgl.nmds}
 
-\title{Plotting Routines For Nonmetric Multi-dimensional Scaling Ordinations}
+\title{Plotting Routines For Nonmetric Multi-Dimensional Scaling Ordinations}
 \description{A set of routines for plotting, highlighting points,
 or adding fitted surfaces to NMDSs.}
 \usage{
 \method{plot}{nmds}(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, \dots)
-\method{points}{nmds}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, breaks=FALSE, \dots)
+\method{points}{nmds}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, 
+                      breaks=FALSE, \dots)
 \method{plotid}{nmds}(ord, ids = seq(1:nrow(ord$points)), ax = 1, ay = 2,
     col = 1, \dots)
-\method{hilight}{nmds}(ord, overlay, ax = 1, ay = 2, title="", cols=c(2,3,4,5,6,7), glyph=c(1,3,5),
-    \dots)
-\method{chullord}{nmds}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys = c(1,2,3), \dots)
+\method{hilight}{nmds}(ord, overlay, ax = 1, ay = 2, title="", cols=c(2,3,4,5,6,7), 
+                      glyph=c(1,3,5), \dots)
+\method{chullord}{nmds}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
+                        ltys = c(1,2,3), \dots)
 \method{surf}{nmds}(ord, var, ax = 1, ay = 2, thinplate = TRUE, col = 2, labcex = 0.8,
     family = gaussian, gamma=1, grid=50, \dots)
-\method{thull}{nmds}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,numitr=100,\dots)
+\method{thull}{nmds}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,
+     numitr=100,\dots)
 \method{density}{nmds}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     6, 7), ltys = c(1, 2, 3), numitr, ...)
 rgl.nmds(ord,ax=1,ay=2,az=3,radius=0.01,col=0)
@@ -32,7 +35,7 @@ rgl.nmds(ord,ax=1,ay=2,az=3,radius=0.01,col=0)
     \item{x}{an object of class \sQuote{nmds}}
     \item{ax}{the dimension to use for the X axis}
     \item{ay}{the dimension to use for the Y axis}
-    \item{az}{the dimension to use for the third axis}
+    \item{az}{the dimension to use for the Z axis}
     \item{title}{a title for the plot}
     \item{which}{a logical variable to specify points to be highlighted}
     \item{breaks}{a logical switch to control using variable glyph sizes in \sQuote{points}}
@@ -42,9 +45,10 @@ rgl.nmds(ord,ax=1,ay=2,az=3,radius=0.01,col=0)
     \item{glyph}{the sequence of glyphs (pch) to be used}
     \item{ltys}{the sequence of line types to be used}
     \item{var}{a variable to be surfaced or tension hulled}
-    \item{thinplate}{a logical variable to control the fitting routine: thinplate = TRUE
-                     (the default) fits a thinplate spline, thinplate = FALSE fits
-                      independent smooth splines}
+    \item{thinplate}{a logical variable to control the fitting routine: thinplate=TRUE
+                     (the default) fits a thinplate spline, thinplate=FALSE fits
+                      independent smooth splines.  If you have too few data points you may 
+                      have to specify thinplate=FALSE}
     \item{family}{controls the link function passed to \sQuote{gam}:
           one of \sQuote{gaussian}, \sQuote{binomial}, or \sQuote{poisson}}
     \item{gamma}{controls the smoothness of the fit from \code{\link[mgcv]{gam}}}
@@ -114,13 +118,17 @@ generating smoother representations, and smaller numbers a more resolved
 container.  \sQuote{thull} returns an invisible object of class \sQuote{thull}
 which has an associated plot function.  Plotting the thull object produces a 
 colored surface representation of the thull with optional contour lines.
+
+Function \sQuote{rgl.nmds} produces a three-dimensional ordination of the NMDS
+using the rgl package.
 }
+
 
 \value{Function \sQuote{plotid} returns a vector of row numbers of
 identified plots}
 
 \note{Previous versions of surf relied on the \sQuote{interp} function of
-package \code{\link[akima]{akima}}.  The revised routine using
+package akima.  The revised routine using
 \code{\link[mgcv]{predict.gam}} was suggested by Jari Oksanen as used in
 \code{\link[vegan]{ordisurf}}.
 }

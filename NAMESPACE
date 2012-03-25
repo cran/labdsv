@@ -1,0 +1,25 @@
+# Remove the previous line if you edit this file
+
+# Export all names
+export(abuocc,concov,const,dematrify,dga,disana,dropplt,dropspc,dsvdis, 
+envrtest,euclidify,homoteneity,importance,indspc,plot.indspc,indval, 
+indval.default,indval.stride,summary.indval,isamic,matrify,metrify, 
+nmds,plot.nmds,points.nmds,plotid.nmds,surf.nmds,bestnmds,hilight.nmds, 
+chullord.nmds,density.nmds,rgl.nmds,ordcomp,orddist,ordpart, 
+ordpart.pco,ordpart.pca,ordpart.nmds,ordtaxa,ordtest,surf,plotid, 
+specid,hilight,chullord,thull,density,thull,pca,plot.pca,points.pca, 
+plotid.pca,surf.pca,summary.pca,scores.pca,loadings.pca,varplot.pca, 
+hilight.pca,chullord.pca,pco,plot.pco,points.pco,plotid.pco,surf.pco, 
+hilight.pco,chullord.pco,density.pco,rgl.pco,raretaxa,reconcile, 
+rgl.nmds,rgl.nmds,rnddist,rndtaxa,spcdisc,thull.nmds,thull.pco, 
+plot.thull,vegtab,vegtrans 
+)
+
+# Import all packages listed as Imports or Depends
+import(
+  mgcv,
+  MASS
+)
+
+useDynLib(labdsv)
+

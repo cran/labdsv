@@ -1,5 +1,6 @@
 \name{indval}
 \alias{indval}
+\alias{duleg}
 \alias{indval.default}
 \alias{indval.stride}
 \alias{summary.indval}
@@ -63,6 +64,7 @@ The default function returns a list of class \sQuote{indval} with components:
     \item{indcls}{the indicator value for each species to its maximum class}
     \item{pval}{the probability of obtaining as high an indicator values as
                 observed over the specified iterations}  
+    \item{}{}
 
 The stride-based function returns a data.frame with the number of clusters
 in the first column and the mean indicator value in the second.

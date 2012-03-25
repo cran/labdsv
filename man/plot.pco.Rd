@@ -7,6 +7,7 @@
 \alias{density.pco}
 \alias{surf.pco}
 \alias{thull.pco}
+\alias{rgl.pco}
 
 \title{Plotting Routines For Principal Coordinates Ordinations}
 \description{A set of routines for plotting, highlighting points,
@@ -16,33 +17,38 @@ or adding fitted surfaces to PCOs.}
 \method{points}{pco}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, \dots)
 \method{plotid}{pco}(ord, ids = seq(1:nrow(ord$points)), ax = 1, ay = 2,
     col = 1, \dots)
-\method{hilight}{pco}(ord, overlay, ax = 1, ay = 2, title="", cols=c(2,3,4,5,6,7), glyph=c(1,3,5),
-    \dots)
-\method{chullord}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys = c(1,2,3), \dots)
+\method{hilight}{pco}(ord, overlay, ax = 1, ay = 2, title="", cols=c(2,3,4,5,6,7), 
+    glyph=c(1,3,5), \dots)
+\method{chullord}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
+    ltys = c(1,2,3), \dots)
 \method{density}{pco}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     6, 7), ltys = c(1, 2, 3), numitr=100, ...)
 \method{surf}{pco}(ord, var, ax = 1, ay = 2, thinplate=TRUE, col = 2, labcex = 0.8,
     family = gaussian, grid=50, gamma=1, \dots)
-\method{thull}{pco}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,numitr=100,...)
+\method{thull}{pco}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,
+    lty=1,numitr=100,...)
+rgl.pco(ord,ax=1,ay=2,az=3,radius=0.01,col=0)
 }
 
 \arguments{
     \item{x}{an object of class \sQuote{pco}}
     \item{ax}{the dimension to use for the X axis}
     \item{ay}{the dimension to use for the Y axis}
+    \item{az}{the dimension to use for the Z axis}
     \item{title}{a title for the plot}
     \item{which}{a logical variable to specify points to be highlighted}
     \item{ord}{an object of class \sQuote{pco}}
     \item{overlay}{a factor or integer vector to hilight or distinguish}
     \item{cols}{the sequence of color indices to be used}
-    \item{glyph}{the sequence of glyphs (pch) to be ed}
+    \item{glyph}{the sequence of glyphs (pch) to be used}
     \item{ltys}{the sequence of line types to be used}
     \item{numitr}{number of iterations to use in estimating the probability of obtaining
            the observed density}
     \item{var}{a variable to be surfaced}
     \item{thinplate}{a logical variable to control how the surface is fit: thinplate
                      = TRUE (the default) fits a thinplate spline, thinplate = FALSE
-                     fits independent smooth splines}
+                     fits independent smooth splines.  If you have too few data points
+                     you may have to specify thinplate-FALSE}
     \item{family}{controls the link function passed to \sQuote{gam}:
           one of \sQuote{gaussian}, \sQuote{binomial}, or \sQuote{poisson}}
     \item{gamma}{controls the smoothness of the fit from \code{\link[mgcv]{gam}}}
@@ -56,6 +62,7 @@ or adding fitted surfaces to PCOs.}
     \item{grain}{the size of moving window to use in calculating the tensioned hull}
     \item{nlevels}{the number of contour intervals to draw on the tensioned hull}
     \item{levels}{specific levels to use in drawing the tensioned hull}
+    \item{radius}{the radius of the spheres representing points in an rgl plot}
     \item{lty}{the line type to use in drawing the tensioned hull contours}
     \item{\dots}{arguments to pass to the plot function}
 }
@@ -65,6 +72,7 @@ Function \sQuote{plot} produces a scatterplot of sample
 scores for the specified axes, erasing or over-plotting
 on the current graphic device.  Axes dimensions are controlled to produce
 a graph with the correct aspect ratio.
+
 Functions \sQuote{points}, \sQuote{plotid}, \sQuote{hilight},
 \sQuote{chullord}, and \sQuote{surf}
 add detail to an existing plot.  The axes specified must
@@ -103,13 +111,18 @@ of the data, and the contours are fit by \sQuote{contour}.  The default link
 function for fitting the GAMs is \sQuote{gaussian}, suitable for unbounded
 continuous variables.  For logical variables you should specify \sQuote{family
 = binomial} to get a logistic GAM, and for integer counts you should specify
-\sQuote{family = poisson} to get a Poisson GAM.  }
+\sQuote{family = poisson} to get a Poisson GAM. 
+
+Function \sQuote{rgl.pco} produces a three-dimensional ordination of the NMDS
+using the rgl package.
+
+}
 
 \value{Function \sQuote{plotid} returns a vector of row numbers of
 identified plots}
 
 \note{Previous versions of surf relied on the \sQuote{interp} function of
-package \code{\link[akima]{akima}}.  The revised routine using
+package akima.  The revised routine using
 \code{\link[mgcv]{predict.gam}} was suggested by Jari Oksanen as used in
 package\code{\link[vegan]{ordisurf}}.
 }

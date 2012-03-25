@@ -18,7 +18,7 @@ sub-sampled by (an optional) classification of the samples
    minimum species abundances, optionally ordering in arbitrary order.
 }
 
-\value{a data.frame with specified rows, columns, and row.names)}
+\value{a data.frame with specified rows, columns, and row.names}
 \references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
 \note{Vegetation tables are a common tool in vegetation analysis.  In recent
 years analysis has tended to become more quantitative, and less oriented to

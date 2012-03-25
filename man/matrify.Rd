@@ -6,8 +6,8 @@ abundance) and converts it into full matrix form, and then exports it as
 data.frame with the appropriate row.names and column names.}
 \usage{matrify(data)}
 \arguments{
-    \item{data}{a data.frame or matrix in three column format (or database)
-format, where the first column is the sample ID, the second column is the taxon
+    \item{data}{a data.frame or matrix in three column format (or database
+format), where the first column is the sample ID, the second column is the taxon
 ID, and the third sample is the abundance of that taxon in that sample.}
 }
 \details{The routine is pure R code to convert data from database form to the sparse

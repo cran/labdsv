@@ -15,12 +15,13 @@ or adding fitted surfaces to PCAs.}
 \method{points}{pca}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, \dots)
 \method{plotid}{pca}(ord, ids = seq(1:nrow(ord$scores)), ax = 1, ay = 2,
     col = 1, \dots)
-\method{hilight}{pca}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5),
-    origpch = 1, blank = '#FFFFFF', \dots)
-\method{chullord}{pca}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), ltys = c(1,2,3), \dots)
+\method{hilight}{pca}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
+                      glyph=c(1,3,5), \dots)
+\method{chullord}{pca}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
+                       ltys = c(1,2,3), \dots)
 \method{surf}{pca}(ord, var, ax = 1, ay = 2, col = 2, labcex = 0.8,
     family = gaussian, thinplate=TRUE, grid=50, gamma=1, \dots)
-\method{varplot}{pca}(x, dim=length(x$sdev))
+varplot.pca(x, dim=length(x$sdev))
 }
 
 \arguments{
@@ -33,8 +34,6 @@ or adding fitted surfaces to PCAs.}
     \item{overlay}{a factor or integer vector to hilight or distinguish}
     \item{cols}{the sequence of color indices to be used}
     \item{glyph}{the sequence of glyphs (pch) to be used}
-    \item{origpch}{the pch number of the glyph employed in the original plot (to be obliterated by blank)}
-    \item{blank}{the color to use to erase the glyphs of the original plot}
     \item{ltys}{the sequence of line types to be used}
     \item{var}{a variable to be surfaced}
     \item{family}{controls the link function passed to \sQuote{gam}:
@@ -54,8 +53,7 @@ or adding fitted surfaces to PCAs.}
 \details{
 Function \sQuote{plot} produces a scatterplot of sample
 scores for the specified axes, erasing or over-plotting
-on the current graphic device.  Axes dimensions are controlled to produce
-a graph with the correct aspect ratio.
+
 Functions \sQuote{points}, \sQuote{plotid}, \sQuote{hilight},
 \sQuote{chullord}, and \sQuote{surf}
 add detail to an existing plot.  The axes specified must
@@ -92,7 +90,8 @@ of the data, and the contours are fit by \sQuote{contour}.  The default link
 function for fitting the GAMs is \sQuote{gaussian}, suitable for unbounded
 continuous variables.  For logical variables you should specify \sQuote{family
 = binomial} to get a logistic GAM, and for integer counts you should specify
-\sQuote{family = poisson} to get a Poisson GAM.  }
+\sQuote{family = poisson} to get a Poisson GAM.  
+}
 
 \value{Function \sQuote{plotid} returns a vector of row numbers of
 identified plots.
@@ -103,7 +102,7 @@ by eigenvector up to the specified number of dimensions
 }
 
 \note{Previous versions of surf relied on the \sQuote{interp} function of
-package \code{\link[akima]{akima}}.  The revised routine using
+package akima.  The revised routine using
 \code{\link[mgcv]{predict.gam}} was suggested by Jari Oksanen as used in
 package vegan.
 }

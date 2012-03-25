@@ -1,7 +1,53 @@
+labdsv 1.5-0
+
+labdsv was updates in several areas, with the largest change being the
+transition to a NAMESPACE format as mandated by R 2.14.  
+
+Specific changes are:
+
+1) function const() was modernized to replace truncation code with formatting
+code.  More importantly, const() was modified to return the result with a
+return() statement, rather than a print() statement to make it embeddable in the
+new concov() function (see just below).
+
+2) a new function called concov() was added to combine the two functions const()
+and importance() in a single output, commonly called a "constancy/coverage
+table" by ecologists.  
+
+3) a new function called homoteneity() was added to facilitate diversity
+analysis.  homoteneity() is defined as the mean constancy of the S most constant
+species, expressed as a fraction, where S is the mean species richness of a
+type. This value represents the constancy of the average species in a community
+type; higher values for homoteneity indicate greater uniformity in species
+composition among plots.  This function was adapted from the Virginia heritage
+program at http://www.dcr.virginia.gov/natural_heritage/ncstatistics.shtml.
+
+4) function importance() was modified to replace truncation code with formatting
+code.  More importantly, importance was modified to allow calculating "typical"
+importance, as opposed to "mean" importance where typical importance is the sum
+of the abundance of a species divided by the number of plots in which it occurs, 
+whereas mean importance is the sum of the abundance of a species divided by the
+number of plots in the type.  Typical importance is the default.
+
+5) function plot.pca() was updated to use more conventional R graphing code.
+function surf.pca() had a typo fixed that produced a bug when surfing
+non-thinplate spline surfs for binary variables.
+
+6) a new function called reconcile() was added to help manage the taxa and site
+environment data.frames.  Specifically, reconcile() returns as a list the
+rows common to both the the taxa and site data.frames, and drops plots which only
+occur in one or the other.
+
+7) function rgl.pco() was added to produce rgl three-dimensional graphics of PCO
+ordination.  rgl.nmds always worked on PCOs, but the naming convention made it
+appear to be specific to NMDS.  Since rgl is not a S-3 generic function, it was
+necessary to have two separately named functions to do the job.
+
+
 labdsv 1.4-1
 
 labdsv was modified in several subtle ways to better accommodate package
-optpart, e.g. function indval was made generic to handle 'streides' from, package
+optpart, e.g. function indval was made generic to handle 'strides' from, package
 optpart.  The hilight.nmds and hilight.pco functions were modified slightly to
 overcome problems with ghosting.
 
@@ -21,8 +67,8 @@ plotting routines just using "asp = 1" where necessary.
 3) In response to a problem noted by Miquel de Caceres, I modified an element
 of code in indval.f to eliminate a >= comparison.  In some cases, because the
 test compared a 64-bit real to an 80-bit register value the test would fail
-even when the values were known to be the same.  The problem only occured on
-rare occassions where cluster sizes were equal and species were rare of
+even when the values were known to be the same.  The problem only occurred on
+rare occasions where cluster sizes were equal and species were rare of
 singletons.
 
 It's possible that
@@ -41,7 +87,7 @@ code if anyone has suggestions.
 
 labdsv 1.3-2
 
-1) I fixed a bug (typo) in surf.nmds() that affected thinplte splines of logical
+1) I fixed a bug (typo) in surf.nmds() that affected thinplate splines of logical
 variables.
 
 2) Changed a parameter in the smooth function of the plot.indspc() function
@@ -140,7 +186,7 @@ and other activities.  The general site for all material is
 
 http://ecology.msu.montana.edu/labdsv/
 
-The material specifically relevant to this pacakage is at
+The material specifically relevant to this package is at
 
 http://ecology.msu.montana.edu/labdsv/R/labdsv
 
@@ -161,7 +207,7 @@ function tabdev.R was deleted to temporarily solve inscrutable
 problems with Windows server.  tabdev.R worked under linux
 and Windows XP, so there may be no need to update on your system.
 
-In addition, the URL in the decsription file was updated to 
+In addition, the URL in the description file was updated to 
 point to the current location of the lab manual for LabDSV.
 
 labdsv 1.2-0
@@ -216,7 +262,7 @@ duleg.R
 	enforced better casting of variable types in FORTRAN call
 	added numitr to FORTRAN call and return
 	improved the labeling of row and column names in output
-	fixed possible bugs from unitiated values in FORTRAN code
+	fixed possible bugs from uninitiated values in FORTRAN code
 envrtest.R
 	added an argument to function call to control plotting
 	improved the default title on the plot

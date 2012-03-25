@@ -30,8 +30,10 @@ other analyses.}
 }
 \examples{
 data(bryceveg) # produces a vegetation data.frame
-dis.bc <- dsvdis(bryceveg,'bray/curtis') # creates a Bray/Curtis dissimilarity matrix
-pco.bc <- pco(dis.bc,2) # produces a two-dimensional Principal Coordinates Ordination object
+dis.bc <- dsvdis(bryceveg,'bray/curtis') # creates a Bray/Curtis 
+                                         #dissimilarity matrix
+pco.bc <- pco(dis.bc,2) # produces a two-dimensional Principal Coordinates 
+                        #Ordination object
 orddist(pco.bc,dim=2)
 }
 \keyword{multivariate}
