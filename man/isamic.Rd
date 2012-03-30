@@ -1,5 +1,6 @@
 \name{isamic}
 \alias{isamic}
+\alias{duarm}
 
 \title{Indicator Species Analysis Minimizing Intermediate Occurrences}
 
@@ -12,7 +13,7 @@ always present or always absent within clusters or types.}
                rows}
     \item{clustering}{a vector of numeric cluster memberships for samples, or a
                  classification object returned from \code{\link[cluster]{pam}}, 
-                 or \code{\link[optpart]{partana}}}
+                 \code{\link[optpart]{partana}}, or \code{\link[optpart]{slice}}}
     \item{sort}{if TRUE, return in order of highest value to lowest rather than
                 input order}
 }

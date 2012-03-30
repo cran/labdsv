@@ -1,7 +1,6 @@
-const <- function (taxa, clustering, minval = 0, show = minval, digits = 2, sort=FALSE, spcord = NULL) 
+const <- function (taxa, clustering, minval = 0, show = minval, digits = 2, 
+    sort = FALSE, spcord = NULL) 
 {
-    chop <- function(x) (as.integer(sum(x > 0) * 10^digits/sum(clustering == 
-        i))/10^digits)
     if (inherits(clustering, c("partana", "partition", "clustering"))) 
         clustering <- clustering$clustering
     namlst <- NULL
@@ -19,12 +18,12 @@ const <- function (taxa, clustering, minval = 0, show = minval, digits = 2, sort
     }
     if (is.vector(clustering)) {
         res <- matrix(0, nrow = ncol(taxa), ncol = max(clustering))
-        for (i in 1:max(clustering)) {
-            res[, i] <- apply(taxa[clustering == i, ], 2, chop)
-        }
-        keep <- as.logical(apply(res, 1, max) >= minval)
-        res <- res[keep, ]
-        tmp <- as.data.frame(res)
+        x <- apply(taxa,2,function(x){tapply(x>0,clustering,sum)})
+        y <- as.numeric(table(clustering))
+        res <- x/y
+        keep <- as.logical(apply(res, 2, max) >= minval)
+        res <- res[, keep]
+        tmp <- as.data.frame(t(res))
         row.names(tmp) <- names(taxa)[keep]
         if (!is.null(spcord)) {
             tmp <- tmp[rev(order(spcord[keep])), ]
@@ -32,49 +31,47 @@ const <- function (taxa, clustering, minval = 0, show = minval, digits = 2, sort
     }
     if (!is.null(namlst)) 
         names(tmp) <- namlst
-    tmp  <- format(round(tmp, digits = digits))
-    tmp[tmp < show] <- substring(" .  ",1,digits+2)
-
+    tmp <- format(round(tmp, digits = digits))
+    tmp[tmp < show] <- substring(" .  ", 1, digits + 2)
     if (sort) {
         print(tmp)
         repeat {
-            plots <- readline(' enter the species: ')
-            if (plots == "") break
-            else pnt <- readline(' in front of        : ')
-
-            for (i in (strsplit(plots,",")[[1]])){
+            plots <- readline(" enter the species: ")
+            if (plots == "") 
+                break
+            else pnt <- readline(" in front of        : ")
+            for (i in (strsplit(plots, ",")[[1]])) {
                 ord <- 1:nrow(tmp)
-                x <- match(i,row.names(tmp))
+                x <- match(i, row.names(tmp))
                 if (!is.na(x)) {
-                    z <- ord[x]
-                    ord <- ord[-x] 
-                    y <- match(pnt,row.names(tmp))
-                    if (!is.na(y)) {
-                        if (y>1) {
-                            first <- ord[1:(y-1)]
-                            last <- ord[y:length(ord)]
-                            ord <- c(first,z,last)
-                        }
-                        else {
-                            last <- ord[y:length(ord)]
-                            ord <- c(z,last)
-                        }
-                        tmp <- tmp[ord,]
-                        print(tmp)
+                  z <- ord[x]
+                  ord <- ord[-x]
+                  y <- match(pnt, row.names(tmp))
+                  if (!is.na(y)) {
+                    if (y > 1) {
+                      first <- ord[1:(y - 1)]
+                      last <- ord[y:length(ord)]
+                      ord <- c(first, z, last)
                     }
                     else {
-                        print(paste('species',pnt,'does not exist'))
+                      last <- ord[y:length(ord)]
+                      ord <- c(z, last)
                     }
+                    tmp <- tmp[ord, ]
+                    print(tmp)
+                  }
+                  else {
+                    print(paste("species", pnt, "does not exist"))
+                  }
                 }
                 else {
-                    print(paste('species',i,'does not exist'))
+                  print(paste("species", i, "does not exist"))
                 }
             }
         }
-        invisible(tmp)
+        return(tmp)
     }
     else {
-        print(tmp)
-        invisible(tmp)
+        return(tmp)
     }
 }

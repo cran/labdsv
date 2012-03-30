@@ -19,9 +19,9 @@ functions and table sorting routines) benefit from smaller simpler data frames.
 
 \value{produces a new taxon data frame}
 
-\note{This is a heavy-handed approach to managing rare species in data frames.
+\note{This is a heavy-handed approach to managing rare species in data.frames.
 It is often possible to write a mask (logical vector) that suppresses the
-influence of rare species and keep the original data frame intact, but this
+influence of rare species and keeps the original data.frame intact, but this
 function simplifies data management for some purposes.}
 
 \author{
@@ -32,4 +32,4 @@ function simplifies data management for some purposes.}
     data(bryceveg) # returns a data frame called bryceveg
     newveg <- dropspc(bryceveg,5) # deletes species which occur 5 or fewer times
 }
-\keyword{data}
+\keyword{manip}

@@ -14,7 +14,7 @@ ordtest(ord, var, dim=c(1:ncol(ord$points)), index = 'euclidean',
 \item{dim}{the number of dimensions to use in the calculation}
 \item{index}{the distance metric for the calculation of within-set distances.
    Currently only euclidean is accepted}
-\item{nitr}{the number of iteration to perform to establish p-values}
+\item{nitr}{the number of iterations to perform to establish p-values}
 }
 \details{
 Calculates the sum of within-set pair-wise distances and compares to \sQuote{nitr}

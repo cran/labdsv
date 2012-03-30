@@ -36,11 +36,11 @@
 
     \tabular{ll}{
         ruzicka \tab \eqn{1 - \sum min(x_i,y_i) / \sum max(x_i,y_i)} \cr
-        bray/curtis \tab \eqn{1 - \sum[2 \times min(x_i,y_i)] / \sum x_i + y_i} \cr
-        roberts \tab \eqn{1 - [(x_i+y_i) \times (min(x_i,y_i) / max(x_i,y_i)] / (x_i + y_i)} \cr
-        chisq \tab \eqn{(exp - obs) / \sqrt(exp)} \cr
+        bray/curtis \tab \eqn{1 - \sum[2 * min(x_i,y_i)] / \sum x_i + y_i} \cr
+        roberts \tab \eqn{1 - [(x_i+y_i) * min(x_i,y_i) / max(x_i,y_i)] / (x_i + y_i)} \cr
+        chisq \tab \eqn{(exp - obs) / \sqrt{exp}} \cr
     }
-    The weights allow the assignment of weights to individual species in the calculation
+    The weight argument allow the assignment of weights to individual species in the calculation
     of plot-to-plot similarity.  The weights can be assigned by life-form, indicator value,
     or for other investigator specific reasons.  For the presence/absence indices the
     weights should be integers; for the quantitative indices the weights should be in the interval [0,1].

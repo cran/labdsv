@@ -15,25 +15,9 @@ plot.pca <- function(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
 {
     if (class(x) != 'pca')
         stop("You must specify a an object of class pca")
-    oldpin <- par("pin")
-    par(pin = c(min(oldpin[1], oldpin[2]), min(oldpin[1], oldpin[2])))
-    xlim <- range(x$scores[, ax])
-    ylim <- range(x$scores[, ay])
-    tol <- 0.04
-    midx <- 0.5 * (xlim[2] + xlim[1])
-    midy <- 0.5 * (ylim[2] + ylim[1])
-    if(xlim[2] - xlim[1] > ylim[2] - ylim[1]) {
-        xlim <- midx + (1 + tol) * 0.5 * c(-1, 1) * (xlim[2] - xlim[ 1])
-        ylim <- midy + (1 + tol) * 0.5 * c(-1, 1) * (xlim[2] - xlim[ 1])
-    }
-    else {
-        xlim <- midx + (1 + tol) * 0.5 * c(-1, 1) * (ylim[2] - ylim[ 1])
-        ylim <- midy + (1 + tol) * 0.5 * c(-1, 1) * (ylim[2] - ylim[ 1])
-    }
-    plot(x$scores[, ax], x$scores[, ay], xlim = xlim, ylim = ylim, col = 
-        col, xlab = paste("PCA", ax), ylab = paste("PCA", ay), pch = pch,
-        main = title)
-    par(pin = oldpin)
+    plot(x$scores[, ax], x$scores[, ay], asp=1, 
+        col = col, xlab = paste("PCA", ax), ylab = paste("PCA", ay), 
+        pch = pch, main = title)
     invisible()
 }
 
@@ -69,10 +53,10 @@ surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8,
     y <- ord$scores[, ay]
     if (is.logical(var)) {
         if (thinplate) tmp <- gam(var~s(x,y),family=binomial,gamma=gamma)
-        tmp <- gam(var~s(x)+s(y),family=binomial,gamma-gamma)
+        else tmp <- gam(var~s(x)+s(y),family=binomial,gamma=gamma)
     } else {
         if (thinplate) tmp <- gam(var~s(x,y),family=family,gamma=gamma)
-        tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
+        else tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
     }
     new.x <- seq(min(x),max(x),len=grid)
     new.y <- seq(min(y),max(y),len=grid)
@@ -135,7 +119,7 @@ varplot.pca <- function(x,dim=length(x$sdev))
     barplot(cumsum(var/x$totdev)[1:dim],ylab="Cumulative Variance")
 }
 
-hilight.pca <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), origpch=1, blank='#FFFFFF', ...)
+hilight.pca <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(1,3,5), ...)
 {
     if (class(ord) != 'pca')
        stop("You must pass an object of class pca")
@@ -143,10 +127,10 @@ hilight.pca <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(
        factor <- factor$clustering
     if (is.logical(overlay) || is.factor(overlay))
         overlay <- as.numeric(overlay)
+    plot(ord,ax-ax,ay=ay,type='n')
     layer <- 0
     pass <- 1
     for (i in 1:max(overlay,na.rm=TRUE)) {
-        points(ord, overlay == i, ax, ay, col = blank, pch = origpch)
         layer <- layer + 1
         if (layer > length(cols)) {
           layer <- 1
@@ -162,7 +146,7 @@ chullord.pca <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 ...)
 {
     if (class(ord) != 'pca')
-        stop("You must pass an object of class pco")
+        stop("You must pass an object of class pca")
     if (inherits(overlay,c('partana','pam','clustering')))
        overlay <- overlay$clustering
     else if (is.logical(overlay))
