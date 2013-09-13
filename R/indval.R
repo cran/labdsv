@@ -7,6 +7,11 @@ indval.default <- function(x,clustering,numitr=1000, ...)
 {
     if (!is.data.frame(x)) x <- data.frame(x)
     if (inherits(clustering,c('clustering','partana','partition'))) clustering <- clustering$clustering
+    if (min(clustering)< 0 || (length(table(clustering)) != max(clustering))) {
+        cat('WARNING: renumbering clusters to consecutive integers\n')
+        clustering <- match(clustering,sort(unique(clustering)))
+    }
+    if (any(apply(x>0,2,sum)==0)) stop('All species must occur in at least one plot')
     numplt <- nrow(x)
     numspc <- ncol(x)
     numcls <- as.integer(length(table(clustering)))
@@ -20,6 +25,7 @@ indval.default <- function(x,clustering,numitr=1000, ...)
     tmpabu <- rep(0.0,numcls)
     pclass <- rep(0,numplt)
     tclass <- rep(0,numplt)
+    errcod <- 0
     tmp <- .Fortran("duleg",
         as.double(as.matrix(x)),
         as.integer(numplt),
@@ -38,10 +44,12 @@ indval.default <- function(x,clustering,numitr=1000, ...)
         as.double(tmpabu),
         as.integer(pclass),
         as.integer(tclass),
+        errcod = as.integer(errcod),
         PACKAGE='labdsv')
     out <- list(relfrq=data.frame(tmp$relfrq),relabu=data.frame(tmp$relabu),
-              indval=data.frame(tmp$indval),
-              maxcls=tmp$maxcls,indcls=tmp$indcls,pval=tmp$pval)
+              indval=data.frame(tmp$indval),maxcls=tmp$maxcls,indcls=tmp$indcls,
+              pval=tmp$pval,error=tmp$errcod)
+    print(paste('error code = ',out$error))
     row.names(out$relfrq) <- names(x)
     row.names(out$relabu) <- names(x)
     row.names(out$indval) <- names(x)
@@ -52,6 +60,7 @@ indval.default <- function(x,clustering,numitr=1000, ...)
     names(out$relabu) <- levels(factor(clustering))
     names(out$indval) <- levels(factor(clustering))
     class(out) <- 'indval'
+    if (out$error == 1) cat('WARNING: one or more species not assigned to any cluster\n') 
     out
 }
 
@@ -70,6 +79,7 @@ indval.stride <- function(x,taxa,numitr=1,...)
 summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, sort=FALSE, 
                             too.many = 100, ...) 
 {
+    if (object$error == 1) cat('WARNING: one or more species not assigned to any cluster\n')
     if (type == 'short') {
         tmp <- data.frame(object$maxcls[object$pval <= p], round(object$indcls[object$pval <= 
             p], 4), object$pval[object$pval <= p])

@@ -79,8 +79,13 @@ hilight.pco <- function (ord, overlay, ax=1, ay=2, title="", cols=c(2,3,4,5,6,7)
 {
     if (class(ord) != 'pco')
        stop("You must pass an object of class pco")
-    if (inherits(overlay,c('partana','pam','clustering')))
+    if (inherits(overlay,c('partana','pam','clustering'))) {
        overlay <- overlay$clustering
+        if (min(overlay)< 0 || (length(table(overlay)) != max(overlay))) {
+            cat('WARNING: renumbering clusters to consecutive integers\n')
+            overlay <- match(overlay,sort(unique(overlay)))
+        }
+    }
     if (is.logical(overlay) || is.factor(overlay))
         overlay <- as.numeric(overlay)
     plot(ord,ax=ax,ay=ay,type='n')
@@ -103,8 +108,13 @@ chullord.pco <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 {
     if (class(ord) != 'pco')
         stop("You must pass an object of class pco")
-    if (inherits(overlay,c('partana','pam','clustering')))
+    if (inherits(overlay,c('partana','pam','clustering'))) {
        overlay <- overlay$clustering
+        if (min(overlay)< 0 || (length(table(overlay)) != max(overlay))) {
+            cat('WARNING: renumbering clusters to consecutive integers\n')
+            overlay <- match(overlay,sort(unique(overlay)))
+        }
+    }
     else if (is.logical(overlay))
         overlay <- as.numeric(overlay)
     else if (is.factor(overlay))
@@ -132,8 +142,13 @@ density.pco <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
 {
     if (class(ord) != "pco") 
         stop("You must pass an object of class pco")
-    if (inherits(overlay, c("partana", "pam", "clustering"))) 
+    if (inherits(overlay, c("partana", "pam", "clustering"))) {
         overlay <- overlay$clustering
+        if (min(overlay)< 0 || (length(table(overlay)) != max(overlay))) {
+            cat('WARNING: renumbering clusters to consecutive integers\n')
+            overlay <- match(overlay,sort(unique(overlay)))
+        }
+    }
     else if (is.logical(overlay)) 
         overlay <- as.numeric(overlay)
     else if (is.factor(overlay)) 

@@ -1,6 +1,6 @@
       subroutine duleg(veg,numplt,numspc,class,clstab,
      +      numcls,numitr,relfrq,relabu,indval,pval,
-     +      indcls,maxcls,tmpfrq,tmpabu,pclass,tclass)
+     +      indcls,maxcls,tmpfrq,tmpabu,pclass,tclass,errcod)
 c
 c* passed in
 c
@@ -20,6 +20,7 @@ c
       double precision pval(numspc)
       double precision indcls(numspc)
       integer maxcls(numspc)
+      integer errcod
 c
 c* relfrq, relabu, and indval all initialized to zero by R
 c
@@ -38,6 +39,8 @@ c
 
 c
 c*********************************** one *********************************
+c
+      errcod = 0
 c
       do 10 i=1,numspc
       totveg = 0
@@ -67,11 +70,16 @@ c
         endif
    13   continue
       indcls(i) = maxval
+      if (maxcls(i) .lt. 1 .or. maxcls(i) .gt. numcls) errcod = 1
    10 continue
 c
 c*********************************** two ************************************
 c
       do 20 i=1,numspc
+        if (maxcls(i) .lt. 1 .or. maxcls(i) .gt. numcls) then
+          pval(i) = 0
+          cycle
+        end if
         do 21 j=1,numitr-1
         tmpcls = 0
         tmpind = 0
@@ -105,7 +113,6 @@ c
             maxval = tmpind
           endif
    25     continue
-c          if (maxval .ge. indval(i,maxcls(i))) then
           if (maxval - indval(i,maxcls(i)) .gt. -0.0001) then
             pval(i) = pval(i) + 1
           endif

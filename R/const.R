@@ -14,6 +14,10 @@ const <- function (taxa, clustering, minval = 0, show = minval, digits = 2,
         clustering <- as.integer(clustering)
     }
     else if (is.numeric(clustering)) {
+        if (min(clustering)< 0 || (length(table(clustering)) != max(clustering))) {
+            cat('WARNING: renumbering clusters to consecutive integers\n')
+            clustering <- match(clustering,sort(unique(clustering)))
+        }
         namlst <- as.integer(levels(factor(clustering)))
     }
     if (is.vector(clustering)) {
