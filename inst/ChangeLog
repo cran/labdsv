@@ -1,6 +1,22 @@
+labdsv_1.6-1
+
+added a routine to function indval() to check the taxa matrix for species
+which never occur [apply(x>0,2,sum) = 0] for some species.  indval() aborts
+with an error message in such cases.  I also added a rotine to the FORTRAN 
+code to trap array out-of-bounds conditions caused by species not assigned 
+to any cluster for any reason.  indval() gives such species a probability
+of 1.0 and prints a warning message from indval() or summary.indval().
+
+labdsv_1.6-0
+
+adding a routine to check cluster memberships in all functions that 
+accept cluster membership vectors as input.  Such vectors are now forced 
+to consecutive integers (preserving the order) if they are not already in that
+form.
+
 labdsv 1.5-0
 
-labdsv was updates in several areas, with the largest change being the
+labdsv was updated in several areas, with the largest change being the
 transition to a NAMESPACE format as mandated by R 2.14.  
 
 Specific changes are:

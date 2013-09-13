@@ -1,6 +1,14 @@
 concov <- function (taxa,clustering,digits=1,width=5,typical=TRUE,thresh=10)
 {
-    if (inherits(clustering,c('clustering','partana','pam'))) clustering <- clustering$clustering
+    if (inherits(clustering,c('clustering','partana','pam'))) 
+        clustering <- clustering$clustering
+    if (is.numeric(clustering)) {
+        if (min(clustering)< 0 || (length(table(clustering)) != max(clustering))) {
+            cat('WARNING: renumbering clusters to consecutive integers\n')
+            clustering <- match(clustering,sort(unique(clustering)))
+        }
+    }
+
     x <- const(taxa,clustering)
     y <- importance(taxa,clustering,typical=typical)
     tmp <- NULL
