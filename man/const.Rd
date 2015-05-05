@@ -9,9 +9,9 @@ class the species occurs in.}
 \arguments{
     \item{taxa}{a data.frame of species abundances with samples as rows and
 species as columns}
-    \item{clustering}{a vector of (integer) cluster memberships, or an
-           object of class \sQuote{clustering},
-           class \sQuote{partana}, or class \sQuote{partition}}
+    \item{clustering}{(1) an object of class \sQuote{clustering},
+           class \sQuote{partana}, or class \sQuote{partition}, (2) a vector of 
+integer cluster memberships, (3) a factor vector, or (4) a character vector.}
     \item{minval}{the minimum constancy a species must have in at least
          one class to be included in the output}
     \item{show}{the minimum constancy a species must have to show a printed value}
@@ -43,7 +43,7 @@ or possibly the order of species centroids in an ordination.
 \value{a data.frame with species as rows, classes as columns, with fraction
 of occurrence of species in classes.}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Constancy tables are often used in vegetation classification to
 calculate or present characteristic species for specific classes or types.
 \sQuote{const} may be combined with \sQuote{importance} and \sQuote{vegtab} to achieve a

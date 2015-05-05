@@ -6,7 +6,7 @@
 using a specified rareness threshold.}
 
 \usage{
-raretaxa(taxa,min=1,log=FALSE,type='b')
+raretaxa(taxa,min=1,log=FALSE,type='b', panel='all')
 }
 \arguments{
 \item{taxa}{a taxon dataframe with samples as rows and species as columns}
@@ -14,6 +14,9 @@ raretaxa(taxa,min=1,log=FALSE,type='b')
 \item{log}{controls whether or not the Y axis on some graphs should be log
 scaled} 
 \item{type}{the plot type.  \sQuote{b} = both points and lines}
+\item{panel}{a switch to control which graphic is displayed.  Can be either an integer
+from 1 to 3 or the word \sQuote{all}.
+}
 }
 
 \details{Rare species are an issue in ecological data sets.  This function

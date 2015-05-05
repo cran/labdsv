@@ -18,7 +18,7 @@ on the relative abundance of species within classes.
 \value{
 A vector of discrimination values.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}

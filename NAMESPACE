@@ -1,24 +1,59 @@
 # Remove the previous line if you edit this file
 
 # Export all names
-export(abuocc,concov,const,dematrify,dga,disana,dropplt,dropspc,dsvdis, 
-envrtest,euclidify,homoteneity,importance,indspc,plot.indspc,indval, 
-indval.default,indval.stride,summary.indval,isamic,matrify,metrify, 
-nmds,plot.nmds,points.nmds,plotid.nmds,surf.nmds,bestnmds,hilight.nmds, 
-chullord.nmds,density.nmds,rgl.nmds,ordcomp,orddist,ordpart, 
-ordpart.pco,ordpart.pca,ordpart.nmds,ordtaxa,ordtest,surf,plotid, 
-specid,hilight,chullord,thull,density,thull,pca,plot.pca,points.pca, 
-plotid.pca,surf.pca,summary.pca,scores.pca,loadings.pca,varplot.pca, 
-hilight.pca,chullord.pca,pco,plot.pco,points.pco,plotid.pco,surf.pco, 
-hilight.pco,chullord.pco,density.pco,rgl.pco,raretaxa,reconcile, 
-rgl.nmds,rgl.nmds,rnddist,rndtaxa,spcdisc,thull.nmds,thull.pco, 
-plot.thull,vegtab,vegtrans 
+export(
+abuocc,bestnmds,chullord,chullord.nmds,chullord.pca,chullord.pco,
+clustify,compspec,concov,const,dematrify,density,density.nmds,density.pco,
+dga,disana,dropplt,dropspc,dsvdis,ellip.nmds,envrtest,euclidify,
+hilight,hilight.nmds,hilight.pca,hilight.pco,homoteneity,importance,
+indval,indval.default,indval.stride,isamic,loadings.pca,matrify,metrify,
+nmds,ordcomp,orddist,ordpart,ordpart.nmds,ordpart.pca,ordpart.pco,ordtaxa,
+ordtest,pca,pco,plot.compspec,plotid,plotid.nmds,plotid.pca,plotid.pco,
+plot.nmds,plot.pca,plot.pco,plot.thull,plot.thull,points.nmds,points.pca,
+points.pco,raretaxa,reconcile,rgl.nmds,rgl.nmds,rgl.nmds,rgl.pco,rnddist,
+rndtaxa,scores.pca,spcdisc,specid,summary.indval,summary.pca,surf,surf.nmds,
+surf.pca,surf.pco,thull,thull,thull.nmds,varplot.pca,vegtab,vegtrans
 )
+
+# register S3  Methods
+
+S3method(chullord,nmds)
+S3method(chullord,pca)
+S3method(chullord,pco)
+S3method(density,nmds)
+S3method(density,pco)
+S3method(hilight,nmds)
+S3method(hilight,pca)
+S3method(hilight,pco)
+S3method(indval,default)
+S3method(indval,stride)
+S3method(ordpart,nmds)
+S3method(ordpart,pca)
+S3method(ordpart,pco)
+S3method(plot,compspec)
+S3method(plot,nmds)
+S3method(plot,pca)
+S3method(plot,pco)
+S3method(plot,thull)
+S3method(plotid,nmds)
+S3method(plotid,pca)
+S3method(plotid,pco)
+S3method(points,nmds)
+S3method(points,pca)
+S3method(points,pco)
+S3method(summary,indval)
+S3method(summary,pca)
+S3method(surf,nmds)
+S3method(surf,pca)
+S3method(surf,pco)
+S3method(thull,nmds)
 
 # Import all packages listed as Imports or Depends
 import(
   mgcv,
-  MASS
+  MASS,
+  cluster,
+  rgl
 )
 
 useDynLib(labdsv)

@@ -5,8 +5,7 @@ envrtest <- function (set,env,numitr=1000,minval=0, replace=FALSE,
     prob <- 0
     if (!is.logical(set)) {
         mask <- (set > minval)
-    }
-    else {
+    } else {
         mask <- set
     }
     omin <- min(env[mask])
@@ -32,6 +31,6 @@ envrtest <- function (set,env,numitr=1000,minval=0, replace=FALSE,
     out <- list()
     out$diff <- odiff
     out$prob <- prob
+    attr(out,'call') <- match.call()
     invisible(out)
 }
-

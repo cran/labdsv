@@ -6,11 +6,11 @@ indval <- function(x, ...)
 indval.default <- function(x,clustering,numitr=1000, ...)
 {
     if (!is.data.frame(x)) x <- data.frame(x)
-    if (inherits(clustering,c('clustering','partana','partition'))) clustering <- clustering$clustering
-    if (min(clustering)< 0 || (length(table(clustering)) != max(clustering))) {
-        cat('WARNING: renumbering clusters to consecutive integers\n')
-        clustering <- match(clustering,sort(unique(clustering)))
-    }
+
+    clustering <- clustify(clustering)
+    levels <- levels(clustering)
+    clustering <- as.integer(clustering)
+
     if (any(apply(x>0,2,sum)==0)) stop('All species must occur in at least one plot')
     numplt <- nrow(x)
     numspc <- ncol(x)
@@ -38,7 +38,7 @@ indval.default <- function(x,clustering,numitr=1000, ...)
         relabu = relabu,
         indval = indval,
         pval = pval,
-	indcls = indcls,
+        indcls = indcls,
         maxcls = as.integer(maxcls),
         as.double(tmpfrq),
         as.double(tmpabu),
@@ -49,18 +49,17 @@ indval.default <- function(x,clustering,numitr=1000, ...)
     out <- list(relfrq=data.frame(tmp$relfrq),relabu=data.frame(tmp$relabu),
               indval=data.frame(tmp$indval),maxcls=tmp$maxcls,indcls=tmp$indcls,
               pval=tmp$pval,error=tmp$errcod)
-    print(paste('error code = ',out$error))
     row.names(out$relfrq) <- names(x)
     row.names(out$relabu) <- names(x)
     row.names(out$indval) <- names(x)
     names(out$maxcls) <- names(x)
     names(out$indcls) <- names(x)
     names(out$pval) <- names(x)
-    names(out$relfrq) <- levels(factor(clustering))
-    names(out$relabu) <- levels(factor(clustering))
-    names(out$indval) <- levels(factor(clustering))
+    names(out$relfrq) <- levels
+    names(out$relabu) <- levels
+    names(out$indval) <- levels
     class(out) <- 'indval'
-    if (out$error == 1) cat('WARNING: one or more species not assigned to any cluster\n') 
+    if (out$error == 1) cat('WARNING: one or more species not assigned to any cluster\n')
     out
 }
 
@@ -95,8 +94,7 @@ summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, so
         cat(paste("\nSignificant Indicator Distribution\n"))
         print(table(tmp$cluster))
 
-    }
-    else {
+    } else {
         tmp <- format(round(object$indval,digits=digits))
         keep <- apply(object$indval,1,function(x){max(x)>show})
         tmp <- tmp[keep,] 
@@ -106,9 +104,11 @@ summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, so
     if (sort) {
         repeat {
             plots <- readline(' enter the plots    : ')
-            if (plots == "") break
-            else pnt <- readline(' in front of        : ')
-
+            if (plots == "") {
+                break
+            } else {
+                pnt <- readline(' in front of        : ')
+            }
             for (i in strsplit(plots,",")[[1]]){
                 ord <- 1:nrow(tmp)
                 x <- match(i,row.names(tmp))
@@ -120,20 +120,17 @@ summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, so
                     if (!is.na(y)) {
                             if (y==1) {
                                 ord <- c(x,ord)
-                            }
-                            else {
+                            } else {
                                 first <- ord[1:(y-1)]
                                 last <- ord[y:length(ord)]
                                 ord <- c(first,x,last)
                             }
                             tmp <- tmp[ord,]
                             print(tmp)
-                        }
-                        else {
+                        } else {
                             print(paste('species',pnt,'does not exist'))
                         }
-                    }
-                    else {
+                    } else {
                         print(paste('species',i,'does not exist'))
                     }
                 }

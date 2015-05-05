@@ -18,7 +18,7 @@ matrix form required by multivariate analyses in packages \sQuote{labdsv} and
 \value{a data.frame with samples as rows, taxa as columns, and abudance values
 for taxa in samples.
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Typically, the source of the data will be an ASCII file of a dbase
 database or a CSV file from an Excel file in three column format.  That file can
 be read into a data.frame with \code{read.table} or \code{read.csv} and then

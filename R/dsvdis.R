@@ -8,6 +8,7 @@ dsvdis <- function(x, index, weight = rep(1,ncol(x)), step = 0., diag=FALSE, upp
     if (!is.loaded("dsvdis")) {
         dyn.load("labdsv")
     }
+    taxa <- deparse(substitute(x)) 
     x <- as.matrix(x)
     y <- matrix(0,nrow=nrow(x),ncol=nrow(x))
     dis <- .Fortran("dsvdis",
@@ -28,5 +29,6 @@ dsvdis <- function(x, index, weight = rep(1,ncol(x)), step = 0., diag=FALSE, upp
     attr(tmp2, "method") <- choices[i]
     attr(tmp2, "call") <- match.call()
     attr(tmp2, "Size") <- nrow(x)
+    attr(tmp2, "taxa") <- taxa
     return(tmp2)
 }

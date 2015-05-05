@@ -7,6 +7,7 @@
 \alias{surf.nmds}
 \alias{density.nmds}
 \alias{thull.nmds}
+\alias{ellip.nmds}
 \alias{rgl.nmds}
 
 \title{Plotting Routines For Nonmetric Multi-Dimensional Scaling Ordinations}
@@ -22,13 +23,15 @@ or adding fitted surfaces to NMDSs.}
                       glyph=c(1,3,5), \dots)
 \method{chullord}{nmds}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
                         ltys = c(1,2,3), \dots)
+\method{ellip}{nmds}(ord, overlay, ax = 1, ay = 2, cols = c(2,3,4,5,6,7),
+                        ltys=c(1,2,3), \dots)
 \method{surf}{nmds}(ord, var, ax = 1, ay = 2, thinplate = TRUE, col = 2, labcex = 0.8,
     family = gaussian, gamma=1, grid=50, \dots)
 \method{thull}{nmds}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,
      numitr=100,\dots)
 \method{density}{nmds}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     6, 7), ltys = c(1, 2, 3), numitr, ...)
-rgl.nmds(ord,ax=1,ay=2,az=3,radius=0.01,col=0)
+rgl.nmds(ord,ax=1,ay=2,az=3,radius=0.01,col=1)
 }
 
 \arguments{
@@ -96,6 +99,12 @@ By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
 it is possible to control the sequence of colors and linetypes of the convex
 hulls.
 
+Function sQuote{ellip} is passed a factor vector or integer vector,
+and plots a minimum volume ellipse around all points in each factor class.
+By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
+it is possible to control the sequence of colors and linetypes of the
+ellipses.
+
 Function \sQuote{density} calculates the fraction of points within the convex
 hull that belong to the specified type.
 
@@ -134,7 +143,7 @@ package akima.  The revised routine using
 }
 
 
-\references{\url{http://ecology..msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab9/lab9.html}}
 \author{
 David W. Roberts
 \email{droberts@montana.edu}

@@ -3,7 +3,7 @@
 \title{Ordination Distribution Test}
 \description{Testing the distribution of points in an ordination}
 \usage{
-ordtest(ord, var, dim=c(1:ncol(ord$points)), index = 'euclidean',
+ordtest(ord, var, dim=1:ncol(ord$points), index = 'euclidean',
    nitr = 1000)
 }
 \arguments{
@@ -11,7 +11,7 @@ ordtest(ord, var, dim=c(1:ncol(ord$points)), index = 'euclidean',
        \sQuote{nmds}}
 \item{var}{a logical or factor vector used to organize the calculation
      of within-set distances}
-\item{dim}{the number of dimensions to use in the calculation}
+\item{dim}{the specific dimensions to use in the calculation}
 \item{index}{the distance metric for the calculation of within-set distances.
    Currently only euclidean is accepted}
 \item{nitr}{the number of iterations to perform to establish p-values}
@@ -30,7 +30,7 @@ Produces a list with components:
 \item{p}{the probability of obtaining a value that small}
 \item{reps}{the sum of within-set pairwise distances for all permutations}
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}

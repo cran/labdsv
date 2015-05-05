@@ -24,7 +24,7 @@ constancy - 0.5, normalized to the number of clusters (columns).}
 
 \value{a data.frame of species indicator values} 
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}
 Aho, K., D.W. Roberts, and T.W.Weaver.  2008. Using geometric and
 non-geometric internal evaluators to compare eight vegetation
 classification methods.  J. Veg. Sci. In press.}

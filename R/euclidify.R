@@ -1,6 +1,7 @@
 euclidify <- function (x,upper=FALSE,diag=FALSE)
 {
-    x <- as.dist(x)
+    if (class(x) != 'dist') 
+        stop('The first argument mmust be an object of class dist')
     tmp <- .Fortran("euclid",x=as.matrix(x),as.integer(attr(x,"Size")),
                      PACKAGE='labdsv')
     tmp2 <- as.dist(tmp$x)

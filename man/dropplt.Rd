@@ -4,19 +4,20 @@
 \description{Looks for plots which have missing values in site or environment
 data, and deletes those plots from both the taxon and site data frames.}
 
-\usage{dropplt(taxa,site)
+\usage{dropplt(taxa,site,which=NULL)
 }
 \arguments{
     \item{taxa}{a taxon data frame with samples as rows and species as columns}
     \item{site}{a site or environment data frame with samples as rows and 
 variables as columns}
+    \item{which}{a switch to dpecify specific plots to drop from both data.frames}
 }
 \details{First looks to see that the row names of the taxon data frame and the
 site or environment data frame are identical.  If not, it prints an error
-message and exits.  It then looks at the site or environment data frame for
+message and exits.  if which is NULL, It then looks at the site or environment data frame for
 plots or samples that have missing values, and deletes those plots from both the
-taxon and site data frames.
-}
+taxon and site data frames.  Alternatively, if which is a numeric scalar or vector
+it deletes the specified plots from both the taxon and site data.frames.}
 
 \value{produces a list with two components:
 \item{taxa}{the new taxon data frame}

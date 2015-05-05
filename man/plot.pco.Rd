@@ -4,6 +4,7 @@
 \alias{plotid.pco}
 \alias{hilight.pco}
 \alias{chullord.pco}
+\alias{ellip.pco}
 \alias{density.pco}
 \alias{surf.pco}
 \alias{thull.pco}
@@ -21,13 +22,15 @@ or adding fitted surfaces to PCOs.}
     glyph=c(1,3,5), \dots)
 \method{chullord}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
     ltys = c(1,2,3), \dots)
+\method{ellip}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7),
+    ltys = c(1,2,3), \dots)
 \method{density}{pco}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     6, 7), ltys = c(1, 2, 3), numitr=100, ...)
 \method{surf}{pco}(ord, var, ax = 1, ay = 2, thinplate=TRUE, col = 2, labcex = 0.8,
     family = gaussian, grid=50, gamma=1, \dots)
 \method{thull}{pco}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,
     lty=1,numitr=100,...)
-rgl.pco(ord,ax=1,ay=2,az=3,radius=0.01,col=0)
+rgl.pco(ord,ax=1,ay=2,az=3,radius=0.01,col=1)
 }
 
 \arguments{
@@ -98,6 +101,12 @@ By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
 it is possible to control the sequence of colors and linetypes of the convex
 hulls.
 
+Function sQuote{ellip} is passed a factor vector or integer vector,
+and plots a minimum volume ellipse around all points in each factor class.
+By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
+it is possible to control the sequence of colors and linetypes of the
+ellipses.
+ 
 Function \sQuote{density} calculates the fraction of points within the convex
 hull that belong to the specified type.
 
@@ -127,7 +136,7 @@ package akima.  The revised routine using
 package\code{\link[vegan]{ordisurf}}.
 }
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html}}
 \author{
 David W. Roberts
 \email{droberts@montana.edu}

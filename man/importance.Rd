@@ -11,9 +11,9 @@ the average or typical abundance of each species in each class.
 \arguments{
     \item{taxa}{a data.frame of species abundances with samples as rows and
 species as columns}
-    \item{clustering}{a vector of (integer) class memberships, or an object of
-         class \sQuote{clustering}, class \sQuote{partana},
-         of class \code{\link[cluster]{partition}}}
+    \item{clustering}{(1) an object of class \sQuote{clustering},
+           class \sQuote{partana}, or class \sQuote{partition}, (2) a vector of
+integer cluster memberships, (3) a factor vector, or (4) a character vector.}
     \item{minval}{the minimum importance a species must have in at least one class
 to be included in the output}
     \item{digits}{the number of digits to report in the table}
@@ -29,7 +29,7 @@ should be listed in the table}
 \value{a data.frame with species as rows, classes as columns, with
     average abundance of species in classes.}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab3/lab3.html}}
 \note{Importance tables are often used in vegetation classification to
 calculate or present characteristic species for specific classes or types.
 Importance may be combined with \code{\link[labdsv]{const}},

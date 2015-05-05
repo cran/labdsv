@@ -14,8 +14,7 @@ bestnmds(dis,k=2,itr=20,maxit=100)
 }
 
 \arguments{
-    \item{dis}{a dist object returned from \code{dist} or a full symmetric
-        dissimilarity or distance matrix}
+    \item{dis}{a dist object returned from \code{dist}, \code{dsvdis} or \code{vegdist}}
     \item{k}{the desired number of dimensions for the result}
     \item{y}{a matrix of initial locations (objects as rows, coordinates as columns,
         as many columns as specified by k).  If none is supplied, \code{cmdscale}
@@ -47,7 +46,7 @@ Psychometrics 29:115-129.
 
 T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hall.
 
-\url{http://ecology.msu.montana.edu:/labdsv/R/labdsv}
+\url{http://ecology.msu.montana.edu:/labdsv/R/labs/lab9/lab9.html}
 }
 
 \note{nmds is included as part of the LabDSV package to provide a consistent interface and 

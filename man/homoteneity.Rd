@@ -17,7 +17,7 @@ type.}
 
 \value{a data.frame of homoteneity values
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv/}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{This function was adapted from the Virginia Heritage
 Program at 
 

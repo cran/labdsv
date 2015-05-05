@@ -32,6 +32,8 @@ dga <- function(z,x,y,step=25,pres="+",abs="-",labcex=1,
         xlab=xlab,ylab=ylab,main=title)
         points(x[z],y[z],pch=pres)
         points(x[!z],y[!z],pch=abs)
+        attr(tmp.gam,'call') <- match.call()
+        invisible(tmp.gam)
     } else {
         tmp.gam <- gam(z ~ s(x) + s(y),family=poisson)
         gam.pred <- matrix(predict.gam(tmp.gam,grid,type="response"),nrow=step+1)
@@ -42,6 +44,7 @@ dga <- function(z,x,y,step=25,pres="+",abs="-",labcex=1,
         points(x[z>quant[2]&z<=quant[4]],
                y[z>quant[2]&z<=quant[4]],pch=pch)
         points(x[z>quant[4]],y[z>quant[4]],cex=1.5,pch=pch)
-        invisible()
+        attr(tmp.gam,'call') <- match.call()
+        invisible(tmp.gam)
     }
 }

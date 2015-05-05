@@ -5,13 +5,13 @@ rnddist <- function (size, method='metric', sat = 1.0, upper=FALSE, diag=FALSE)
     if (method == 'metric') {
         y <- metrify(x, upper=upper, diag=diag)
         attr(y, "method") <- "metric random"
-    }
-    else if (method == 'euclidean') {
+    } else if (method == 'euclidean') {
         y <- euclidify(x, upper=upper, diag=diag)
         attr(y,"method") <- 'euclidean random'
-    }
-    else
+    } else {
         stop("you must specify 'metric' or 'euclidean' as the method")
+    }
+
     y <- y/max(y)
         if (sat != 1.0) {
         y <- y / sat

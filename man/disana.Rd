@@ -4,12 +4,15 @@
 \description{Dissimilarity analysis is a graphical analysis of the
 distribution of values in a dissimilarity matrix}
 
-\usage{disana(x)
+\usage{disana(x, panel='all')
 }
 \arguments{
     \item{x}{an object of class \sQuote{dist} such as returned by
     \code{\link{dist}},
     \code{\link[vegan]{vegdist}} or \code{\link[labdsv]{dsvdis}}}
+    \item{panel}{a switch to specify which panel of graphics should
+                 be displayed.  Can be either an integer from 1 to 3,
+                 or the word \sQuote{all}.}
 }
 \details{Calculates three vectors: the minimum, mean,
 and maximum dissimilarity for each sample in a dissimilarity matrix.
@@ -26,7 +29,7 @@ Optionally, you can identify sample plots in the last panel with the mouse.
 \item{max}{the maximum dissimilarity of each sample to all others}
 \item{plots}{a vector of samples identified in the last panel}
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Dissimilarity matrices are often large, and difficult to visualize
 directly.  \sQuote{disana} is designed to highlight aspects of interest in these
 large matrices.  If the first panel shows a long limb of constant maximum

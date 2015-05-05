@@ -107,7 +107,7 @@ package akima.  The revised routine using
 package vegan.
 }
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html}}
 \author{
 David W. Roberts
 \email{droberts@montana.edu}

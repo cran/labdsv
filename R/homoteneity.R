@@ -1,13 +1,8 @@
 homoteneity <- function (taxa,clustering) 
 {
-    if (inherits(clustering, c("partana", "partition", "clustering"))) 
-        clustering <- clustering$clustering
-    if (is.numeric(clustering)) {
-        if (min(clustering)< 0 || (length(table(clustering)) != max(clustering))) {
-            cat('WARNING: renumbering clusters to consecutive integers\n')
-            clustering <- match(clustering,sort(unique(clustering)))
-        }
-    }
+    clustering <- clustify(clustering)
+    levels <- levels(clustering)
+    clustering <- as.integer(clustering)
 
     numtyp <- length(table(clustering))
     homo <- rep(NA,numtyp)
@@ -19,6 +14,7 @@ homoteneity <- function (taxa,clustering)
     }
     out <- data.frame(as.character(1:numtyp),homo)
     names(out) <- c('cluster','homoteneity')
+    attr(out,'call') <- match.call()
+    attr(out,'orig_clustering') <- levels
     out
 }
-

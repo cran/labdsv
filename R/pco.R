@@ -53,11 +53,17 @@ surf.pco <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2, labcex=0.8,
         var <- var[!is.na(var)]
     }
     if (is.logical(var)) {
-        if (thinplate) tmp <- gam(var~s(x,y), gamma=gamma, family=binomial)
-        else tmp <- gam(var~s(x)+s(y),family=binomial,gamma=gamma)
+        if (thinplate) {
+            tmp <- gam(var~s(x,y), gamma=gamma, family=binomial)
+        } else {
+            tmp <- gam(var~s(x)+s(y),family=binomial,gamma=gamma)
+        }
     } else {
-        if (thinplate) tmp <- gam(var~s(x,y), gamma=gamma, family=family)
-        else tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
+        if (thinplate) {
+            tmp <- gam(var~s(x,y), gamma=gamma, family=family)
+        } else {
+            tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
+        }
     }
 
     new.x <- seq(min(x),max(x),len=grid)
@@ -73,21 +79,14 @@ surf.pco <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2, labcex=0.8,
     print(tmp)
     d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
     cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
+    invisible(tmp)
 }
 
 hilight.pco <- function (ord, overlay, ax=1, ay=2, title="", cols=c(2,3,4,5,6,7), glyph=c(1,3,5), ...)
 {
     if (class(ord) != 'pco')
        stop("You must pass an object of class pco")
-    if (inherits(overlay,c('partana','pam','clustering'))) {
-       overlay <- overlay$clustering
-        if (min(overlay)< 0 || (length(table(overlay)) != max(overlay))) {
-            cat('WARNING: renumbering clusters to consecutive integers\n')
-            overlay <- match(overlay,sort(unique(overlay)))
-        }
-    }
-    if (is.logical(overlay) || is.factor(overlay))
-        overlay <- as.numeric(overlay)
+    overlay <- as.integer(clustify(overlay))
     plot(ord,ax=ax,ay=ay,type='n')
     title(title)
     layer <- 0
@@ -108,17 +107,7 @@ chullord.pco <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 {
     if (class(ord) != 'pco')
         stop("You must pass an object of class pco")
-    if (inherits(overlay,c('partana','pam','clustering'))) {
-       overlay <- overlay$clustering
-        if (min(overlay)< 0 || (length(table(overlay)) != max(overlay))) {
-            cat('WARNING: renumbering clusters to consecutive integers\n')
-            overlay <- match(overlay,sort(unique(overlay)))
-        }
-    }
-    else if (is.logical(overlay))
-        overlay <- as.numeric(overlay)
-    else if (is.factor(overlay))
-        overlay <- as.numeric(overlay)
+    overlay <- as.integer(clustify(overlay))
     pass <- 1
     layer <- 0
     lty <- ltys[pass]
@@ -137,22 +126,49 @@ chullord.pco <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
     }
 }
 
-density.pco <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5, 
-    6, 7), ltys = c(1, 2, 3), numitr=100, ...) 
+ellip.pco <- function (ord, overlay, ax = 1, ay = 2, 
+    cols = c(2, 3, 4, 5, 6, 7), ltys = c(1, 2, 3), ...) 
 {
     if (class(ord) != "pco") 
         stop("You must pass an object of class pco")
     if (inherits(overlay, c("partana", "pam", "clustering"))) {
         overlay <- overlay$clustering
-        if (min(overlay)< 0 || (length(table(overlay)) != max(overlay))) {
-            cat('WARNING: renumbering clusters to consecutive integers\n')
-            overlay <- match(overlay,sort(unique(overlay)))
+        if (min(overlay) < 0 || (length(table(overlay)) != max(overlay))) {
+            cat("WARNING: renumbering clusters to consecutive integers\n")
+            overlay <- match(overlay, sort(unique(overlay)))
         }
     }
     else if (is.logical(overlay)) 
         overlay <- as.numeric(overlay)
     else if (is.factor(overlay)) 
         overlay <- as.numeric(overlay)
+    pass <- 1
+    layer <- 0
+    lty <- ltys[pass]
+    for (i in 1:max(overlay, na.rm = TRUE)) {
+        x <- ord$points[, ax][overlay == i & !is.na(overlay)]
+        y <- ord$points[, ay][overlay == i & !is.na(overlay)]
+        pts <- chull(x, y)
+        layer <- layer + 1
+        if (layer > length(cols)) {
+            layer <- 1
+            pass <- min(pass + 1, length(ltys))
+        }
+        col <- cols[layer]
+        lty = ltys[pass]
+        x <- as.matrix(cbind(x[pts], y[pts]))
+        elp <- ellipsoidhull(x)
+        print(elp)
+        lines(predict(elp),col=col)
+    }
+}
+
+density.pco <- function (ord, overlay, ax = 1, ay = 2, 
+    cols = c(2, 3, 4, 5, 6, 7), ltys = c(1, 2, 3), numitr=100, ...) 
+{
+    if (class(ord) != "pco") 
+        stop("You must pass an object of class pco")
+    overlay <- as.integer(clustify(overlay))
     
     densi <- function(xpts,ypts,overlay) {
         x <- xpts[overlay==1 & !is.na(overlay)]
@@ -187,9 +203,10 @@ density.pco <- function (ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
 
 }
 
-rgl.pco <- function (ord,ax=1,ay=2,az=3,radius=0.01,col=0)
+rgl.pco <- function (ord,ax=1,ay=2,az=3,radius=0.01,col=1)
 {
-    require(rgl)
+    if (!requireNamespace("rgl")) 
+        stop("this function requires the 'rgl' package to be installed")
     if (ncol(ord$points) < 3) stop("Must be 3-D")
     tmp <- ord$points[,c(ax,ay,az)]
 

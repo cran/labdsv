@@ -31,7 +31,7 @@ and calculating (n+1)/numitr.  To get three-digit probabilities, set numitr=1000
 \value{Produces a plot on the current graphics device, and an invisible list with the
 components observed within-set difference and the p-value.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{The plot is based on the concept of constraint, or limiting value, and
 checks to see whether the distribution of a particular variable within a cluster
 is constrained in an improbable way.}

@@ -29,7 +29,7 @@ zero.
 
 \value{A integer vector of cluster membership values
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Although the routine could easily be adapted for any scatter plot,
 it is currently only designed for objects of class \sQuote{pca},
 \sQuote{pco}, or \sQuote{nmds}}

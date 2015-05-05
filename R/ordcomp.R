@@ -3,27 +3,21 @@ ordcomp <- function(x,dis,dim,xlab="Computed Distance",ylab="Ordination Distance
     y <- as.dist(dis)
     if (class(x) == "pca") {
         z <- x$scores
-    } 
-    else if (inherits(x, c("pco", "nmds", "metaMDS"))) {
+    } else if (inherits(x, c("pco", "nmds", "metaMDS"))) {
         z <- x$points
-    } 
-    else if (inherits(x,c("fso","mfso"))) {
+    } else if (inherits(x,c("fso","mfso"))) {
         z <- as.matrix(x$mu)
-    } 
-    else if (class(x) == "ordiplot") {
+    } else if (class(x) == "ordiplot") {
         z <- x$sites
-    }
-    else {
+    } else {
         z <- x
         if (ncol(x) != ncol(z)) {
             cat(paste("Only comparing first", dim, "dimensions\n"))
         }
     }
 
-
     if (missing(dim)) dim <- ncol(z)
     if (ncol(z) > dim) cat(paste("Only comparing first",dim,"dimensions\n"))
-
     if (length(y) > 5000 & missing(pch)) pch <- "."
 
     a <- dist(z[,1:dim])

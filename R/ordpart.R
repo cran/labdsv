@@ -21,8 +21,10 @@ ordpart.pco <- function(ord,ax=1,ay=2)
             break
         }
     }
-    attr(clust,'class') <- 'clustering'
-    return(clust)
+    out <- list()
+    out$clustering <- clust
+    class(out) <- 'clustering'
+    return(out)
 }
 
 ordpart.pca <- function(ord,ax=1,ay=2)
@@ -43,8 +45,10 @@ ordpart.pca <- function(ord,ax=1,ay=2)
             break
         }
     }
-    attr(clust,'class') <- 'clustering'
-    return(clust)
+    out <- list()
+    out$clustering <- clust
+    class(out) <- 'clustering'
+    return(out)
 }
 
 ordpart.nmds <- function (ord,ax=1,ay=2)
@@ -65,8 +69,10 @@ ordpart.nmds <- function (ord,ax=1,ay=2)
             break
         }
     }
-    attr(clust,'class') <- 'clustering'
-    return(clust)
+    out <- list()
+    out$clustering <- clust
+    class(out) <- 'clustering'
+    return(out)
 }
 
 pip <- function (x,y,polyx,polyy) 

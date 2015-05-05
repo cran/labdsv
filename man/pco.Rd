@@ -24,7 +24,7 @@
 \references{Gower, J.C. (1966)  Some distance properties of latent root
 and vector methods used in multivariate analysis.  Biometrika 53:325-328.
 
-\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html}}
 
 \note{Principal Coordinates Analysis was pioneered by Gower (1966)
     as an alternative to PCA better suited to ecological datasets.}

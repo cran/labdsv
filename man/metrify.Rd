@@ -20,10 +20,10 @@ third.
 
 \value{a object of class \sQuote{dist}}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labdsv}}
+\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Many multivariate statistical methods are designed for metric spaces,
 and yet the direct calculation of distance is often inappropriate due
-to problems with joint absences.  metrify takes any dissimilarity matrix and
+to problems with joint absences.  \sQuote{metrify} takes any dissimilarity matrix and
 converts it to the closest metric space representation, generally to avoid negative
 eigenvalues in an eigenanalysis of the matrix.}
 \author{

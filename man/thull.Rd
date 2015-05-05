@@ -23,7 +23,7 @@ the returned thull results in an \sQuote{image} of the representation.
     \item{main}{the main title}
     \item{\dots}{other graphics parameters}
 }
-\details{Tensioned hull analysis fits a minimun volume envelope to specific
+\details{Tensioned hull analysis fits a minimum volume envelope to specific
 points in an ordination.  A tensioned hull object is returned from function
 \code{\link[labdsv]{thull}} of a PCO, NMDS or MFSO.  This function plots the
 resulting tensioned hull as an image, with optional overlays of contours. 
@@ -33,7 +33,6 @@ resulting tensioned hull as an image, with optional overlays of contours.
 Produces a plot on the current graphic device.
 }
 
-\references{\url{http://ecology.montana.msu.edu/labdsv/R}}
 
 \author{
     David W. Roberts
@@ -41,13 +40,13 @@ Produces a plot on the current graphic device.
 }
 
 \examples{
-    data(bryceveg) # returns a dataframe called brycceveg
+    data(bryceveg) # returns a dataframe called bryceveg
     dis.bc <- dsvdis(bryceveg,'bray') # calculates a Bray-Curtis 
                                       # dissimilarity matrix
     nmds.bc <- nmds(dis.bc) # calculates an NMDS ordination
     plot(nmds.bc) # plots the ordination on the current device
     demo.thull <- thull(nmds.bc,bryceveg$arcpat,0.25) # calculates 
-                        # the tensioned hull rperesenting the distribution 
+                        # the tensioned hull representing the distribution 
                         # of a species
     plot(demo.thull) # portrays the image version of the tensioned hull
 }

@@ -4,11 +4,12 @@
 \description{Eliminates species from the taxon data frame that occur fewer than
 or equal to a threshold number of occurrences.}
 
-\usage{dropspc(taxa,min=0)
+\usage{dropspc(taxa,minocc=0,minabu=0)
 }
 \arguments{
     \item{taxa}{a taxon data frame}
-    \item{min}{the threshold number of occurrences}
+    \item{minocc}{the threshold number of occurrences to be dropped}
+    \item{minabu}{the threshold minimum abundance to be dropped}
 }
 \details{The function is useful for eliminating species (columns) from taxon
 data frames which never occur, which often happens if you eliminate plots, and

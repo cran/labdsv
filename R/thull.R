@@ -1,5 +1,6 @@
 
-thull.nmds <- function (ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,numitr=100,...) 
+thull.nmds <- function (ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,
+                        levels=NULL,lty=1,numitr=100,...) 
 {
     if (is.null(class(ord))) {
         stop("You must supply an object of class nmds from nmds")
@@ -67,7 +68,8 @@ thull.nmds <- function (ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=N
                     PACKAGE='labdsv')
             rndsum[i] <- sum(res$hull) 
         } 
-        cat(paste('\nvolume   = ',format(obssum,digits=5),'\nmean     = ',format(mean(rndsum),digit=5),
+        cat(paste('\nvolume   = ',format(obssum,digits=5),'\nmean     = ',
+                   format(mean(rndsum),digit=5),
                    '\nfraction = ',format(obssum/mean(rndsum),digits=5)))
         cat(paste('\np <= ',(sum(rndsum<=obssum)+1)/numitr),'\n')
         out$obs <- obssum
@@ -77,7 +79,8 @@ thull.nmds <- function (ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=N
     invisible(out)
 }
 
-thull.pco <- function (ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,numitr=100,...) 
+thull.pco <- function (ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,
+                       levels=NULL,lty=1,numitr=100,...) 
 {
     if (is.null(class(ord))) {
         stop("You must supply an object of class pco from pco")

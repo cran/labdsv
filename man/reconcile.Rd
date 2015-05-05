@@ -19,7 +19,6 @@ deleted.
 \value{a list object with two elements: taxa and site, which are the sorted and
 reconciled data.frames.
 }
-\references{\url{http://ecology.montana.msu.edu/labdsv/}}
 \note{package labdsv (and many other packages in ecological data analysis)
 require two data.frames to structure the data.  One contains the abundance of
 taxa within samples with samples as rows and taxa as columns.  This data.frame I

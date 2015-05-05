@@ -2,9 +2,9 @@ reconcile <- function (taxa,site)
 {
     if (identical(row.names(taxa),row.names(site))) {
         cat("You're good to go\n")
-        invisible()
-    }
-    else {
+    } else {
+        orig_taxa <- deparse(substitute(taxa))
+        orig_site <- deparse(substitute(site))
         extra <- nrow(taxa) - sum(row.names(taxa) %in% row.names(site))
         if (extra > 0) cat(paste("You have",extra,"plots in taxa not in site\n"))
         extra <- nrow(site) - sum(row.names(site) %in% row.names(taxa))
@@ -14,6 +14,9 @@ reconcile <- function (taxa,site)
         taxa <- taxa[row.names(taxa) %in% row.names(site),]
         site <- site[row.names(site) %in% row.names(taxa),]
         out <- list(taxa=taxa,site=site)
+        attr(out,'call') <- match.call()
+        attr(out,'orig_taxa') <- orig_taxa
+        attr(out,'orig_site') <- orig_site
+        invisible(out)
     }
 }
-

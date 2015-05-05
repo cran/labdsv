@@ -52,11 +52,17 @@ surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8,
     x <- ord$scores[, ax]
     y <- ord$scores[, ay]
     if (is.logical(var)) {
-        if (thinplate) tmp <- gam(var~s(x,y),family=binomial,gamma=gamma)
-        else tmp <- gam(var~s(x)+s(y),family=binomial,gamma=gamma)
+        if (thinplate) {
+            tmp <- gam(var~s(x,y),family=binomial,gamma=gamma)
+        } else {
+            tmp <- gam(var~s(x)+s(y),family=binomial,gamma=gamma)
+        }
     } else {
-        if (thinplate) tmp <- gam(var~s(x,y),family=family,gamma=gamma)
-        else tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
+        if (thinplate) {
+            tmp <- gam(var~s(x,y),family=family,gamma=gamma)
+        } else {
+            tmp <- gam(var~s(x)+s(y),family=family,gamma=gamma)
+        }
     }
     new.x <- seq(min(x),max(x),len=grid)
     new.y <- seq(min(y),max(y),len=grid)
@@ -72,6 +78,7 @@ surf.pca <- function(ord, var, ax=1, ay=2, col=2, labcex=0.8,
     print(tmp)
     d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
     cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
+    invisible(tmp)
 }
 
 
@@ -123,10 +130,7 @@ hilight.pca <- function (ord, overlay, ax=1, ay=2, cols=c(2,3,4,5,6,7), glyph=c(
 {
     if (class(ord) != 'pca')
        stop("You must pass an object of class pca")
-    if (inherits(overlay,c('partana','pam','clustering')))
-       factor <- factor$clustering
-    if (is.logical(overlay) || is.factor(overlay))
-        overlay <- as.numeric(overlay)
+    overlay <- as.integer(clustify(overlay))
     plot(ord,ax-ax,ay=ay,type='n')
     layer <- 0
     pass <- 1
@@ -147,12 +151,7 @@ chullord.pca <- function (ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), lty
 {
     if (class(ord) != 'pca')
         stop("You must pass an object of class pca")
-    if (inherits(overlay,c('partana','pam','clustering')))
-       overlay <- overlay$clustering
-    else if (is.logical(overlay))
-        overlay <- as.numeric(overlay)
-    else if (is.factor(overlay))
-        overlay <- as.numeric(overlay)
+    overlay <- as.integer(clustify(overlay))
     pass <- 1
     layer <- 0
     lty <- ltys[pass]

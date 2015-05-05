@@ -1,360 +1,416 @@
+labdsv_1.7-0
+
+	Quite a few changes were made to labdsv to (1) make it work
+	better with tools like knitr or Sweave, and (2) to improve
+	and standardize the way functions work
+	with factors or classification vectors.  
+
+	With respect to knitr and Sweave, all functions
+	which produce multiple panels of plots with "hit
+	return" prompts have been modified to allow you to specify
+	a single panel if desired by passing an argument
+	called 'panel' which can be an integer or the word
+	'all'.
+
+	With respect to clustering, , a new function called
+	"clustify" was written to manage the wide variety of
+	forms clustering information can take.  All inputs
+	are converted to a factor, and then managed within
+	the calling functions as necessary.
+	as.numeric(clustify('input')) guarantees consecutive
+	integers beginning at one, and allows
+	levels('input') to correctly label columns or list
+	objects with the original IDs.
+
+	Changes made in 1.6-1 to prevent passing unacceptable
+	cluster IDs (e.g. 0) broke the ability of some functions to
+	use factors as cluster IDs.  The changes
+	in 1.7-0 fix that.
+	
+	I changed the name of the 'indspc' function to 'compspec'
+	(for COMPositional SPECificity) as more indicative of its
+	purpose.  'insdpc' is still an acceptable alias in
+	the help file.
+	
+	Finally, now that Google and Hadley Wickham have
+	both said that 'else' does not need to start on line
+	by itself, all instances of
+
+	if () {
+	}
+	else {
+	} 
+
+	have been changed to 
+		
+	if () {
+	} else {
+	}
+	
+	I know it breaks the rules, but I agree with Hadley it's more readable and the
+	interpreter seems to handle it just fine.
+	
+	Miscellaneous improvements were made to the documentation, and the INDEX was
+	update to reflect some changes previously overlooked.
+	
+	
 labdsv_1.6-1
 
-added a routine to function indval() to check the taxa matrix for species
-which never occur [apply(x>0,2,sum) = 0] for some species.  indval() aborts
-with an error message in such cases.  I also added a rotine to the FORTRAN 
-code to trap array out-of-bounds conditions caused by species not assigned 
-to any cluster for any reason.  indval() gives such species a probability
-of 1.0 and prints a warning message from indval() or summary.indval().
-
+	added a routine to function indval() to check the taxa matrix for species
+	which never occur [apply(x>0,2,sum) = 0] for some species.  indval() aborts
+	with an error message in such cases.  I also added a routine to the FORTRAN 
+	code to trap array out-of-bounds conditions caused by species not assigned 
+	to any cluster for any reason.  indval() gives such species a probability
+	of 1.0 and prints a warning message from indval() or summary.indval().
+	
 labdsv_1.6-0
 
-adding a routine to check cluster memberships in all functions that 
-accept cluster membership vectors as input.  Such vectors are now forced 
-to consecutive integers (preserving the order) if they are not already in that
-form.
-
+	adding a routine to check cluster memberships in all functions that 
+	accept cluster membership vectors as input.  Such vectors are now forced 
+	to consecutive integers (preserving the order) if they are not already in that
+	form.
+	
 labdsv 1.5-0
 
-labdsv was updated in several areas, with the largest change being the
-transition to a NAMESPACE format as mandated by R 2.14.  
+	labdsv was updated in several areas, with the largest change being the
+	transition to a NAMESPACE format as mandated by R 2.14.  
 
 Specific changes are:
 
-1) function const() was modernized to replace truncation code with formatting
-code.  More importantly, const() was modified to return the result with a
-return() statement, rather than a print() statement to make it embeddable in the
-new concov() function (see just below).
+	1) function const() was modernized to replace truncation code with formatting
+	code.  More importantly, const() was modified to return the result with a
+	return() statement, rather than a print() statement to make it embeddable in the
+	new concov() function (see just below).
 
-2) a new function called concov() was added to combine the two functions const()
-and importance() in a single output, commonly called a "constancy/coverage
-table" by ecologists.  
+	2) a new function called concov() was added to combine the two functions const()
+	and importance() in a single output, commonly called a "constancy/coverage
+	table" by ecologists.  
 
-3) a new function called homoteneity() was added to facilitate diversity
-analysis.  homoteneity() is defined as the mean constancy of the S most constant
-species, expressed as a fraction, where S is the mean species richness of a
-type. This value represents the constancy of the average species in a community
-type; higher values for homoteneity indicate greater uniformity in species
-composition among plots.  This function was adapted from the Virginia heritage
-program at http://www.dcr.virginia.gov/natural_heritage/ncstatistics.shtml.
+	3) a new function called homoteneity() was added to facilitate diversity
+	analysis.  homoteneity() is defined as the mean constancy of the S most constant
+	species, expressed as a fraction, where S is the mean species richness of a
+	type. This value represents the constancy of the average species in a community
+	type; higher values for homoteneity indicate greater uniformity in species
+	composition among plots.  This function was adapted from the Virginia heritage
+	program at http://www.dcr.virginia.gov/natural_heritage/ncstatistics.shtml.
 
-4) function importance() was modified to replace truncation code with formatting
-code.  More importantly, importance was modified to allow calculating "typical"
-importance, as opposed to "mean" importance where typical importance is the sum
-of the abundance of a species divided by the number of plots in which it occurs, 
-whereas mean importance is the sum of the abundance of a species divided by the
-number of plots in the type.  Typical importance is the default.
+	4) function importance() was modified to replace truncation code with formatting
+	code.  More importantly, importance was modified to allow calculating "typical"
+	importance, as opposed to "mean" importance where typical importance is the sum
+	of the abundance of a species divided by the number of plots in which it occurs, 
+	whereas mean importance is the sum of the abundance of a species divided by the
+	number of plots in the type.  Typical importance is the default.
 
-5) function plot.pca() was updated to use more conventional R graphing code.
-function surf.pca() had a typo fixed that produced a bug when surfing
-non-thinplate spline surfs for binary variables.
-
-6) a new function called reconcile() was added to help manage the taxa and site
-environment data.frames.  Specifically, reconcile() returns as a list the
-rows common to both the the taxa and site data.frames, and drops plots which only
-occur in one or the other.
-
-7) function rgl.pco() was added to produce rgl three-dimensional graphics of PCO
-ordination.  rgl.nmds always worked on PCOs, but the naming convention made it
-appear to be specific to NMDS.  Since rgl is not a S-3 generic function, it was
-necessary to have two separately named functions to do the job.
-
+	5) function plot.pca() was updated to use more conventional R graphing code.
+	function surf.pca() had a typo fixed that produced a bug when surfing
+	non-thinplate spline surfs for binary variables.
+	
+	6) a new function called reconcile() was added to help manage the taxa and site
+	environment data.frames.  Specifically, reconcile() returns as a list the
+	rows common to both the the taxa and site data.frames, and drops plots which only
+	occur in one or the other.
+	
+	7) function rgl.pco() was added to produce rgl three-dimensional graphics of PCO
+	ordination.  rgl.nmds always worked on PCOs, but the naming convention made it
+	appear to be specific to NMDS.  Since rgl is not a S-3 generic function, it was
+	necessary to have two separately named functions to do the job.
+	
 
 labdsv 1.4-1
 
-labdsv was modified in several subtle ways to better accommodate package
-optpart, e.g. function indval was made generic to handle 'strides' from, package
-optpart.  The hilight.nmds and hilight.pco functions were modified slightly to
-overcome problems with ghosting.
+	labdsv was modified in several subtle ways to better accommodate package
+	optpart, e.g. function indval was made generic to handle 'strides' from, package
+	optpart.  The hilight.nmds and hilight.pco functions were modified slightly to
+	overcome problems with ghosting.
 
 
 
 labdsv 1.3-3
 
-1) I added two new plotting routines for plotting NMDS ordinations:
-thull and rgl.nmds.  thull stands for "tensioned hull" and fits a minimum
-volume surface to a plot to contain a specific identified element. 
-The rgl.nmds function uses the fabulous rgl library to plot a 3-D version
-of an NMDS.
-
-2) Since no one (as far as I know) uses labdsv in S-Plus, I simplified the 
-plotting routines just using "asp = 1" where necessary.
-
-3) In response to a problem noted by Miquel de Caceres, I modified an element
-of code in indval.f to eliminate a >= comparison.  In some cases, because the
-test compared a 64-bit real to an 80-bit register value the test would fail
-even when the values were known to be the same.  The problem only occurred on
-rare occasions where cluster sizes were equal and species were rare of
-singletons.
-
-It's possible that
-alternative compiler optimizations would have solved the problem, but I do not
-know how to write R make files for multiple systems that would solve the
-problem.  In essence, the code was changed from 
-
-   if (x >= y) then
-
-to   
-
-  if (x - y > -0.0001) then
-
-to enforce a conservative test.  I would be happy to replace that with better
-code if anyone has suggestions.
+	1) I added two new plotting routines for plotting NMDS ordinations:
+	thull and rgl.nmds.  thull stands for "tensioned hull" and fits a minimum
+	volume surface to a plot to contain a specific identified element. 
+	The rgl.nmds function uses the fabulous rgl library to plot a 3-D version
+	of an NMDS.
+	
+	2) Since no one (as far as I know) uses labdsv in S-Plus, I simplified the 
+	plotting routines just using "asp = 1" where necessary.
+	
+	3) In response to a problem noted by Miquel de Caceres, I modified an element
+	of code in indval.f to eliminate a >= comparison.  In some cases, because the
+	test compared a 64-bit real to an 80-bit register value the test would fail
+	even when the values were known to be the same.  The problem only occurred on
+	rare occasions where cluster sizes were equal and species were rare of
+	singletons.
+	
+	It's possible that
+	alternative compiler optimizations would have solved the problem, but I do not
+	know how to write R make files for multiple systems that would solve the
+	problem.  In essence, the code was changed from 
+	
+   	if (x >= y) then
+	
+	to   
+	
+  	if (x - y > -0.0001) then
+	
+	to enforce a conservative test.  I would be happy to replace that with better
+	code if anyone has suggestions.
 
 labdsv 1.3-2
 
-1) I fixed a bug (typo) in surf.nmds() that affected thinplate splines of logical
-variables.
+	1) I fixed a bug (typo) in surf.nmds() that affected thinplate splines of logical
+	variables.
 
-2) Changed a parameter in the smooth function of the plot.indspc() function
-as well as changing the axis labels.
+	2) Changed a parameter in the smooth function of the plot.indspc() function
+	as well as changing the axis labels.
 
-3) I renamed the duleg function to "indval."  It now returns objects 
-of class "indval."
+	3) I renamed the duleg function to "indval."  It now returns objects 
+	of class "indval."
 
-4) I added a new function called ordtaxa which allows interactive re-ordering of
-rows and columns in the taxon dataframe, re-ordering the rows in the site
-dataframe to maintain the correspondence.
+	4) I added a new function called ordtaxa which allows interactive re-ordering of
+	rows and columns in the taxon dataframe, re-ordering the rows in the site
+	dataframe to maintain the correspondence.
 
-5) Similar to ordtaxa, I added an argument to summary.indval, const, and
-importance to allow interactive re-ordering the rows in the summary tables.
+	5) Similar to ordtaxa, I added an argument to summary.indval, const, and
+	importance to allow interactive re-ordering the rows in the summary tables.
 
-6) I added simple functions dropspc and dropplt to simplify maintaining the
-taxon and site dataframes.  dropspc eliminates species (columns) in the taxon
-data.frame where the number of occurrences is less then a threshold.  dropplt
-removes plots (rows) in both the taxon dataframe and the site dataframe where
-plots have missing values for any site variable.
+	6) I added simple functions dropspc and dropplt to simplify maintaining the
+	taxon and site dataframes.  dropspc eliminates species (columns) in the taxon
+	data.frame where the number of occurrences is less then a threshold.  dropplt
+	removes plots (rows) in both the taxon dataframe and the site dataframe where
+	plots have missing values for any site variable.
 
 labdsv 1.3-1
 
-This is a bug fix for 1.3-0.  dsvdis.R was missing a cast of the 
-taxon data.frame to "as.double" and would fail on taxon matrices that
-are strictly integers.  Taxon matrices with real numbers worked.
-
+	This is a bug fix for 1.3-0.  dsvdis.R was missing a cast of the 
+	taxon data.frame to "as.double" and would fail on taxon matrices that
+	are strictly integers.  Taxon matrices with real numbers worked.
+	
 labdsv 1.3-0
 
-A number of small changes, and a couple of larger ones were made in
-the revision to 1.3-0.
+	A number of small changes, and a couple of larger ones were made in
+	the revision to 1.3-0.
+	
+	1) A bug was fixed in the duleg FORTRAN code that compared a four-byte
+	floating point number to an eight-byte number.  This bug would only
+	appear in relatively few cases, and affected the calculated
+	probability of some observations, not the indicator value itself.  I
+	also improved the permutation code used in the probability estimates.
 
-1) A bug was fixed in the duleg FORTRAN code that compared a four-byte
-floating point number to an eight-byte number.  This bug would only
-appear in relatively few cases, and affected the calculated
-probability of some observations, not the indicator value itself.  I
-also improved the permutation code used in the probability estimates.
+	2) Subsequent to the discovery of duleg bug, all remaining four-byte
+	floating points (FORTRAN REAL) were converted to eight-byte floating
+	point (FORTRAN DOUBLE PRECISION) to achieve better correspondence with
+	R and avoid problems.  It does increase the storage requirement of
+	some programs, but this seems to rarely be a problem on modern
+	computers.
 
-2) Subsequent to the discovery of duleg bug, all remaining four-byte
-floating points (FORTRAN REAL) were converted to eight-byte floating
-point (FORTRAN DOUBLE PRECISION) to achieve better correspondence with
-R and avoid problems.  It does increase the storage requirement of
-some programs, but this seems to rarely be a problem on modern
-computers.
+	3) I discovered that I was using specialized FORTRAN code in several
+	places where the base package "dist()" function would work.  I
+	replaced all of those instances.  This resulted in dropping function
+	"vardist," and modifying internal function "orddist."
 
-3) I discovered that I was using specialized FORTRAN code in several
-places where the base package "dist()" function would work.  I
-replaced all of those instances.  This resulted in dropping function
-"vardist," and modifying internal function "orddist."
+	4) I modified function "ordcomp," changing the default
+	dimensionality to full dimensionality, rather than n=2.  It is still
+	possible to specify any desired dimensionality through the "dim="
+	argument; I only changed the default.
 
-4) I modified function "ordcomp," changing the default
-dimensionality to full dimensionality, rather than n=2.  It is still
-possible to specify any desired dimensionality through the "dim="
-argument; I only changed the default.
+	5) While updating function "ordcomp" I realized that it would be just
+	as easy to have function "ordcomp" avoid the call to internal function
+	"orddist" and do the calculations directly.  Consequently, function
+	"orddist" is now a stand-alone function useful for calculating the
+	pair-wise distances in an ordination for any purpose.  Function
+	"orddist" returns an object of class "dist."
 
-5) While updating function "ordcomp" I realized that it would be just
-as easy to have function "ordcomp" avoid the call to internal function
-"orddist" and do the calculations directly.  Consequently, function
-"orddist" is now a stand-alone function useful for calculating the
-pair-wise distances in an ordination for any purpose.  Function
-"orddist" returns an object of class "dist."
+	6) I changed the surface fitting routine in all versions of the "surf"
+	functions (for pca, pco, and nmds) to use the "predict.gam" function
+	of package "mgcv" in place of the function "interp" from package
+	"akima."  This resulted in smoother, better fit surfaces, and allowed
+	me to no longer require package "akima" to load labdsv.  This change
+	was suggested and first implemented by Jari Oksanen for function
+	"ordisurf" in package "vegan."  Again, following the lead of vegan, I
+	made the default surface fitter a thin plate spline, rather then
+	additive independent smooth splines.  The original behavior is still
+	available by specifying thinplate=FALSE.  Finally, I added a
+	gamma argument to the surf function to allow users to control the 
+	smoothness of the surface by passing gamma tot he underlying gam 
+	function.
 
-6) I changed the surface fitting routine in all versions of the "surf"
-functions (for pca, pco, and nmds) to use the "predict.gam" function
-of package "mgcv" in place of the function "interp" from package
-"akima."  This resulted in smoother, better fit surfaces, and allowed
-me to no longer require package "akima" to load labdsv.  This change
-was suggested and first implemented by Jari Oksanen for function
-"ordisurf" in package "vegan."  Again, following the lead of vegan, I
-made the default surface fitter a thin plate spline, rather then
-additive independent smooth splines.  The original behavior is still
-available by specifying thinplate=FALSE.  Finally, I added a
-gamma argument to the surf function to allow users to control the 
-smoothness of the surface by passing gamma tot he underlying gam 
-function.
+	7) In response to a problem identified by P. Legendre, I inserted
+	checks to see that "taxa" is converted to a dataframe, rather than a
+	matrix, wherever necessary.
 
-7) In response to a problem identified by P. Legendre, I inserted
-checks to see that "taxa" is converted to a dataframe, rather than a
-matrix, wherever necessary.
+	8) I added two new routines to simplify working with large sparse
+	data sets: "matrify" and "dematrify".  "matrify" takes data in three
+	column database format (sample_id, taxon, abundance) and converts it
+	into an expanded sparse matrix data.frame.  This routine allows users
+	to store their data in a compacted, three column form for exchange
+	with other programs.  "dematrify" takes a data.frame of taxa abundance
+	in sparse matrix form and writes it out three column database format
+	(sample_id, taxon, abundance).  
 
-8) I added two new routines to simplify working with large sparse
-data sets: "matrify" and "dematrify".  "matrify" takes data in three
-column database format (sample_id, taxon, abundance) and converts it
-into an expanded sparse matrix data.frame.  This routine allows users
-to store their data in a compacted, three column form for exchange
-with other programs.  "dematrify" takes a data.frame of taxa abundance
-in sparse matrix form and writes it out three column database format
-(sample_id, taxon, abundance).  
+	9) I added a new routine to nmds() and pco() called "density" which
+	calculates the fraction of plots within a convex hull that belong to 
+	the same type as the type that defines the convex hull.
 
-9) I added a new routine to nmds() and pco() called "density" which
-calculates the fraction of plots within a convex hull that belong to 
-the same type as the type that defines the convex hull.
+	10) Once again, I had to re-organize the web server that supports labdsv
+	and other activities.  The general site for all material is
+	
+	http://ecology.msu.montana.edu/labdsv/
 
-10) Once again, I had to re-organize the web server that supports labdsv
-and other activities.  The general site for all material is
+	The material specifically relevant to this package is at
 
-http://ecology.msu.montana.edu/labdsv/
-
-The material specifically relevant to this package is at
-
-http://ecology.msu.montana.edu/labdsv/R/labdsv
+	http://ecology.msu.montana.edu/labdsv/R/labdsv
 
 
 labdsv 1.2-2
 
-fixed a bug in jsurf.nmds where the ordination was not called
-correctly
+	fixed a bug in jsurf.nmds where the ordination was not called
+	correctly
 
-deleted extraneous files in the man directory (don't know why 
-they were there in the first place)
+	deleted extraneous files in the man directory (don't know why 
+	they were there in the first place)
 
-moved confus to package optpart
+	moved confus to package optpart
 
 labdsv 1.2-1
 
-function tabdev.R was deleted to temporarily solve inscrutable
-problems with Windows server.  tabdev.R worked under linux
-and Windows XP, so there may be no need to update on your system.
-
-In addition, the URL in the description file was updated to 
-point to the current location of the lab manual for LabDSV.
+	function tabdev.R was deleted to temporarily solve inscrutable
+	problems with Windows server.  tabdev.R worked under linux
+	and Windows XP, so there may be no need to update on your system.
+	
+	In addition, the URL in the description file was updated to 
+	point to the current location of the lab manual for LabDSV.
 
 labdsv 1.2-0
 
-A couple of general changes were made to many functions.
+	A couple of general changes were made to many functions.
 
-1) in several functions the dataframe "veg" was changed to "taxa"
-   to better represent the full range of community ecology the code
-   is suitable for
+	1) in several functions the dataframe "veg" was changed to "taxa"
+   	to better represent the full range of community ecology the code
+   	is suitable for
 
-2) in functions that used classified types or community types the
-   vector specifying that was changed from "class" to "clustering"
-   to avoid conflict with a reserved word, and to integrate better
-   with code from package "cluster".
+	2) in functions that used classified types or community types the
+   	vector specifying that was changed from "class" to "clustering"
+   	to avoid conflict with a reserved word, and to integrate better
+   	with code from package "cluster".
 
-3) the package was checked and built on both linux and Windows to
-   help ensure better utility on windows
+	3) the package was checked and built on both linux and Windows to
+   	help ensure better utility on windows
 
-In addition, a number of small changes were made to several functions,
-listed below:
-
-abuocc.R
-	changed veg to taxa in function and documentation
-confus.R
-	added a correction for plotting factors correctly
-	example changed to "\dontrun" because it requires library tree
-const.R
-	changed veg to taxa in function and documentation
-	changed class to clustering in function and documentation
-	changed class test to inheritance
-	generally improved documentation
-dga.R
-	added an invisible return
-	improved the example in the documentation
-disana.R
-	eliminated null class test
-	eliminated FORTRAN call by using apply with na.rm
-	corrected point labels to "attr(x,'Labels')"
-dissim.R
-	removed function dissim
-dsvdis.R
-	changed an attribute label from "index" to "method" to
+	In addition, a number of small changes were made to several functions,
+	listed below:
+	
+	* abuocc:
+		changed veg to taxa in function and documentation
+	* confus:
+		added a correction for plotting factors correctly
+		example changed to "\dontrun" because it requires library tree
+	* const:
+		changed veg to taxa in function and documentation
+		changed class to clustering in function and documentation
+		changed class test to inheritance
+		generally improved documentation
+	* dga:
+		added an invisible return
+		improved the example in the documentation
+	* disana:
+		eliminated null class test
+		eliminated FORTRAN call by using apply with na.rm
+		corrected point labels to "attr(x,'Labels')"
+	* dissim:
+		removed function dissim
+	* dsvdis:
+		changed an attribute label from "index" to "method" to
 		match dist()
-	changed the test of step from > to >= so that step=1.0 works
-duarm.R
-	changed veg to taxa in function and documentation
-	changed class to clustering
-	simplified the presentation of results
-duleg.R
-	changed veg to taxa in function and documentation
-	changed class to clustering
-	enforced better casting of variable types in FORTRAN call
-	added numitr to FORTRAN call and return
-	improved the labeling of row and column names in output
-	fixed possible bugs from uninitiated values in FORTRAN code
-envrtest.R
-	added an argument to function call to control plotting
-	improved the default title on the plot
-euclidify.R
-	cast the input object to class "dist"
-	improved the information in the attributes of the output object
-hilight.R
-	converted hilight to a generic function and wrote separate 
+		changed the test of step from > to >= so that step=1.0 works
+	* duarm:
+		changed veg to taxa in function and documentation
+		changed class to clustering
+		simplified the presentation of results
+	* duleg:
+		changed veg to taxa in function and documentation
+		changed class to clustering
+		enforced better casting of variable types in FORTRAN call
+		added numitr to FORTRAN call and return
+		improved the labeling of row and column names in output
+		fixed possible bugs from uninitiated values in FORTRAN code
+	* envrtest:
+		added an argument to function call to control plotting
+		improved the default title on the plot
+	* euclidify:
+		cast the input object to class "dist"
+		improved the information in the attributes of the output object
+	* hilight:
+		converted hilight to a generic function and wrote separate 
 		methods for PCA. PCO, and NMDS
-importance.R
-	changed veg to taxa
-	changed class to clustering
-	changed class test to inheritance
-metrify.R
-	cast the input object as class "dist"
-	changed the output attribute from "index" to "method" to
+	* importance:
+		changed veg to taxa
+		changed class to clustering
+		changed class test to inheritance
+	* metrify:
+		cast the input object as class "dist"
+		changed the output attribute from "index" to "method" to
 		match dist()
-nmds.R
-	deleted test for null class
-	changed the name of the overlayed object in the 
+	* nmds:
+		deleted test for null class
+		changed the name of the overlayed object in the 
 		points.nmds function from "overlay" to "which"
-	added "cex=0.8" as the default to function surf.nmds and jsurf.nmds
-	corrected logical values from "T" to "TRUE"	
-	improved the bestnmds function
-	improved the hilight function by adding better control of colors
+		added "cex=0.8" as the default to function surf.nmds and jsurf.nmds
+		corrected logical values from "T" to "TRUE"	
+		improved the bestnmds function
+		improved the hilight function by adding better control of colors
 		and glyphs
-	added a convex hull function called chullord.nmds()
-npmmds.R
-	dropped function npmmds()
-ordcomp.R
-	deleted the test of NULL class and the option to submit a matrix
+		added a convex hull function called chullord.nmds()
+	* npmmds:
+		dropped function npmmds()
+	* ordcomp:
+		deleted the test of NULL class and the option to submit a matrix
 		instead of a "dist" object
-	added an invisible return
-orddist.R
-	cast the input object to double in FORTRAN call
-ordpart.R
-	added default axes to the plot, and renamed axes to ax and ay
-	cast the values to double in FORTRAN call
-        significantly improved the documentation
-ordtest.R
-	added an inheritance test for object of class "pco", "nmds" and 
+		added an invisible return
+	* orddist:
+		cast the input object to double in FORTRAN call
+	* ordpart:
+		added default axes to the plot, and renamed axes to ax and ay
+		cast the values to double in FORTRAN call
+		significantly improved the documentation
+	* ordtest:
+		added an inheritance test for object of class "pco", "nmds" and 
 		"metaMDS"
-ordutils.R
-	added hilight() and chullord() as generic functions
-pca.R
-	added an explicit "cex = 1" as the default in points.pca()
-	corrected logicals from "T" to "TRUE"
-	corrected the scaling on variance accounted for in varplot()
-	added a jsurf.pca() function to jitter coordinates if necessary
-	added hilight.pca() as a method
-	added chullord.pca() as a method
-	improved the documentation
-pco.R
-	eliminated NULL class test
-	corrected logical "T" to "TRUE"
-	added hilight.pco() as a method
-	added chullord.pco() as a method
-refine.R
-	dropped function refine()
-rndveg.R
-	renamed rndveg() to rndtaxa()
-	changed veg to taxa in function
-simenv.R
-	dropped function simenv(), replaced by envrtest()
-spcdisc.R
-	corrected logical "F" to "FALSE"
-tabdev.R
-	changed veg to taxa
-	cast most variables as double in FORTRAN call
-vardist.R
-	cast arguments as double in FORTRAN call
-vegtab.R
-	changed veg to taxa
-vegtrans.R
-	eliminated FORTRAN call by conversion of algorithm to pure R
-	eliminated function stdveg() to standardize by plot or
+	* ordutils:
+		added hilight() and chullord() as generic functions
+	* pca:
+		added an explicit "cex = 1" as the default in points.pca()
+		corrected logicals from "T" to "TRUE"
+		corrected the scaling on variance accounted for in varplot()
+		added a jsurf.pca() function to jitter coordinates if necessary
+		added hilight.pca() as a method
+		added chullord.pca() as a method
+		improved the documentation
+	* pco:
+		eliminated NULL class test
+		corrected logical "T" to "TRUE"
+		added hilight.pco() as a method
+		added chullord.pco() as a method
+	* refine:
+		dropped function refine()
+	* rndveg:
+		renamed rndveg() to rndtaxa()
+		changed veg to taxa in function
+	* simenv:
+		dropped function simenv(), replaced by envrtest()
+	* spcdisc:
+		corrected logical "F" to "FALSE"
+	* tabdev:
+		changed veg to taxa
+		cast most variables as double in FORTRAN call
+	* vardist:
+		cast arguments as double in FORTRAN call
+	* vegtab:
+		changed veg to taxa
+	* vegtrans:
+		eliminated FORTRAN call by conversion of algorithm to pure R
+		eliminated function stdveg() to standardize by plot or
 		species max
-zzz.R
-	no longer require stats (now included in base)
+	* zzz:
+		no longer require stats (now included in base)

@@ -91,7 +91,7 @@ by 100; this function does not.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/labdsv/R/labdsv}
+    \url{http://ecology.msu.montana.edu/labdsv/R}
 }
 
 \references{Dufrene, M. and Legendre, P.  1997.  Species assemblages and indicator species:
