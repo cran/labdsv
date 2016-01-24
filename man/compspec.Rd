@@ -6,8 +6,8 @@
 \description{
 Calculates the mean similarity of all plots in which a species occurs
 }
-\usage{compspec(taxa, dis, numitr=100, drop=FALSE)
-\method{plot}{compspec}(x, spc=NULL, \dots)
+\usage{compspec(taxa, dis, numitr=100, drop=FALSE, progress=FALSE)
+\method{plot}{compspec}(x,spc=NULL,\dots)
 }
 \arguments{
 \item{taxa}{a data frame of taxa, samples as rows, species as columns}
@@ -19,17 +19,17 @@ Calculates the mean similarity of all plots in which a species occurs
 of the distribution}
 \item{drop}{a switch to determine whether to drop species out when calculating
 their compspec value}
+\item{progress}{a switch to control printing out progress}
 \item{x}{an object of class compspec}
-\item{spc}{a specifier for a specific species if drop=TRUE.  Can be an integer from
-1 to the number of species, or the species code as given in the taxon matrix}
+\item{spc}{an integer code to specify exactly which species drop-out to plot}
 \item{\dots}{additional arguments to the plot function}
 }
 \value{a list with several data.frames: \sQuote{vals} with species name, mean similarity, 
-number of occurrences, and probability of observing as high a mean similarity as observed,
+number of occurrences, and probaability of observing as high a mean similarity as observed,
 and \sQuote{quantiles} with the distribution of the quantiles of mean similarity for 
 given numbers of occurrences.
 If drop=TRUE, results specific to dropping out each species in turn are added to the list
-as a list by taxon name.}
+by taxon name.}
 
 
 \note{

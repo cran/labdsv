@@ -19,7 +19,6 @@ that truncates maximum values to simulate a dissimilarity rather than a distance
    euclidean properties of the distances.  Values are normalized
    to a maximum of 1.0.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \author{
    David W. Roberts
    \email{droberts@montana.edu}

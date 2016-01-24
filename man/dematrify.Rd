@@ -18,7 +18,6 @@ matrix form to three column database form for export or reduced storage}
 \value{a data.frame with the first column the sample ID, the second column
 the taxon ID, and the third column the abundance.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Typically, large ecological data sets are characterized by sparse matrices
 of taxon abundance in samples with many zeros in the matrix.   Because these datasets
 may be many columns wide, they are difficult to work with in text editors or

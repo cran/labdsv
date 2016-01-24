@@ -7,8 +7,6 @@
 \alias{surf.nmds}
 \alias{density.nmds}
 \alias{thull.nmds}
-\alias{ellip.nmds}
-\alias{rgl.nmds}
 
 \title{Plotting Routines For Nonmetric Multi-Dimensional Scaling Ordinations}
 \description{A set of routines for plotting, highlighting points,
@@ -23,22 +21,18 @@ or adding fitted surfaces to NMDSs.}
                       glyph=c(1,3,5), \dots)
 \method{chullord}{nmds}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
                         ltys = c(1,2,3), \dots)
-\method{ellip}{nmds}(ord, overlay, ax = 1, ay = 2, cols = c(2,3,4,5,6,7),
-                        ltys=c(1,2,3), \dots)
 \method{surf}{nmds}(ord, var, ax = 1, ay = 2, thinplate = TRUE, col = 2, labcex = 0.8,
     family = gaussian, gamma=1, grid=50, \dots)
 \method{thull}{nmds}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,lty=1,
      numitr=100,\dots)
 \method{density}{nmds}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     6, 7), ltys = c(1, 2, 3), numitr, ...)
-rgl.nmds(ord,ax=1,ay=2,az=3,radius=0.01,col=1)
 }
 
 \arguments{
     \item{x}{an object of class \sQuote{nmds}}
     \item{ax}{the dimension to use for the X axis}
     \item{ay}{the dimension to use for the Y axis}
-    \item{az}{the dimension to use for the Z axis}
     \item{title}{a title for the plot}
     \item{which}{a logical variable to specify points to be highlighted}
     \item{breaks}{a logical switch to control using variable glyph sizes in \sQuote{points}}
@@ -66,7 +60,6 @@ rgl.nmds(ord,ax=1,ay=2,az=3,radius=0.01,col=1)
     \item{pch}{plot character: glyph to plot}
     \item{cex}{character expansion factor: size of plotted characters}
     \item{numitr}{the number of iterations to use in estimating the probability of the observed density}
-    \item{radius}{the radius of the spheres representing points in an rgl plot}
     \item{levels}{specific levels for contours in thull}
     \item{\dots}{arguments to pass to the plot function}
 }
@@ -99,12 +92,6 @@ By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
 it is possible to control the sequence of colors and linetypes of the convex
 hulls.
 
-Function sQuote{ellip} is passed a factor vector or integer vector,
-and plots a minimum volume ellipse around all points in each factor class.
-By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
-it is possible to control the sequence of colors and linetypes of the
-ellipses.
-
 Function \sQuote{density} calculates the fraction of points within the convex
 hull that belong to the specified type.
 
@@ -128,8 +115,6 @@ container.  \sQuote{thull} returns an invisible object of class \sQuote{thull}
 which has an associated plot function.  Plotting the thull object produces a 
 colored surface representation of the thull with optional contour lines.
 
-Function \sQuote{rgl.nmds} produces a three-dimensional ordination of the NMDS
-using the rgl package.
 }
 
 

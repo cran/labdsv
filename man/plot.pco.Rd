@@ -4,11 +4,9 @@
 \alias{plotid.pco}
 \alias{hilight.pco}
 \alias{chullord.pco}
-\alias{ellip.pco}
 \alias{density.pco}
 \alias{surf.pco}
 \alias{thull.pco}
-\alias{rgl.pco}
 
 \title{Plotting Routines For Principal Coordinates Ordinations}
 \description{A set of routines for plotting, highlighting points,
@@ -22,22 +20,18 @@ or adding fitted surfaces to PCOs.}
     glyph=c(1,3,5), \dots)
 \method{chullord}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7), 
     ltys = c(1,2,3), \dots)
-\method{ellip}{pco}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7),
-    ltys = c(1,2,3), \dots)
 \method{density}{pco}(ord, overlay, ax = 1, ay = 2, cols = c(2, 3, 4, 5,
     6, 7), ltys = c(1, 2, 3), numitr=100, ...)
 \method{surf}{pco}(ord, var, ax = 1, ay = 2, thinplate=TRUE, col = 2, labcex = 0.8,
     family = gaussian, grid=50, gamma=1, \dots)
 \method{thull}{pco}(ord,var,grain,ax=1,ay=2,col=2,grid=50,nlevels=5,levels=NULL,
     lty=1,numitr=100,...)
-rgl.pco(ord,ax=1,ay=2,az=3,radius=0.01,col=1)
 }
 
 \arguments{
     \item{x}{an object of class \sQuote{pco}}
     \item{ax}{the dimension to use for the X axis}
     \item{ay}{the dimension to use for the Y axis}
-    \item{az}{the dimension to use for the Z axis}
     \item{title}{a title for the plot}
     \item{which}{a logical variable to specify points to be highlighted}
     \item{ord}{an object of class \sQuote{pco}}
@@ -65,7 +59,6 @@ rgl.pco(ord,ax=1,ay=2,az=3,radius=0.01,col=1)
     \item{grain}{the size of moving window to use in calculating the tensioned hull}
     \item{nlevels}{the number of contour intervals to draw on the tensioned hull}
     \item{levels}{specific levels to use in drawing the tensioned hull}
-    \item{radius}{the radius of the spheres representing points in an rgl plot}
     \item{lty}{the line type to use in drawing the tensioned hull contours}
     \item{\dots}{arguments to pass to the plot function}
 }
@@ -101,12 +94,6 @@ By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
 it is possible to control the sequence of colors and linetypes of the convex
 hulls.
 
-Function sQuote{ellip} is passed a factor vector or integer vector,
-and plots a minimum volume ellipse around all points in each factor class.
-By specifying values for arguments \sQuote{cols} and \sQuote{ltys}
-it is possible to control the sequence of colors and linetypes of the
-ellipses.
- 
 Function \sQuote{density} calculates the fraction of points within the convex
 hull that belong to the specified type.
 
@@ -122,8 +109,6 @@ continuous variables.  For logical variables you should specify \sQuote{family
 = binomial} to get a logistic GAM, and for integer counts you should specify
 \sQuote{family = poisson} to get a Poisson GAM. 
 
-Function \sQuote{rgl.pco} produces a three-dimensional ordination of the NMDS
-using the rgl package.
 
 }
 

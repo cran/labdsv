@@ -14,7 +14,8 @@ bestnmds(dis,k=2,itr=20,maxit=100)
 }
 
 \arguments{
-    \item{dis}{a dist object returned from \code{dist}, \code{dsvdis} or \code{vegdist}}
+    \item{dis}{a dist object returned from \code{dist} or a full symmetric
+        dissimilarity or distance matrix}
     \item{k}{the desired number of dimensions for the result}
     \item{y}{a matrix of initial locations (objects as rows, coordinates as columns,
         as many columns as specified by k).  If none is supplied, \code{cmdscale}

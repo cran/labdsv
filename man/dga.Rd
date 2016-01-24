@@ -33,7 +33,6 @@ symbols as described above.}
 \value{a graph of the distribution of the z variable on a grid of
 x and y is displayed on the current active device.}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{
 Direct gradient analysis was promoted by Robert Whittaker and
 followers as a preferred method of vegetation analysis.

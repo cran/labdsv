@@ -1,4 +1,4 @@
-compspec <- function (taxa, dis, numitr = 100, drop=FALSE)
+compspec <- function (taxa, dis, numitr = 100, drop=FALSE, progress=FALSE)
 {
     compspec.core <- function(taxa,dis,maxocc,numitr)
     {
@@ -58,7 +58,7 @@ compspec <- function (taxa, dis, numitr = 100, drop=FALSE)
         quantiles <- matrix(0,nrow=max(apply(taxa>0,2,sum)),ncol=4)
         res$spc <- list()
         for (i in 1:ncol(taxa)) {
-            print(i)
+            if (progress) cat(paste(i,'/',ncol(taxa),'\n'))
             tmp.dis <- dsvdis(taxa[,-i],attr(dis,'method'))
             res$spc[[names(taxa)[i]]] <- compspec.core(taxa,tmp.dis,maxocc,numitr=numitr)
             quantiles <- quantiles + res$spc[[i]]$quantiles

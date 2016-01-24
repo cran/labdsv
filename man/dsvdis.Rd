@@ -15,8 +15,8 @@
     \item{weight}{a vector of weights for species (columns)}
     \item{step}{a threshold dissimilarity to initiate shortest-path adjustment
          (0.0 is a flag for no adjustment)}
-    \item{diag}{a switch to control returning the diagonal (default=FALSE)}
-    \item{upper}{a switch to control returning the upper (TRUE) or lower (FALSE)
+    \item{diag}{a switch to control returning diagonal (default=FALSE)}
+    \item{upper}{a switch to control returning upper (TRUE) or lower (FALSE)
                  triangle}
 }
 
@@ -29,7 +29,7 @@
     \tabular{ll}{
         steinhaus \tab \eqn{1 - a / (a + b + c)} \cr
         sorensen \tab \eqn{1 - 2a / (2a + b +c)} \cr
-        ochiai \tab \eqn{1 - a / \sqrt{(a+b) * (a+c)}} \cr
+        ochiai \tab \eqn{1 - a / \sqrt{(a+b) \times (a+c)}} \cr
     }
 
     Others are quantitative.  For variable i in samples x and y:
@@ -48,9 +48,7 @@
 
     The threshold dissimilarity \sQuote{step} sets all values greater than "step" to 9999.9 and
     then solves for the shortest path distance connecting plots to other non-9999.9 values
-    in the matrix.   If any dissimilarities = 9999.9 after iterating it means that
-    sample is disjunct from all other samples given the specified threshold.  
-    Step = 0.0 (the default) is a flag for "no shortest-path correction".
+    in the matrix.   Step = 0.0 (the default) is a flag for "no shortest-path correction".
 }
 
 \value{Returns an object of class "dist", equivalent to that from \code{dist}.}

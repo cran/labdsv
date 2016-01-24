@@ -11,9 +11,9 @@ the average or typical abundance of each species in each class.
 \arguments{
     \item{taxa}{a data.frame of species abundances with samples as rows and
 species as columns}
-    \item{clustering}{(1) an object of class \sQuote{clustering},
-           class \sQuote{partana}, or class \sQuote{partition}, (2) a vector of
-integer cluster memberships, (3) a factor vector, or (4) a character vector.}
+    \item{clustering}{a vector of (integer) class memberships, or an object of
+         class \sQuote{clustering}, class \sQuote{partana},
+         of class \code{\link[cluster]{partition}}}
     \item{minval}{the minimum importance a species must have in at least one class
 to be included in the output}
     \item{digits}{the number of digits to report in the table}

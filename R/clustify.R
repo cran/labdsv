@@ -8,8 +8,7 @@ clustify <- function(clustering)
         clustering <- factor(clustering)
     } else if (is.logical(clustering)) {
         clustering <- factor(clustering)
-    } else if (!is.factor(clustering)) {
+    } else if (!is.factor(clustering)) 
         stop('Cannot understand passed clustering')
-    }
     clustering
 }

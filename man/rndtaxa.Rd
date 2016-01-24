@@ -22,7 +22,6 @@ a basis for null model tests in vegetation ecology.
 \value{a data.frame with samples as rows and species as columns of the same
        dimensions as entered.}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Randomizing vegetation often leads to unrealistic data distributions,
     but this function attempts to preserve either species occurrence distributions
     or plot-level species richness.  It is probably worth examining the output

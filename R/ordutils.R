@@ -33,7 +33,7 @@ density <- function(ord, ...)
     UseMethod("density")
 }
 
-thull <- function(ord, ...)
+ellip <- function(ord, ...)
 {
-    UseMethod("thull")
+    UseMethod("ellip")
 }

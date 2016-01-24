@@ -4,7 +4,7 @@ orddist <- function (x, dim)
         z <- x$scores
     } else if (inherits(x, c("pco", "nmds", "metaMDS"))) {
         z <- x$points
-    } else if (inherits(x, c("fso", "mfso"))) {
+    } else if (class(x) == "fso") {
         z <- as.matrix(x$mu)
     }
 

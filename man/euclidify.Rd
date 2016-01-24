@@ -23,7 +23,6 @@ third objects.
 
 \value{an object of class \sQuote{dist}}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Many multivariate statistical methods are designed for euclidean spaces,
 and yet the direct calculation of euclidean distance is often inappropriate due
 to problems with joint absences.  euclidify takes any dissimilarity matrix and

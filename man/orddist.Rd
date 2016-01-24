@@ -14,13 +14,12 @@ the desired dimensionality of the calculations.}
     \item{x}{an ordination object from \code{\link[labdsv]{pca}},
     \code{\link[labdsv]{pco}}, \code{\link[labdsv]{nmds}},
     \code{\link[fso]{fso}}}
-    \item{dim}{the specific dimensions to be included in the calculations
+    \item{dim}{the desired dimensionality to be included in the calculations
                (must be <= number of dimensions of the ordinations)}
 }
 
 \value{an object of class \sQuote{dist} is produced
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Ordinations are low dimensional representations of multidimensional
 spaces.  This function produces data on the low-dimensional distances for
 other analyses.}

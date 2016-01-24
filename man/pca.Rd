@@ -6,13 +6,13 @@
 \title{Principal Components Analysis}
 \description{Principal components analysis is a eigenanalysis of a
 correlation or covariance matrix used to project a high-dimensional
-system to fewer dimensions.}
-
+system to fewer dimensions.
+}
 \usage{
 pca(mat, cor = FALSE, dim = min(nrow(mat),ncol(mat)))
-scores.pca(x, labels = NULL, dim = length(x$sdev))
-loadings.pca(x, dim = length(x$sdev), digits = 3, cutoff = 0.1)
 \method{summary}{pca}(object, dim = length(object$sdev), \dots)
+\method{scores}{pca}(x, labels = NULL, dim = length(x$sdev))
+\method{loadings}{pca}(x, dim = length(x$sdev), digits = 3, cutoff = 0.1)
 }
 \arguments{
     \item{mat}{a matrix or data.frame of interest, samples as rows,
@@ -65,6 +65,5 @@ plotting consistent with the other LabDSV functions.
     plot(x)
     surf(x,brycesite$elev)
     points(x,brycesite$depth=='deep')
-    loadings.pca(x,cutoff=0.05)
 }
 \keyword{multivariate}

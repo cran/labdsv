@@ -17,6 +17,7 @@ vegtrans <- function (taxa,code,value)
         value <- c('0',value)
     }
     newtaxa <- matrix(NA,nrow=nrow(taxa),ncol=ncol(taxa))
+
     for (i in 1:length(code)) newtaxa[taxa==code[i]] <- value[i]
     newtaxa <- data.frame(newtaxa)
     names(newtaxa) <- names(taxa)
@@ -24,5 +25,5 @@ vegtrans <- function (taxa,code,value)
     if (any(is.na(newtaxa))) {
         print("WARNING, not all values specified")
     }
-    newtaxa
+    return(newtaxa)
 }
