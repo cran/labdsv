@@ -3,9 +3,9 @@
 \title{Create Three Column Database Form Data Frame from Sparse Data Frames}
 \description{Takes a sparse matrix data frame (typical of ecological
 abundance data) and converts it into three column database format.}
-\usage{dematrify(taxa, filename, sep = ",", thresh = 0)}
+\usage{dematrify(comm, filename, sep = ",", thresh = 0)}
 \arguments{
-    \item{taxa}{a sparse data.frame or matrix, with samples as rows and taxa 
+    \item{comm}{a sparse data.frame or matrix, with samples as rows and comm 
 as columns} 
     \item{filename}{the name of the filename to produce}
     \item{sep}{the separator to use in separating columns}
@@ -26,13 +26,14 @@ form is suitable for input to databases, and more easily edited.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{matrify}}}
 
 
 \examples{
-   library(labdsv)
-   data(bryceveg)
-   x <- dematrify(bryceveg)
+library(labdsv)
+data(bryceveg)
+x <- dematrify(bryceveg)
 }
 \keyword{IO}

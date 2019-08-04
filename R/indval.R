@@ -59,15 +59,15 @@ indval.default <- function(x,clustering,numitr=1000, ...)
     names(out$relabu) <- levels
     names(out$indval) <- levels
     class(out) <- 'indval'
-    if (out$error == 1) cat('WARNING: one or more species not assigned to any cluster\n')
+    if (out$error == 1) cat('WARNING: one or more sample units not assigned to any cluster\n')
     out
 }
 
-indval.stride <- function(x,taxa,numitr=1,...)
+indval.stride <- function(x,comm,numitr=1,...)
 {
     res <- rep(NA,ncol(x$clustering))
     for (i in 1:ncol(x$clustering)) {
-        res[i] <- mean(indval(taxa,x$clustering[,i],numitr=numitr)$indcls)
+        res[i] <- mean(indval(comm,x$clustering[,i],numitr=numitr)$indcls)
     }
     clusters <- x$seq
     indval <- res
@@ -138,3 +138,20 @@ summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, so
         invisible(tmp)
     }
 }
+
+plot.indval <- function (indval,title='',pch=1,legend=TRUE) 
+{
+    plot(indval$indcls,indval$pval,col=indval$maxcls+1,log='y',
+         pch=pch,xlab='Indicator Value',ylab='Probability')
+    lines(c(0,1),c(0.05,0.05),col=2,lty=2)
+    lines(c(0,1),c(0.01,0.01),col=2,lty=2)
+    clusts <- 1:max(indval$maxcls)
+    if (legend) legend(0.9,0.9,as.character(clusts),
+             col=clusts+1,pch=pch)
+    test <- readline("Do you want to identify any species [Y or N] : ")
+    if (test == 'Y' || test == 'y') {
+        spcs <- identify(indval$indcls,indval$pval,names(indval$indcls))
+        return(spcs)
+    }
+}
+

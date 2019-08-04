@@ -1,30 +1,30 @@
-dropplt <- function (taxa,site,which=NULL) 
+dropplt <- function (comm,site,which=NULL) 
 {
-    if (!identical(row.names(taxa),row.names(site))) stop('data frames do not match')
+    if (!identical(row.names(comm),row.names(site))) stop('data frames do not match')
 
-    orig_taxa <- deparse(substitute(taxa))
+    orig_comm <- deparse(substitute(comm))
     orig_site <- deparse(substitute(site))
     if (is.null(which)) {
         keep <- apply(site,1,function(x){!any(is.na(x))})
     } else {
-        keep <- 1:nrow(taxa)
+        keep <- 1:nrow(comm)
         keep <- keep[-which]
     }
-    taxa <- taxa[keep,]
+    comm <- comm[keep,]
     site <- site[keep,]
-    res <- list(taxa=taxa,site=site)
+    res <- list(comm=comm,site=site)
     attr(res,'call') <- match.call()
-    attr(res,'orig_taxa') <- orig_taxa
+    attr(res,'orig_comm') <- orig_comm
     attr(res,'orig_site') <- orig_site
     res
 }
 
-dropspc <- function (taxa,minocc=0,minabu=0) 
+dropspc <- function (comm,minocc=0,minabu=0) 
 {
-    taxa <- taxa[,apply(taxa>minabu,2,sum)>minocc]
-    attr(taxa,'call') <- match.call()
-    attr(taxa,'minocc') <- minocc
-    attr(taxa,'minabu') <- minabu
-    taxa
+    comm <- comm[,apply(comm>minabu,2,sum)>minocc]
+    attr(comm,'call') <- match.call()
+    attr(comm,'minocc') <- minocc
+    attr(comm,'minabu') <- minabu
+    comm
 }
 

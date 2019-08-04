@@ -18,7 +18,7 @@
      other LabDSV functions
 }
 
-\value{an object of class \sQuote{pco} with components:
+\value{An object of class \sQuote{pco} with components:
 \item{points}{the coordinates of samples on eigenvectors}
 }
 \references{Gower, J.C. (1966)  Some distance properties of latent root
@@ -34,14 +34,16 @@ of the \sQuote{cmdscale} function: Venebles and Ripley
 of the wrapper function
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{cmdscale}, \code{\link[labdsv]{pca}},
           \code{\link[labdsv]{nmds}}, \code{\link[vegan]{cca}}
 }
 \examples{
-        data(bryceveg) # returns a vegetation data.frame
-        dis.bc <- dsvdis(bryceveg,'bray/curtis')
+data(bryceveg) # returns a vegetation data.frame
+dis.bc <- dsvdis(bryceveg,'bray/curtis')
                   # returns an object of class dist'
-        veg.pco <- pco(dis.bc,k=4) # returns first 4 dimensions
+veg.pco <- pco(dis.bc,k=4) # returns first 4 dimensions
+plot(veg.pco)
 }
 \keyword{multivariate}

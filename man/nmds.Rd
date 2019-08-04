@@ -4,13 +4,13 @@
 \title{Nonmetric Multidimensional Scaling}
 
 \description{This function is simply a wrapper for the isoMDS function in the
-    MASS package by Venables and Ripley.  The purpose is to establish a
-    \sQuote{nmds} class to simplify plotting and additional graphical analysis as
-    well as a summary.}
+    MASS package by Venables and Ripley.  The purpose is to convert the output
+    to class \sQuote{dsvord} to simplify plotting and additional graphical analysis as
+    well as to provide a summary method.}
 
 \usage{
-nmds(dis,k=2,y=cmdscale(d=dis,k=k),maxit=50)
-bestnmds(dis,k=2,itr=20,maxit=100)
+nmds(dis,k=2,y=cmdscale(d=dis,k=k),maxit=50,trace=FALSE)
+bestnmds(dis,k=2,itr=20,maxit=100,trace=FALSE)
 }
 
 \arguments{
@@ -21,22 +21,25 @@ bestnmds(dis,k=2,itr=20,maxit=100)
         as many columns as specified by k).  If none is supplied, \code{cmdscale}
         is used to generate them}
     \item{maxit}{the maximum number of iterations in the isoMDS routine}
+    \item{trace}{a switch to control printing intermediate results}
     \item{itr}{number of random starts to find best result}
 }
 
 \details{The nmds function simply calls the \code{isoMDS} function of the 
     MASS library, but converts the result from a list to an object of
-    class \sQuote{nmds}.  The only purpose for the function is to allow \sQuote{plot},
+    class \sQuote{dsvord}.  The only purpose for the function is to allow \sQuote{plot},
     \sQuote{identify},
     \sQuote{surf}, and other additional methods to be defined for the 
-    nmds class, to simplify the analysis of the result.
+    class, to simplify the analysis of the result.
 
-    The \sQuote{bestnmds} function runs \sQuote{itr} number of
+    The \sQuote{bestnmds} function runs one run from a PCO solution and
+    \sQuote{itr-1} number of
     random initial locations and returns the best result of the set.}
 
-\value{an object of class \sQuote{nmds}, with components:
+\value{An object of class \sQuote{dsvord}, with components:
     \item{points}{the coordinates of samples along axes}
     \item{stress}{the "goodness-of-fit" computed as stress in percent}
+    \item{type}{\sQuote{NMDS}}
 }
 \references{
 Kruskal, J.B. (1964)  Multidimensional scaling by optimizing goodness of fit
@@ -47,25 +50,26 @@ Psychometrics 29:115-129.
 
 T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hall.
 
-\url{http://ecology.msu.montana.edu:/labdsv/R/labs/lab9/lab9.html}
+\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab9/lab9.html}
 }
 
 \note{nmds is included as part of the LabDSV package to provide a consistent interface and 
     utility for vegetation ordination methods.  Other analyses included with the same
-    interface at present include principal components analysis (pca), and principal coordinates
-    analysis (pco).}
+    interface at present include principal components analysis (pca), principal coordinates
+    analysis (pco), and t-distributed neighborhood embedding (t-SNE).}
 
 \author{
     Venables and Ripley for the original isoMDS function included in the MASS package.
 
-    David W. Roberts \email{droberts@montana.edu} 
-    \url{http://ecology.msu.montana.edu/droberts}
+    David W. Roberts 
+    \email{droberts@montana.edu} 
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \seealso{
     \code{isoMDS} for the original function
 
-    \code{\link[labdsv]{plot.nmds}} for the \sQuote{plot} method, the \sQuote{plotid}
+    \code{\link[labdsv]{plot.dsvord}} for the \sQuote{plot} method, the \sQuote{plotid}
         method to identify points with a mouse, the \sQuote{points} method to 
         identify points meeting a logical condition, the \sQuote{hilight} method
         to color-code points according to a factor, 
@@ -81,12 +85,12 @@ T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hal
 }
 
 \examples{
-    data(bryceveg)
-    data(brycesite)
-    dis.man <- dist(bryceveg,method="manhattan")
-    demo.nmds <- nmds(dis.man,k=4)
-    plot(demo.nmds)
-    points(demo.nmds,brycesite$elev>8000)
-    plotid(demo.nmds,ids=row.names(brycesite))
+data(bryceveg)
+data(brycesite)
+dis.man <- dist(bryceveg,method="manhattan")
+demo.nmds <- nmds(dis.man,k=4)
+plot(demo.nmds)
+points(demo.nmds,brycesite$elev>8000)
+plotid(demo.nmds,ids=row.names(brycesite))
 }
 \keyword{multivariate}

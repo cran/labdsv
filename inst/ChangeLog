@@ -1,3 +1,41 @@
+labdsv_2.0-1
+
+This is a fairly significant redesign of labdsv focused primarily on the
+ordination routines.  This version creates a new ordination class "dsvord" that
+incorporates all the existing ordinations and makes importing ordinations from
+other packages simpler.  The plot(), points(), surf(), plotid(), hilight(),
+chullord(), ellip(), rgl() and thull() functions have all been re-written to
+accommodate the new dsvord class.  The result is much simpler, but should be
+backward compatible with all existing scripts that use labdsv.  Many ordination
+results from other packages can be converted to labdsv through the as.dsvord 
+function.
+
+labdsv now incorporates the t-Distributed Stochastic Neighbor Embedding 
+routine from Rtsne as an ordination.
+
+New functions were introduced to facilitate modeling species and environmental
+variables as a function of ordinations: see predict and calibrate respectively.
+
+The bestnmds and besttsne functions now include a single iteration from a 
+PCO initial condition as part of the requested random starts.
+
+Several new functions were introduced to make it easier to edit data.frames
+in the workspace.  See factorize, defactorize, and gsr.
+
+In addition, new community standardizations were developed, comprising
+samptot (for standardize by sample total), spcmax (to standardize by species 
+maximum) and hellinger (to perform the hellinger standardization).
+
+A couple of changes were made to make labdsv more R-like in syntax.  metrify
+can now be invoked as as.metric, euclidify can now be invoked as as.euclidean.  
+(I know that verbs are now the rage, but I added the conversions anyway, and 
+the old verbs still work.)
+
+Changes were made to function concov() to make it work better when passed a
+single cluster.
+
+At least for the time being rgl is back in labdsv.
+
 labdsv_1.8-0
 
 Due to the ever increasing hassle of building rgl I deleted all references

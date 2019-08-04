@@ -5,7 +5,7 @@
 of the abundance distribution of (typically) species along opposing environmental
 gradients 
 }
-\usage{dga(z,x,y,step=25,pres="+",abs="-",labcex=1,
+\usage{dga(z,x,y,step=50,pres="+",abs="-",labcex=1,
     xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
     pch = 1, title = "", \dots)
 }
@@ -26,6 +26,8 @@ gradients
 \details{
 \sQuote{dga} interpolates a grid of x,y values from the supplied data
 and fits a GAM (from \code{\link[mgcv]{mgcv}}) of the z variable to the grid.  
+For presence/absence data (enterd as a logical) it employs a binomial family, for
+species abundances a negative binomial is employed.
 The GAM surface is then represented by a contour map and abundance 
 symbols as described above.}
 
@@ -40,16 +42,17 @@ followers as a preferred method of vegetation analysis.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[mgcv]{gam}}}
 
 
 \examples{
-    data(bryceveg) # returns a data.frame called bryceveg
-    x <- c(0.2,0.5,1.0,2.0,3.0,4.0,5.0,6.0)
-    y <- c(0.2,0.5,3.0,15.0,37.5,62.5,85.0,97.5)
-    cover <- vegtrans(bryceveg,x,y)
-    data(brycesite)
-    dga(round(cover$arcpat),brycesite$elev,brycesite$av)
+data(bryceveg) # returns a data.frame called bryceveg
+x <- c(0.2,0.5,1.0,2.0,3.0,4.0,5.0,6.0)
+y <- c(0.2,0.5,3.0,15.0,37.5,62.5,85.0,97.5)
+cover <- abundtrans(bryceveg,x,y)
+data(brycesite)
+dga(round(cover$arcpat),brycesite$elev,brycesite$av)
 }
 \keyword{multivariate}

@@ -8,8 +8,8 @@ distribution of values in a dissimilarity matrix}
 }
 \arguments{
     \item{x}{an object of class \sQuote{dist} such as returned by
-    \code{\link{dist}},
-    \code{\link[vegan]{vegdist}} or \code{\link[labdsv]{dsvdis}}}
+    \code{\link{dist}}, \code{\link[labdsv]{dsvdis}}.
+    or \code{\link[vegan]{vegdist}}}
     \item{panel}{a switch to specify which panel of graphics should
                  be displayed.  Can be either an integer from 1 to 3,
                  or the word \sQuote{all}.}
@@ -39,10 +39,11 @@ to their nearest neighbor.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
-    data(bryceveg) # returns a data.frame called veg
-    dis.bc <- dsvdis(bryceveg,'bray/curtis')
-    disana(dis.bc)
+data(bryceveg) # returns a data.frame called veg
+dis.bc <- dsvdis(bryceveg,'bray/curtis')
+disana(dis.bc)
 }
 \keyword{multivariate}

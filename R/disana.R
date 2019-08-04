@@ -1,6 +1,6 @@
 disana <- function (x,panel='all') 
 {
-    if (class(x) == "dist") {
+    if (inherits(x,"dist")) {
         y <- as.matrix(x)
         triang <- x
     } else {

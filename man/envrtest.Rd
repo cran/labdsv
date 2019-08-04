@@ -37,10 +37,11 @@ is constrained in an improbable way.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
-    data(bryceveg) # returns a vegetation data.frame
-    data(brycesite) # returns and environmental data.frame
-    envrtest(bryceveg$berrep>0,brycesite$elev)
+data(bryceveg) # returns a vegetation data.frame
+data(brycesite) # returns and environmental data.frame
+envrtest(bryceveg$berrep>0,brycesite$elev)
 }
 \keyword{cluster}

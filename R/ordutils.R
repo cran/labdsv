@@ -37,3 +37,27 @@ ellip <- function(ord, ...)
 {
     UseMethod("ellip")
 }
+
+rgl <- function(ord, ...)
+{  
+  UseMethod("rgl")
+}
+
+loadings <- function(pca, ...)
+{
+  UseMethod("loadings")
+}
+varplot <- function(pca, ...)
+{
+    UseMethod("varplot")
+}
+
+scores <- function(pca, ...)
+{
+  UseMethod("scores")
+}
+
+calibrate <- function(dsvord, ...)
+{
+    UseMethod("calibrate")
+}

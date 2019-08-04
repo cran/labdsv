@@ -6,14 +6,14 @@ matrify <- function(data)
     abu <- data[,3]
     plt.codes <- levels(factor(plt))
     spc.codes <- levels(factor(spc))
-    taxa <- matrix(0,nrow=length(plt.codes),ncol=length(spc.codes))
+    comm <- matrix(0,nrow=length(plt.codes),ncol=length(spc.codes))
     row <- match(plt,plt.codes)
     col <- match(spc,spc.codes)
     for (i in 1:length(abu)) {
-        taxa[row[i],col[i]] <- abu[i]
+        comm[row[i],col[i]] <- abu[i]
     }
-    taxa <- data.frame(taxa)
-    names(taxa) <- spc.codes
-    row.names(taxa) <- plt.codes
-    taxa
+    comm <- data.frame(comm)
+    names(comm) <- spc.codes
+    row.names(comm) <- plt.codes
+    comm
 }

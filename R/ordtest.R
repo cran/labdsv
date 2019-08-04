@@ -1,12 +1,9 @@
 ordtest <- function (ord,var,dim=1:ncol(ord$points),index='euclidean',nitr=1000)
 {
-    if (inherits(ord, c("pco", "nmds", "metaMDS"))) {
-        points <- ord$points
-    } else if (inherits(ord, 'pca')) {
-        points <- ord$scores
-    } else {
-        stop('ordtest is only defined for pca, pco, nmds, and metaMDS objects')
-    }
+    if (!inherits(ord, c('dsvord'))) 
+        stop('ordtest is only defined for objkect of class dsvord')
+
+    points <- ord$points
     tdist <- 0
     observed <- 0
     reps <- rep(0,nitr-1)

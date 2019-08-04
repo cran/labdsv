@@ -3,6 +3,7 @@
 \alias{ordpart.pca}
 \alias{ordpart.pco}
 \alias{ordpart.nmds}
+\alias{ordpart.dsvord}
 \title{Ordination Partitioning}
 \description{This function allows users to partition or classify the points
 in an ordination by identifying clusters of points with a mouse}
@@ -10,7 +11,8 @@ in an ordination by identifying clusters of points with a mouse}
 \usage{ordpart(ord, ax = 1, ay = 2)
 }
 \arguments{
-	\item{ord}{an ordination of class \sQuote{pca}, \sQuote{pco}, or \sQuote{nmds}}
+	\item{ord}{an ordination of class \sQuote{dsvord} produced by
+                   nmds, pco, pca or other labdsv ordination functions}
 	\item{ax}{the first axis number in the ordination plot}
         \item{ay}{the second axis number in the ordination plot}
 }
@@ -30,11 +32,12 @@ zero.
 \value{A integer vector of cluster membership values
 }
 \note{Although the routine could easily be adapted for any scatter plot,
-it is currently only designed for objects of class \sQuote{pca},
-\sQuote{pco}, or \sQuote{nmds}}
+it is currently only designed for objects of class \sQuote{dsvord}.}
+
 \author{
 	David W. Roberts
 	\email{droberts@montana.edu}
+        \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg)

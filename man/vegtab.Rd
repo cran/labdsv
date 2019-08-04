@@ -4,9 +4,9 @@
 \description{Produces an ordered table of abundance of species in samples,
 sub-sampled by (an optional) classification of the samples
 }
-\usage{vegtab(taxa,set,minval=1,pltord,spcord,pltlbl,trans=FALSE)}
+\usage{vegtab(comm,set,minval=1,pltord,spcord,pltlbl,trans=FALSE)}
 \arguments{
-    \item{taxa}{a vegetation (or other taxon) data.frame }
+    \item{comm}{a vegetation (or other taxon) data.frame }
     \item{set}{a logical variable specifying which samples to include}
     \item{minval}{a minimum abundance threshold to include in the table}
     \item{pltord}{a numeric vector specifying the order of rows in the output}
@@ -27,12 +27,14 @@ often involves a sorted vegetation table.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[vegan]{vegemite}}}
 \examples{
-    data(bryceveg) # returns a vegetation data frame called bryceveg
-    data(brycesite) # returns an environmental data frame called brycesite
-    vegtab(bryceveg,minval=10,pltord=brycesite$elev)
+data(bryceveg)  # returns a vegetation data frame called bryceveg
+data(brycesite) # returns an environmental data frame called 
+                # brycesite
+vegtab(bryceveg,minval=10,pltord=brycesite$elev)
         # produces a sorted table for species whose abundance sums
         # to 10, with rows in order of elevation.
 }

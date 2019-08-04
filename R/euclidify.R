@@ -1,14 +1,22 @@
-euclidify <- function (x,upper=FALSE,diag=FALSE)
+euclidify <- function (dis,upper=FALSE,diag=FALSE)
 {
-    if (class(x) != 'dist') 
-        stop('The first argument mmust be an object of class dist')
-    tmp <- .Fortran("euclid",x=as.matrix(x),as.integer(attr(x,"Size")),
+    if (!inherits(dis,'dist')) 
+        stop('The first argument must be an object of class dist')
+    tmp <- .Fortran("euclid",dis=as.matrix(dis),as.integer(attr(dis,"Size")),
                      PACKAGE='labdsv')
-    tmp2 <- as.dist(tmp$x)
-    attr(tmp2, "Labels") <- dimnames(x)[[1]]
+    tmp2 <- as.dist(tmp$dis)
+    attr(tmp2, "Labels") <- dimnames(dis)[[1]]
     attr(tmp2, "Diag") <- diag
     attr(tmp2, "Upper") <- upper
-    attr(tmp2, "method") <- paste("euclidify", attr(x, "method"))
+    attr(tmp2, "method") <- paste("euclidify", attr(dis, "method"))
     attr(tmp2, "call") <- match.call()
+    attr(tmp2, "timestamp") <- date()
     tmp2
+}
+
+
+
+as.euclidean <- function(dis,upper=FALSE,diag=FALSE)
+{
+    return(euclidify(dis,upper=upper,diag=diag))
 }

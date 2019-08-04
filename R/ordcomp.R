@@ -1,20 +1,14 @@
 ordcomp <- function(x,dis,dim,xlab="Computed Distance",ylab="Ordination Distance",title="",pch=1)
 {
-    y <- as.dist(dis)
-    if (class(x) == "pca") {
-        z <- x$scores
-    } else if (inherits(x, c("pco", "nmds", "metaMDS"))) {
+    if (inherits(x,"dsvord")) {
         z <- x$points
-    } else if (inherits(x,c("fso","mfso"))) {
-        z <- as.matrix(x$mu)
-    } else if (class(x) == "ordiplot") {
+    } else if (inherits(x,"ordiplot")) {
         z <- x$sites
     } else {
         z <- x
-        if (ncol(x) != ncol(z)) {
-            cat(paste("Only comparing first", dim, "dimensions\n"))
-        }
     }
+
+    y <- as.dist(dis)
 
     if (missing(dim)) dim <- ncol(z)
     if (ncol(z) > dim) cat(paste("Only comparing first",dim,"dimensions\n"))

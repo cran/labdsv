@@ -2,14 +2,14 @@
 \alias{raretaxa}
 \title{Identify Rare Taxa in a Data Set}
 
-\description{Identifes the distribution of rare taxa in a taxon dataframe,
+\description{Identifies the distribution of rare taxa in a community data.frame,
 using a specified rareness threshold.}
 
 \usage{
-raretaxa(taxa,min=1,log=FALSE,type='b', panel='all')
+raretaxa(comm,min=1,log=FALSE,type='b', panel='all')
 }
 \arguments{
-\item{taxa}{a taxon dataframe with samples as rows and species as columns}
+\item{comm}{a community data.frame with samples as rows and species as columns}
 \item{min}{the minimum number of occurrences for a species to be considered rare}
 \item{log}{controls whether or not the Y axis on some graphs should be log
 scaled} 
@@ -30,11 +30,12 @@ or rare species/plot.
 \author{
 David W. Roberts
 \email{droberts@montana.edu}
+\url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \examples{
 data(bryceveg)
-\dontrun{raretaxa(bryceveg,min=3,log=TRUE)}
+raretaxa(bryceveg,min=3,log=TRUE)
 }
 
 \keyword{hplot}

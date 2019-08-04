@@ -4,10 +4,10 @@
 \description{For a classified set of vegetation samples,
 lists for each species the fraction of samples in each
 class the species occurs in.}
-\usage{const(taxa, clustering, minval = 0, show = minval, digits = 2, 
+\usage{const(comm, clustering, minval = 0, show = minval, digits = 2, 
              sort = FALSE, spcord = NULL)}
 \arguments{
-    \item{taxa}{a data.frame of species abundances with samples as rows and
+    \item{comm}{a data.frame of species abundances with samples as rows and
 species as columns}
     \item{clustering}{(1) an object of class \sQuote{clustering},
            class \sQuote{partana}, or class \sQuote{partition}, (2) a vector of 
@@ -51,6 +51,7 @@ vegetation table-oriented analysis.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{
 \code{\link[labdsv]{importance}},
@@ -59,7 +60,8 @@ vegetation table-oriented analysis.}
 }
 \examples{
 data(bryceveg) # returns a data.frame called bryceveg
-class <- sample(1:10,nrow(bryceveg),replace=TRUE)
+data(brycesite)
+class <- cut(brycesite$elev,10,labels=FALSE)
 const(bryceveg,class,minval=0.25)
 }
 \keyword{multivariate}

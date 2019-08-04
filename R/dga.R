@@ -1,4 +1,4 @@
-dga <- function(z,x,y,step=25,pres="+",abs="-",labcex=1,
+dga <- function(z,x,y,step=50,pres="+",abs="-",labcex=1,
     xlab=deparse(substitute(x)),ylab=deparse(substitute(y)),pch=1,title="",...)
 {
     xstep <- seq(min(x),max(x),(max(x)-min(x))/step)
@@ -35,7 +35,7 @@ dga <- function(z,x,y,step=25,pres="+",abs="-",labcex=1,
         attr(tmp.gam,'call') <- match.call()
         invisible(tmp.gam)
     } else {
-        tmp.gam <- gam(z ~ s(x) + s(y),family=poisson)
+        tmp.gam <- gam(z ~ s(x) + s(y),family=nb)
         gam.pred <- matrix(predict.gam(tmp.gam,grid,type="response"),nrow=step+1)
         contour(xstep,ystep,gam.pred,labcex=1,
         xlab=xlab,ylab=ylab,main=title)

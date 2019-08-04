@@ -1,15 +1,16 @@
 \name{importance}
 \alias{importance}
+\alias{importance.default}
 \title{Importance Table}
 \description{For a classified set of vegetation samples,
 a importance table lists for each species
 the average or typical abundance of each species in each class.
 }
-\usage{importance(taxa,clustering,minval=0,digits=2,show=minval,
-       sort=FALSE,typical=TRUE,spcord)
+\usage{importance(comm,clustering,minval=0,digits=2,show=minval,
+       sort=FALSE,typical=TRUE,spcord,dots=TRUE)
 }
 \arguments{
-    \item{taxa}{a data.frame of species abundances with samples as rows and
+    \item{comm}{a data.frame of species abundances with samples as rows and
 species as columns}
     \item{clustering}{a vector of (integer) class memberships, or an object of
          class \sQuote{clustering}, class \sQuote{partana},
@@ -19,11 +20,12 @@ to be included in the output}
     \item{digits}{the number of digits to report in the table}
     \item{show}{the minimum value a species must have to print a value}
     \item{sort}{a switch to control interactive re-ordering} 
-    \item{typical}{a swith to control how mean abundance is calculated.
+    \item{typical}{a switch to control how mean abundance is calculated.
 Typical=TRUE divides the sum of species abundance by the number of plots in which
 it occurs; typical=FALSE divides by the number of plots in the type}
     \item{spcord}{a vector of integers to specify the order in which species
 should be listed in the table}
+    \item{dots}{a switch to control substituting dots for small values}
 }
 
 \value{a data.frame with species as rows, classes as columns, with
@@ -39,14 +41,15 @@ vegetation table-oriented analysis.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{const}}, \code{\link[labdsv]{vegtab}},
 \code{\link[labdsv]{concov}}
 }
 \examples{
-    data(bryceveg) # returns a data.frame called bryceveg
-    class <- sample(1:10,nrow(bryceveg),replace=TRUE)
-    importance(bryceveg,class,minval=0.25)
+data(bryceveg) # returns a data.frame called bryceveg
+data(brycesite)
+class <- cut(brycesite$elev,10,labels=FALSE)
+importance(bryceveg,class,minval=0.25)
 }
 \keyword{multivariate}

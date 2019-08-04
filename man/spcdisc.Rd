@@ -21,6 +21,7 @@ A vector of discrimination values.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{const}}, \code{\link[labdsv]{importance}},
         \code{\link[labdsv]{indval}}, \code{\link[labdsv]{isamic}}

@@ -1,12 +1,12 @@
-\name{rndtaxa}
-\alias{rndtaxa}
-\title{Randomize a Taxa Data.Frame}
+\name{rndcomm}
+\alias{rndcomm}
+\title{Randomize a Community Data.Frame}
 \description{Permutes a vegetation (or other) data.frame to establish
 a basis for null model tests in vegetation ecology.
 }
-\usage{rndtaxa(taxa,replace=FALSE,species=FALSE,plots=FALSE)}
+\usage{rndcomm(comm,replace=FALSE,species=FALSE,plots=FALSE)}
 \arguments{
-    \item{taxa}{the vegetation (or other taxon) data.frame, samples as rows, species as columns}
+    \item{comm}{the vegetation (or other taxon) data.frame, samples as rows, species as columns}
     \item{replace}{a switch for permuting (if FALSE) or boostrapping (if TRUE)}
     \item{species}{a switch to control randomizing by species (if TRUE),
        maintaining species occurrence distributions}
@@ -30,12 +30,12 @@ a basis for null model tests in vegetation ecology.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
-    data(bryceveg) # returns a vegetation data.frame called bryceveg
-    test <- rndtaxa(bryceveg,species=TRUE) # preserves species abundance
-            # distribution
-    test2 <- rndtaxa(bryceveg,plots=TRUE) # preserves plot-level 
-                                          # species richness}
-
+data(bryceveg) # returns a vegetation data.frame called bryceveg
+test <- rndcomm(bryceveg,species=TRUE) # preserves species abundance
+                                       # distribution
+test2 <- rndcomm(bryceveg,plots=TRUE) # preserves plot-level 
+                                      # species richness}
 \keyword{datagen}

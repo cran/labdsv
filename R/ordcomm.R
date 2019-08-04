@@ -1,6 +1,6 @@
-ordtaxa <- function (taxa,site)
+ordcomm <- function (comm,site)
 {
-    print(taxa)
+    print(comm)
     repeat {
         plots <- readline(' enter the plots    : ')
         if (plots == "") {
@@ -10,11 +10,11 @@ ordtaxa <- function (taxa,site)
         }
 
         for (i in strsplit(plots,",")[[1]]){
-            ord <- 1:nrow(taxa)
-            x <- match(i,row.names(taxa))
+            ord <- 1:nrow(comm)
+            x <- match(i,row.names(comm))
             if (!is.na(x)) {
                 ord <- ord[-x]
-                y <- match(pnt,row.names(taxa[ord,]))
+                y <- match(pnt,row.names(comm[ord,]))
                 if (!is.na(y)) {
                         if (y==1) {
                             ord <- c(x,ord)
@@ -23,9 +23,9 @@ ordtaxa <- function (taxa,site)
                             last <- ord[y:length(ord)]
                             ord <- c(first,x,last)
                         }
-                        taxa <- taxa[ord,]
+                        comm <- comm[ord,]
                         site <- site[ord,]
-                        print(taxa)
+                        print(comm)
                     } else {
                         print(paste('plot',pnt,'does not exist'))
                     }
@@ -41,11 +41,11 @@ ordtaxa <- function (taxa,site)
                     pnt <- readline(' in front of        : ')
                 }
                 for (i in strsplit(species,",")[[1]]){
-                    ord <- 1:ncol(taxa)
-                    x <- match(i,names(taxa))
+                    ord <- 1:ncol(comm)
+                    x <- match(i,names(comm))
                     if (!is.na(x)) {
                         ord <- ord[-x]
-                        y <- match(pnt,names(taxa[,ord]))
+                        y <- match(pnt,names(comm[,ord]))
                         if (!is.na(y)) {
                             if (y==1) {
                                 ord <- c(x,ord)
@@ -56,8 +56,8 @@ ordtaxa <- function (taxa,site)
                                 print(last)
                                 ord <- c(first,x,last)
                             }
-                            taxa <- taxa[,ord]
-                            print(taxa)
+                            comm <- comm[,ord]
+                            print(comm)
                         } else {
                             print(paste('species',pnt,'does not exist'))
                         }
@@ -67,6 +67,6 @@ ordtaxa <- function (taxa,site)
                 }
             }
         }
-    out <- list(taxa=taxa,site=site)
+    out <- list(comm=comm,site=site)
     invisible(out)
 }

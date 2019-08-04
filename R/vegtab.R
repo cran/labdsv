@@ -1,12 +1,12 @@
-vegtab <- function(taxa,set,minval=1,pltord,spcord,pltlbl,trans=FALSE)
+vegtab <- function(comm,set,minval=1,pltord,spcord,pltlbl,trans=FALSE)
 {
     if (missing(set)) {
-        set <- seq(1:nrow(taxa))
+        set <- seq(1:nrow(comm))
     } else {
-        set <- seq(1:nrow(taxa))[set]
+        set <- seq(1:nrow(comm))[set]
         set <- set[!is.na(set)]
     }
-    tmp <- taxa[set,]
+    tmp <- comm[set,]
     spcidx <- apply(tmp>0,2,sum)
     tmp <- tmp[,spcidx >= minval]
 
@@ -16,7 +16,10 @@ vegtab <- function(taxa,set,minval=1,pltord,spcord,pltlbl,trans=FALSE)
         pltord <- pltord[set]
     }
     if (missing(spcord)) {
-        spcord <- -apply(tmp>0,2,sum)
+        x <- apply(tmp > 0, 2, sum)
+        y <- apply(tmp, 2, sum)
+        spcord <- -1 * (x + y/max(y))
+        #spcord <- -apply(tmp > 0, 2, sum)
     } else {
         spcord <- spcord[spcidx >= minval]
     }

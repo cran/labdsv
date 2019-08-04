@@ -12,7 +12,7 @@ species in clusters or types.}
 \usage{
 indval(x, \dots)
 \method{indval}{default}(x,clustering,numitr=1000,\dots)
-\method{indval}{stride}(x,taxa,numitr=1,\dots)
+\method{indval}{stride}(x,comm,numitr=1,\dots)
 \method{summary}{indval}(object, p=0.05, type='short', digits=2, show=p,
        sort=FALSE, too.many=100, \dots)
 }
@@ -28,7 +28,7 @@ indval(x, \dots)
     
     \item{numitr}{the number of randomizations to iterate to calculate
                   probabilities}
-    \item{taxa}{a dataframe with samples as rows and species as columns}
+    \item{comm}{a data.frame with samples as rows and species as columns}
     \item{object}{an object of class \sQuote{indval}}
     \item{p}{the maximum probability for a species to be listed in the summary}
     \item{type}{a switch to choose between \sQuote{short} and \sQuote{long} style summary}
@@ -42,15 +42,17 @@ indval(x, \dots)
 relative frequency and relative average abundance in clusters.  Specifically,
 
 where:\cr
-\eqn{p_{i,j} = } presence/absence (1/0) of species \eqn{i} in 
+\eqn{p_{ij}}{p_(ij)} =  presence/absence (1/0) of species \eqn{i} in 
    sample \eqn{j}; \cr
-\eqn{x_{i,j}} =  abundance of species \eqn{i} in sample \eqn{j}; \cr
-\eqn{n_c = } number of samples in cluster \eqn{c};\cr
-for cluster \eqn{c} in set \eqn{K}; \cr 
+\eqn{x_{ij}}{x_(ij)} =  abundance of species \eqn{i} in sample \eqn{j}; \cr
+\eqn{n_c} = number of samples in cluster \eqn{c};\cr
+for cluster \eqn{c \in K}; \cr 
 
-\deqn{f_{i,c} = {\sum_{j \in c} p_{i,j} \over n_c}}\cr
-\deqn{a_{i,c} = {(\sum_{j \in c} x_{i,j}) / n_c \over \sum_{k=1}^K ((\sum_{j \in k} x_{i,j}) / n_k)}}\cr
-\deqn{d_{i,c} = f_{i,c} \times a_{i,c}}\cr
+\deqn{f_{ic} = {\sum_{j \in c} p_{ij} \over n_c}}
+
+\deqn{a_{ic} = {\sum_{j \in c} x_{ij} / n_c \over \sum_{k=1}^K (\sum_{j \in k} x_{ij} / n_k)}}
+
+\deqn{d_{ic} = f_{ic} \times a_{ic}}
 
 Calculated on a \sQuote{stride} the function calculates the indicator values of
 species for each of the separate partitions in the stride.
@@ -64,14 +66,13 @@ The default function returns a list of class \sQuote{indval} with components:
     \item{indcls}{the indicator value for each species to its maximum class}
     \item{pval}{the probability of obtaining as high an indicator values as
                 observed over the specified iterations}  
-    \item{}{}
 
 The stride-based function returns a data.frame with the number of clusters
 in the first column and the mean indicator value in the second.
 
 The \sQuote{summary} function has two options.  In \sQuote{short} mode it presents
 a table of indicator species whose probability is less then \sQuote{p}, giving their 
-indicator val;ue and the identity of the cluster they indicate, along with the
+indicator value and the identity of the cluster they indicate, along with the
 sum of probabilities for the entire data set.  In \sQuote{long} mode, the indicator 
 value of each species in each class is shown, with values less than \sQuote{show} 
 replaced by a place-holder dot to emphasize larger values.
@@ -91,6 +92,7 @@ by 100; this function does not.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \references{Dufrene, M. and Legendre, P.  1997.  Species assemblages and indicator species:
@@ -99,9 +101,9 @@ the need for a flexible asymmetrical approach.  Ecol. Monogr. 67(3):345-366.}
 \seealso{\code{\link[labdsv]{isamic}}}
 
 \examples{
-    data(bryceveg) # returns a vegetation data.frame
-    dis.bc <- dsvdis(bryceveg,'bray/curtis') # returns a dissimilarity matrix
-    clust <- sample(1:5,nrow(bryceveg),replace=TRUE)
-    indval(bryceveg,clust)
+data(bryceveg) # returns a vegetation data.frame
+data(brycesite)
+clust <- cut(brycesite$elev,5,labels=FALSE)
+summary(indval(bryceveg,clust))
 }
 \keyword{cluster}

@@ -1,12 +1,6 @@
 orddist <- function (x, dim)
 {
-    if (class(x) == "pca") {
-        z <- x$scores
-    } else if (inherits(x, c("pco", "nmds", "metaMDS"))) {
-        z <- x$points
-    } else if (class(x) == "fso") {
-        z <- as.matrix(x$mu)
-    }
+    z <- x$points
 
     if (missing(dim)) dim <- ncol(z)
     if (dim != ncol(z))

@@ -4,13 +4,13 @@
 \description{Calculates and plots summary statistics about species
 occurrences in a data frame}
 
-\usage{abuocc(taxa,minabu=0,panel='all')}
+\usage{abuocc(comm,minabu=0,panel='all')}
 \arguments{
-    \item{taxa}{a taxon data.frame with samples as rows 
+    \item{comm}{a community data.frame with samples as rows 
      and species as columns}
     \item{minabu}{a minimum abundance threshold species must exceed to be 
      included in the calculations (default=0)}
-    \item{panel}{controls which of three graphs is drawn, and can be 'all'
+    \item{panel}{controls which of four graphs is drawn, and can be 'all'
                  or integers 1-4}
 }
 \details{This functions calculates and plots four data summaries about the 
@@ -27,7 +27,7 @@ Plots:
 4) the total abundance/sample as a function of the plot-level species richness
                                                                                                   
 The third plot allows you to identify individual species with the mouse;
-the fourth plot allows you to identify individual samples with the mouse.
+the fourth plot allows you to identify individual sample units with the mouse.
 }
 
 
@@ -50,12 +50,13 @@ calculations of sample similarity using \code{\link[labdsv]{dsvdis}} among other
 \author{
 	David W. Roberts
 	\email{droberts@montana.edu}
+        \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[vegan]{fisherfit}}, 
          \code{\link[vegan]{prestonfit}},
          \code{\link[vegan]{radfit}}}
 \examples{
-    data(bryceveg) # produces a data.frame called bryceveg
-    abuocc(bryceveg)
+data(bryceveg) # produces a data.frame called bryceveg
+abuocc(bryceveg)
 }
 \keyword{multivariate}

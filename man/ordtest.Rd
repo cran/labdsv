@@ -7,8 +7,7 @@ ordtest(ord, var, dim=1:ncol(ord$points), index = 'euclidean',
    nitr = 1000)
 }
 \arguments{
-\item{ord}{an object of class \sQuote{pca}, \sQuote{pco}, or
-       \sQuote{nmds}}
+\item{ord}{an object of class \sQuote{dsvord}}
 \item{var}{a logical or factor vector used to organize the calculation
      of within-set distances}
 \item{dim}{the number of dimensions to use in the calculation}
@@ -33,6 +32,7 @@ Produces a list with components:
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
+    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[vegan]{anosim}}}
 \examples{

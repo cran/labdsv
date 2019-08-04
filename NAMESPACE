@@ -1,84 +1,132 @@
-# Remove the previous line if you edit this file
-
 # Export all names
-export(abuocc,clustify,compspec,concov,const,dematrify,dga,disana,dropplt,dropspc,dsvdis, 
-envrtest,euclidify,homoteneity,importance,plot.compspec,indval, 
-indval.default,indval.stride,summary.indval,isamic,matrify,metrify, 
-nmds,plot.nmds,points.nmds,plotid.nmds,surf.nmds,bestnmds,hilight.nmds, 
-chullord.nmds,density.nmds,ordcomp,orddist,ordpart, 
-ordpart.pco,ordpart.pca,ordpart.nmds,ordtaxa,ordtest,surf,plotid, 
-specid,hilight,chullord,thull,density,thull,pca,plot.pca,points.pca, 
-plotid.pca,surf.pca,summary.pca,scores.pca,loadings.pca,varplot.pca, 
-hilight.pca,chullord.pca,pco,plot.pco,points.pco,plotid.pco,surf.pco, 
-hilight.pco,chullord.pco,density.pco,raretaxa,reconcile, 
-rnddist,rndtaxa,spcdisc,thull.nmds,thull.pco, 
-plot.thull,vegtab,vegtrans 
+export(
+# data handling and generating
+ reconcile,
+ matrify,
+ dematrify,
+ rndcomm,
+# data editing
+ dropplt,
+ dropspc,
+ factorize,
+ defactorize,
+ ordcomm,
+ gsr,
+# transformations and standardizations
+ abundtrans,
+ convex,
+ samptot,
+ spcmax,
+ hellinger,
+# disimilarity functions,
+ dsvdis,
+ disana,
+ rnddist,
+ neighbors,
+# dissimilarity conversion routines
+ metrify,
+ as.metric,
+ is.metric,
+ euclidify,
+ as.euclidean,
+ stepdist,
+# data viewing
+ abuocc,
+ vegtab,
+ dsvls,
+ dga,
+ raretaxa,
+# ordination functions
+ pca,
+ pco,
+ nmds,
+ bestnmds,
+ tsne,
+ besttsne,
+ as.dsvord,
+# ordination graphics functions
+ surf,
+ ellip,
+ plotid,
+ specid,
+ hilight,
+ chullord,
+ thull,
+# ordination analysis functions
+ density,
+ ordcomp,
+ orddist,
+ ordpart,
+ ordtest,
+ ordneighbors,
+# classification utilities
+ concov,
+ const,
+ homoteneity,
+ importance,
+ isamic,
+ spcdisc,
+ envrtest,
+# compositional specificity
+ compspec,
+# indval
+ indval
 )
+
 
 # Import all packages listed as Imports or Depends
-import(
-  mgcv,
-  MASS,
-  cluster
-)
+  import("mgcv")
   importFrom("grDevices", "chull", "rainbow")
   importFrom("graphics", "abline", "barplot", "contour", "identify",
              "image", "lines", "locator", "plot", "points", "polygon",
-             "text")
+             "text", "arrows")
   importFrom("stats", "as.dist", "binomial", "cmdscale", "cor", "dist",
              "gaussian", "poisson", "prcomp", "predict", "quantile",
-             "runif", "smooth")
-  importFrom("utils", "write.table")
+             "runif", "smooth", "AIC","var","loadings")
+  importFrom("utils", "write.table", "tail","txtProgressBar",
+              "setTxtProgressBar")
+  importFrom("MASS", "isoMDS")
+  importFrom("cluster", "ellipsoidhull")
+  importFrom("Rtsne", "Rtsne")
+  
 
 # Register all generic methods
-S3method(chullord,nmds)
-S3method(chullord,pca)
-S3method(chullord,pco)
 
-S3method(density,nmds)
-S3method(density,pco)
-
-S3method(hilight,nmds)
-S3method(hilight,pca)
-S3method(hilight,pco)
+S3method(plot,dsvord)
+S3method(plot,pco)
+S3method(plot,nmds)
+S3method(chullord,dsvord)
+S3method(density,dsvord)
+S3method(hilight,dsvord)
+S3method(ordpart,dsvord)
+S3method(plotid,dsvord)
+S3method(points,dsvord)
+S3method(surf,dsvord)
+S3method(thull,dsvord)
+S3method(ellip,dsvord)
+S3method(predict,dsvord)
+S3method(calibrate,dsvord)
 
 S3method(indval,default)
 S3method(indval,stride)
 
-S3method(ordpart,nmds)
-S3method(ordpart,pca)
-S3method(ordpart,pco)
-
 S3method(plot,compspec)
-S3method(plot,nmds)
-S3method(plot,pca)
-S3method(plot,pco)
 S3method(plot,thull)
-S3method(plotid,nmds)
-S3method(plotid,pca)
-S3method(plotid,pco)
-S3method(points,nmds)
-
-S3method(points,pca)
-S3method(points,pco)
 
 S3method(summary,indval)
 S3method(summary,pca)
+S3method(summary,dsvord)
+S3method(summary,dist)
+S3method(summary,dsvord)
+S3method(summary,thull)
+S3method(summary,clustering)
+S3method(summary,compspec)
 
-S3method(surf,nmds)
-S3method(surf,pca)
 
-S3method(surf,pco)
-S3method(thull,nmds)
-S3method(thull,pco)
+S3method(varplot,pca)
+S3method(plot,pca)
+S3method(loadings,pca)
+
+S3method(print,abuocc)
 
 useDynLib(labdsv)
-
-
-
-
-
-
-
-
-
