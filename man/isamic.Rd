@@ -32,7 +32,6 @@ classification methods.  J. Veg. Sci. 19(4):549-562.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \seealso{\code{\link[labdsv]{indval}}}

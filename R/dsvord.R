@@ -1,4 +1,5 @@
-plot.dsvord <- function(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, ...)
+plot.dsvord <- function(x, ax = 1, ay = 2, col = 1, title = "", pch = 1,
+                  xlab = paste(x$type, ax), ylab = paste(x$type, ay), ...)
 {
     if (!inherits(x,'dsvord')) 
         stop ("You must provide an object of class dsvord")
@@ -68,7 +69,7 @@ plotid.dsvord <- function(ord, ids=seq(1:nrow(ord$points)), ax = 1,
 
 
 surf.dsvord <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2,
-     labcex = 0.8, family=gaussian, gamma=1.0, grid=50, ...)
+     labcex = 0.8, lty = 1, family=gaussian, gamma=1.0, grid=50, ...)
 {
     if (!inherits(ord,'dsvord')) 
         stop("You must supply an object of class 'dsvord'")
@@ -232,7 +233,7 @@ gamord.dsvord <- function (ord,var,partial=NULL,family='gaussian',thinplate=TRUE
     res
 }
 
-summary.dsvord <- function(object, ...)
+summary.dsvord <- function(object, round = 4, ...)
 {
     if (!inherits(object,'dsvord'))
     stop("You must pass an argument of type 'dsvord'")
@@ -241,8 +242,10 @@ summary.dsvord <- function(object, ...)
     cat(paste('dimensions = ',ncol(object$points),'\n'))
     if (inherits(object,'nmds')) 
         cat(paste('stress = ',object$stress,'\n'))
-    if (inherits(object,'pco')) 
-        cat(paste('GOF = ',object$GOF,'\n'))
+    if (inherits(object,'pco')) {
+        cat(paste('GOF = ',round(object$GOF[1],round),'\n'))
+        cat(paste('GOF = ',round(object$GOF[2],round),'\n'))
+    }
     if (inherits(object,'tsne')) {
         cat(paste('perplexity = ',object$perplexity,'\n'))
         cat(paste('theta      = ',object$theta,'\n'))
@@ -251,6 +254,9 @@ summary.dsvord <- function(object, ...)
     }
     cat(paste('call       = ',deparse(attr(object,'call')),'\n'))
     cat(paste('created    = ',attr(object,'timestamp'),'\n'))
+    if (inherits(object,'pca')) {
+        summary.pca(object,...)
+    }
 }
 
 print.dsvord <- function(x,numpts=50,...)

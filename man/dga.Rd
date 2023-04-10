@@ -42,7 +42,6 @@ followers as a preferred method of vegetation analysis.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[mgcv]{gam}}}
 

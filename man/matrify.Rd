@@ -4,15 +4,19 @@
 \description{Takes a data.frame in three column form (sample.id, taxon,
 abundance) and converts it into full matrix form, and then exports it as a
 data.frame with the appropriate row.names and column names.}
-\usage{matrify(data)}
+\usage{matrify(data, strata=FALSE, base=100)}
 \arguments{
     \item{data}{a data.frame or matrix in three column format (or database
 format), where the first column is the sample ID, the second column is the taxon
 ID, and the third sample is the abundance of that taxon in that sample.}
+    \item{strata}{are the species abundances recorded in multiple strata?}
+    \item{base}{what is the numeric base relative to 1.0}
 }
 \details{The routine is pure R code to convert data from database form to the sparse
 matrix form required by multivariate analyses in packages \sQuote{labdsv} and
-\sQuote{vegan}, as well as \code{dist} and other routines.
+\sQuote{vegan}, as well as \code{dist} and other routines.  If TRUE, the strata argument
+specifies calculating individual species abundances as independent overlap of strata.  
+The base function is useful for converting percent to a fraction.
 }
 
 \value{A data.frame with samples as rows, taxa as columns, and abundance values
@@ -25,7 +29,6 @@ that data.frame can be matrified by this function.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{dematrify}}}
 

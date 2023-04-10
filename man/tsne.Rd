@@ -10,7 +10,7 @@
 
 \usage{
 tsne(dis,k=2,perplexity=30,theta= 0.0,eta=200)
-besttsne(dis,k=2,itr=100,perplexity=30,theta=0.0,eta = 200)
+besttsne(dis,k=2,itr=100,perplexity=30,theta=0.0,eta = 200,pbar=TRUE)
 }
 
 \arguments{
@@ -23,6 +23,7 @@ besttsne(dis,k=2,itr=100,perplexity=30,theta=0.0,eta = 200)
           (0,0,0.5] for increasing speeed (default: 0.0)}
     \item{eta}{Learning rate}
     \item{itr}{number of random starts to find best result}
+    \item{pbar}{switch to control printing progress bar in interactive sessions}
 }
 
 \details{The tsne function simply calls the \code{Rtsne} function of the 
@@ -62,7 +63,6 @@ besttsne(dis,k=2,itr=100,perplexity=30,theta=0.0,eta = 200)
   https://github.com/jkrijthe/Rtsne
 
 
-\url{http://ecology.msu.montana.edu/labdsv/R}
 }
 
 \note{tsne is included as part of the LabDSV package to provide a consistent interface and 
@@ -77,8 +77,6 @@ besttsne(dis,k=2,itr=100,perplexity=30,theta=0.0,eta = 200)
 
     David W. Roberts 
     \email{droberts@montana.edu} 
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html} for the 
-    adaptation to the LabDSV protocol.
 }
 
 \seealso{

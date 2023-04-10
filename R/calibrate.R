@@ -1,9 +1,9 @@
-calibrate.dsvord <- function(dsvord,site,dims=1:ncol(dsvord$points),
-                             family='gaussian',gamma=1,keep.models=FALSE)
+calibrate.dsvord <- function(ord,site,dims=1:ncol(ord$points),
+                             family='gaussian',gamma=1,keep.models=FALSE,...)
 {
-    if (!inherits(dsvord,'dsvord'))
+    if (!inherits(ord,'dsvord'))
         stop("The first argument must be an object of class 'dsvord'")
-    if (nrow(site) != nrow(dsvord$points))
+    if (nrow(site) != nrow(ord$points))
         stop("The arguments are incompatible")
     if (length(family) == 1) family <- rep(family,ncol(site))
     if (length(gamma) == 1) gamma <- rep(gamma,ncol(site))
@@ -29,7 +29,7 @@ calibrate.dsvord <- function(dsvord,site,dims=1:ncol(dsvord$points),
         r.sq
     }
 
-    points <- dsvord$points[,dims]
+    points <- ord$points[,dims]
     numdim <- ncol(points)
     if (numdim > 3) {
         cat("\n truncating to 3D\n")
@@ -67,15 +67,37 @@ calibrate.dsvord <- function(dsvord,site,dims=1:ncol(dsvord$points),
     }
     if (interactive()) close(pb)
     fitted <- sapply(res,predict,type='response')
-    dimnames(fitted) <- list(row.names(site),names(site))
+    fitted <- data.frame(fitted)
+    names(fitted) <- names(site) 
+    row.names(fitted) <- row.names(site)
     aic <- sapply(res,AIC)
     dev <-sapply(res,getdev)
     adj.rsq <- sapply(res,r.sq)
-    out <- list(fitted=fitted,aic=aic,dev.expl=dev,adj.rsq=adj.rsq)
+    stats <- data.frame(aic=aic,dev=dev,adj.rsq=adj.rsq)
+    names(stats) <- c('aic','deviance','adj.rsq')
+    row.names(stats) <- names(site)
+    out <- list(fitted=fitted,stats=stats)
     if (keep.models) {
         out$models <- res
         names(out$models) <- names(site)
     }
+    class(out) <- 'dsvcal'
     out
+}
+
+
+print.dsvcal <- function(x,order='R2',...)
+{
+    if (order == 'R2') {
+        stats <- x$stats[rev(order(x$stats$adj.rsq)),]
+    } else if (order == 'deviance') {
+        stats <- x$stats[rev(order(x$stats$dev)),]
+    } else if (order == 'aic') {
+        stats <- x$stats[order(x$stats$aic),]
+    } else {
+        stats <- x$stats
+    }
+
+    print(stats)
 }
 

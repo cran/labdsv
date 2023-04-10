@@ -15,11 +15,9 @@ the appropriate sum so that all samples total to 1.0.
 
 \value{A data frame of sample total standardized community data.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{
 spcmax, abundtrans

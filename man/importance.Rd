@@ -31,7 +31,6 @@ should be listed in the table}
 \value{a data.frame with species as rows, classes as columns, with
     average abundance of species in classes.}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab3/lab3.html}}
 \note{Importance tables are often used in vegetation classification to
 calculate or present characteristic species for specific classes or types.
 Importance may be combined with \code{\link[labdsv]{const}},
@@ -41,7 +40,6 @@ vegetation table-oriented analysis.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{const}}, \code{\link[labdsv]{vegtab}},
 \code{\link[labdsv]{concov}}

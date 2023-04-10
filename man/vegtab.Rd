@@ -19,7 +19,6 @@ sub-sampled by (an optional) classification of the samples
 }
 
 \value{a data.frame with specified rows, columns, and row.names}
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab3/lab3.html}}
 \note{Vegetation tables are a common tool in vegetation analysis.  In recent
 years analysis has tended to become more quantitative, and less oriented to
 sorted tables, but even still presenting the results from these analyses
@@ -27,7 +26,6 @@ often involves a sorted vegetation table.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[vegan]{vegemite}}}
 \examples{

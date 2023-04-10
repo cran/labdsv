@@ -26,7 +26,6 @@ other analyses.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg) # produces a vegetation data.frame

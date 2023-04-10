@@ -23,14 +23,12 @@ an object of class \sQuote{dsvord} from the given input.
 \sQuote{points} and \sQuote{type} (optionally more), and attributes
 \sQuote{call} and \sQuote{timestamp} and \sQuote{class}.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/}}
 \note{LabDSV recently converted all ordination objects to a single class
 with an ancillary \sQuote{type} specification to differentiate ordination
 types.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 \dontrun{data(bryceveg)

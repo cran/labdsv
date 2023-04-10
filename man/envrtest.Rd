@@ -37,7 +37,6 @@ is constrained in an improbable way.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg) # returns a vegetation data.frame

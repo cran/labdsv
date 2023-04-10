@@ -52,6 +52,9 @@ export(
  hilight,
  chullord,
  thull,
+ varplot,
+ loadings,
+  scores,
 # ordination analysis functions
  density,
  ordcomp,
@@ -59,6 +62,8 @@ export(
  ordpart,
  ordtest,
  ordneighbors,
+ predict,
+ calibrate,
 # classification utilities
  concov,
  const,
@@ -67,9 +72,9 @@ export(
  isamic,
  spcdisc,
  envrtest,
+ ccm,
 # compositional specificity
  compspec,
-# indval
  indval
 )
 
@@ -117,7 +122,6 @@ S3method(summary,indval)
 S3method(summary,pca)
 S3method(summary,dsvord)
 S3method(summary,dist)
-S3method(summary,dsvord)
 S3method(summary,thull)
 S3method(summary,clustering)
 S3method(summary,compspec)
@@ -126,6 +130,7 @@ S3method(summary,compspec)
 S3method(varplot,pca)
 S3method(plot,pca)
 S3method(loadings,pca)
+S3method(scores,pca)
 
 S3method(print,abuocc)
 

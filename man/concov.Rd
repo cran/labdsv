@@ -19,14 +19,12 @@ type to appear in the output table}
 \details{concov calls \code{\link[labdsv]{const}} and
 \code{\link[labdsv]{importance}} and then combines the output in a single table.}
 \value{a data.frame with factors (combined constancy and coverage) as columns}
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab3/lab3.html}}
 \note{Constancy-coverage tables are an informative and concise representation
 of species in classified types. The output format [constancy(mean cover)] follows
 the convention of the US Forest Service vegetation classifications.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{const}}, \code{\link[labdsv]{importance}}}
 \examples{

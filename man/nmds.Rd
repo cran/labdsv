@@ -10,7 +10,7 @@
 
 \usage{
 nmds(dis,k=2,y=cmdscale(d=dis,k=k),maxit=50,trace=FALSE)
-bestnmds(dis,k=2,itr=20,maxit=100,trace=FALSE)
+bestnmds(dis,k=2,itr=20,maxit=100,trace=FALSE,pbar=TRUE)
 }
 
 \arguments{
@@ -23,6 +23,8 @@ bestnmds(dis,k=2,itr=20,maxit=100,trace=FALSE)
     \item{maxit}{the maximum number of iterations in the isoMDS routine}
     \item{trace}{a switch to control printing intermediate results}
     \item{itr}{number of random starts to find best result}
+    \item{pbar}{switch to control printing progress bar in interactive 
+               sesssions}
 }
 
 \details{The nmds function simply calls the \code{isoMDS} function of the 
@@ -50,7 +52,6 @@ Psychometrics 29:115-129.
 
 T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hall.
 
-\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab9/lab9.html}
 }
 
 \note{nmds is included as part of the LabDSV package to provide a consistent interface and 
@@ -63,7 +64,6 @@ T.F. Cox and M.A.A. Cox. (1994) \emph{Multidimensional Scaling.} Chapman and Hal
 
     David W. Roberts 
     \email{droberts@montana.edu} 
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \seealso{

@@ -29,7 +29,6 @@ arbitrarily into any form.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{
     \code{summary.indval},\code{const},\code{importance}

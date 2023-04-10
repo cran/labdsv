@@ -2,7 +2,8 @@ as.dsvord <- function(obj)
 { 
 #     ltm2dsv <- function (ltm)
 #     {
-#         require('reo')
+#         test <- requireNamespace(reo)
+#         if (!test) stop('package reo must be installed')
 #         out <- list()
 #         out$points <- scores(ltm)
 #         out$type <- 'LTM'
@@ -93,11 +94,41 @@ as.dsvord <- function(obj)
         class(out) <- c('dsvord')
         out
     }
+    cca2dsv <- function(obj)
+    {
+        out <- list()
+        dims <- ncol(obj$CCA$u)
+        out$points <- obj$CCA$wa
+        out$type <- toupper(class(obj)[1])
+        attr(out,'class') <- c('dsvord','cca')
+        out
+    }
+
+    
+    ca2dsv <- function(obj)
+    {
+        out <- list()
+        dims <- ncol(obj$CA$u)
+        out$points <- obj$CA$u
+        out$type <- 'CA'
+        attr(out,'class') <- c('dsvord','ca')
+        out
+    }
+    dca2dsv <- function(obj)
+    {
+        out <- list()
+        dims <- 4
+        out$points <- obj$rproj
+        out$type <- 'DCA'
+        attr(out,'class') <- c('dsvord','dca')
+        out
+    }
+
     if (inherits(obj,c('nmds','pco'))) {
         out <- dsv2dsv(obj)
     } else if (inherits(obj,'ltm.ecol')) {
-#       out <- ltm2dsv(obj)
-        stop('ltm is not currently supported, send me an email')
+        #out <- ltm2dsv(obj)
+        stop('ltm is not currently supported')
     } else if (inherits(obj,'boral')) {
         out <- lvs2dsv(obj)
     } else if (inherits(obj,'metaMDS')) {
@@ -110,6 +141,14 @@ as.dsvord <- function(obj)
         out<- pca2dsv(obj)
     } else if (inherits(obj,'mfso')) {
         out <- mfso2dsv(obj)
+    } else if (inherits(obj,'cca'))  {
+        if (is.null(nrow(obj$CCA$u))) {
+            out <- ca2dsv(obj)
+        } else {
+            out <- cca2dsv(obj)
+        }
+    } else if (inherits(obj,'decorana')) {
+        out <- dca2dsv(obj)
     } else {
         stop("object class not recognized")
     }

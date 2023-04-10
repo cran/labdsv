@@ -19,9 +19,6 @@ LabDSV object sorted by type.}
 
 \value{Prints output to the console}
 
-\references{
-\url{http://ecology.msu.montana.edu/labdsv/R}
-}
 
 \note{It's common that after a while the number of objects in your
 workspace can get large, and even with disciplined naming of objects
@@ -31,7 +28,6 @@ report on the objects LabDSV understands.}
 \author{
         David W. Roberts
         \email{droberts@montana.edu}
-        \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \examples{

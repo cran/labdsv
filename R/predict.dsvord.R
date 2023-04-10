@@ -1,5 +1,5 @@
 predict.dsvord <- function(object,comm,minocc=5,dims=1:ncol(object$points),
-                           family='nb',gamma=1,keep.models=FALSE,...)
+                           family='nb',gamma=1,keep.models=FALSE, ...)
 {
     if (!inherits(object,'dsvord'))
         stop("The first argument must be an object of class 'dsvord'")

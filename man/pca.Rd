@@ -1,8 +1,12 @@
 \name{pca}
 \alias{pca}
+\alias{loadings}
 \alias{loadings.pca}
+\alias{summary}
 \alias{summary.pca}
+\alias{scores}
 \alias{scores.pca}
+\alias{varplot}
 \alias{varplot.pca}
 \title{Principal Components Analysis}
 \description{Principal components analysis is a eigenanalysis of a
@@ -12,9 +16,9 @@ system to fewer dimensions.
 \usage{
 pca(mat, cor = FALSE, dim = min(nrow(mat),ncol(mat)))
 \method{summary}{pca}(object, dim = length(object$sdev), \dots)
-\method{scores}{pca}(x, labels = NULL, dim = length(x$sdev))
-\method{loadings}{pca}(x, dim = length(x$sdev), digits = 3, cutoff = 0.1)
-varplot.pca(x, dim=length(x$sdev))
+\method{scores}{pca}(x, labels = NULL, dim = length(x$sdev), \dots)
+\method{loadings}{pca}(x, dim = length(x$sdev), digits = 3, cutoff = 0.1, \dots)
+\method{varplot}{pca}(x, dim=length(x$sdev),\dots)
 }
 \arguments{
     \item{mat}{a matrix or data.frame of interest, samples as rows,
@@ -27,7 +31,7 @@ varplot.pca(x, dim=length(x$sdev))
     \item{labels}{an (optional) vector of labels to identify points}
     \item{digits}{number of digits to report}
     \item{cutoff}{threshold to suppress printing small values}
-    \item{\dots}{arguments to pass to function summary}
+    \item{\dots}{arguments to pass to function summary or graphics arguments}
 }
 \details{PCA is a common multivariate technique.  The version here is simply
 a wrapper for the \code{prcomp} function to make its use and
@@ -40,7 +44,6 @@ plotting consistent with the other LabDSV functions.
          the reduced space.}
    \item{sdev}{a vector of standard deviations for each dimension}
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab7/lab7.html}}
 
 \note{The current version of pca is based on the \code{prcomp}
     function, as opposed to the \code{princomp} function.  Nonetheless,
@@ -53,7 +56,6 @@ plotting consistent with the other LabDSV functions.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{
     \code{princomp}, \code{prcomp},

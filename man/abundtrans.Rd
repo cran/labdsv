@@ -16,7 +16,6 @@ abundtrans(comm,code,value)
 
 \value{a data.frame of transformed abundance data}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab1/lab1.html}}
 \note{Vegetation data are often collected in arbitrary abundance schemes
 (e.g. Braun-Blanquet, Domin, etc.) which have no direct algebraic
 transformation (e.g. log).  This function transforms coded abundances to
@@ -25,7 +24,6 @@ arbitrary importance values as specified.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[vegan]{decostand}}, \code{\link[vegan]{wisconsin}}}
 \examples{

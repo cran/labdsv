@@ -7,18 +7,19 @@
     each environmental variable in a data.frame against an ordination.}
 
 \usage{
-\method{calibrate}{dsvord}(dsvord,site,dims=1:ncol(dsvord$points),
-           family='gaussian',gamma=1,keep.models=FALSE)
+\method{calibrate}{dsvord}(ord,site,dims=1:ncol(ord$points),
+           family='gaussian',gamma=1,keep.models=FALSE,\dots)
 }
 
 \arguments{
-    \item{dsvord}{an ordination object of class dsvord}
+    \item{ord}{an ordination object of class dsvord}
     \item{site}{a matrix or data.frame with sample units as rows
                and environmental variables as columns}
     \item{dims}{the specific dimensions of the ordination to consider}
     \item{family}{the error distribution specifier for the GAM function}
     \item{gamma}{the gamma parameter to control fitting GAM models}
     \item{keep.models}{a switch to control saving the individual GAM models}
+    \item{\dots}{arguments to pass}
 }
 
 \details{The calibrate function sequentially and independently fits a GAM model
@@ -36,7 +37,6 @@ of each variable in each sample unit.}
 \author{
     David W. Roberts 
     \email{droberts@montana.edu} 
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \seealso{\link[labdsv]{predict} for the complementary function that fits GAM models

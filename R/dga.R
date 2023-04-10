@@ -35,7 +35,7 @@ dga <- function(z,x,y,step=50,pres="+",abs="-",labcex=1,
         attr(tmp.gam,'call') <- match.call()
         invisible(tmp.gam)
     } else {
-        tmp.gam <- gam(z ~ s(x) + s(y),family=nb)
+        tmp.gam <- gam(z ~ s(x) + s(y),family=poisson)
         gam.pred <- matrix(predict.gam(tmp.gam,grid,type="response"),nrow=step+1)
         contour(xstep,ystep,gam.pred,labcex=1,
         xlab=xlab,ylab=ylab,main=title)

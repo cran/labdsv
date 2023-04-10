@@ -32,7 +32,6 @@ Produces a list with components:
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[vegan]{anosim}}}
 \examples{

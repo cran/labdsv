@@ -16,11 +16,9 @@ is 1/b the previous difference.  With the default b=2 you get an octave scale.}
 
 \value{a vector of numeric values}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{spcmax, samptot, abundtrans, hellinger
 

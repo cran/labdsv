@@ -1,9 +1,9 @@
 Package: labdsv
-Version: 2.0-1
+Version: 2.1-0
 Title: Ordination and Multivariate Analysis for Ecology
 Author: David W. Roberts <droberts@montana.edu>
 Maintainer: David W. Roberts <droberts@montana.edu>
-Depends: R (>= 2.10), mgcv
+Depends: R (>= 3.0), mgcv
 Imports: cluster, Rtsne, MASS
 Suggests: optpart
 Enhances: vegan
@@ -13,8 +13,7 @@ Description: A variety of ordination and community analyses
    graphical routines to facilitate their interpretation, 
    as well as several novel analyses.
 License: GPL (>= 2)
-URL: http://ecology.msu.montana.edu/labdsv/R
-Packaged: 2019-08-04 10:08:57 UTC; dvrbts
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2019-08-04 12:00:02 UTC
+Packaged: 2023-04-01 16:58:19 UTC; dvrbts
+Date/Publication: 2023-04-10 09:30:02 UTC

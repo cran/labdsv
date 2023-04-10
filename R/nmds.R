@@ -11,12 +11,12 @@ nmds <- function(dis,k=2,y=cmdscale(d=dis,k=k),maxit=50,trace=FALSE)
     return(out)
 }
 
-bestnmds <- function (dis,k=2,itr=20,maxit=100,trace=FALSE)
+bestnmds <- function (dis,k=2,itr=20,maxit=100,trace=FALSE,pbar=TRUE)
 {
     if (!inherits(dis,'dist')) stop("You must pass a dist() object as the first argument")
     if (!is.numeric(k)) stop("The second argument must be an integer")
     if (!is.numeric(itr)) stop("The third argument must be an integer")
-    if (interactive()) pb <- txtProgressBar(min=0, max=itr, style=3)
+    if (interactive() && pbar) pb <- txtProgressBar(min=0, max=itr, style=3)
 
     strss <- rep(0,itr)
     out <- nmds(dis,k=k,maxit=maxit,trace=trace)
@@ -33,9 +33,9 @@ bestnmds <- function (dis,k=2,itr=20,maxit=100,trace=FALSE)
             best <- i
             out <- tmp
         }
-        if (interactive()) setTxtProgressBar(pb,i)
+        if (interactive() && pbar) setTxtProgressBar(pb,i)
     }
-    if (interactive()) close(pb)
+    if (interactive() && pbar) close(pb)
     print(strss)
     cat(paste("\nbest result =", best))
     cat(paste("\nwith stress =",format(out$stress,4),"\n"))

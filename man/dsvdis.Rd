@@ -35,9 +35,9 @@
     Others are quantitative.  For variable i in samples x and y:
 
     \tabular{ll}{
-        ruzicka \tab \eqn{1 - \sum min(x_i,y_i) / \sum max(x_i,y_i)} \cr
-        bray/curtis \tab \eqn{1 - \sum[2 * min(x_i,y_i)] / \sum x_i + y_i} \cr
-        roberts \tab \eqn{1 - [(x_i+y_i) * min(x_i,y_i) / max(x_i,y_i)] / (x_i + y_i)} \cr
+        ruzicka \tab \eqn{1 - \sum \min(x_i,y_i) / \sum \max(x_i,y_i)} \cr
+        bray/curtis \tab \eqn{1 - \sum[2 * \min(x_i,y_i)] / \sum x_i + y_i} \cr
+        roberts \tab \eqn{1 - [(x_i+y_i) * \min(x_i,y_i) / \max(x_i,y_i)] / (x_i + y_i)} \cr
         chisq \tab \eqn{(exp - obs) / \sqrt{exp}} \cr
     }
     The weight argument allows the assignment of weights to individual species in the calculation
@@ -73,9 +73,7 @@
 
 \author{David W. Roberts 
         \email{droberts@montana.edu} 
-        \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html}}
 
 \seealso{\code{dist}, \code{\link[vegan]{vegdist}}}
 

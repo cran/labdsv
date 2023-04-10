@@ -1,5 +1,6 @@
 \name{rndcomm}
 \alias{rndcomm}
+\alias{rndtaxa}
 \title{Randomize a Community Data.Frame}
 \description{Permutes a vegetation (or other) data.frame to establish
 a basis for null model tests in vegetation ecology.
@@ -30,7 +31,6 @@ a basis for null model tests in vegetation ecology.
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg) # returns a vegetation data.frame called bryceveg

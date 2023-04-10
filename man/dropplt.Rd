@@ -30,7 +30,6 @@ missing values, and all plots that have missing values.}
 
 \author{ David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg)  # returns a data frame called bryceveg

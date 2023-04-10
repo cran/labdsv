@@ -17,14 +17,12 @@ values.
 
 \value{A community data.frame
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \note{Hellinger standardization is a convex standardization that 
 simultaneously helps minimize effects of vastly different sample total
 abundances.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{spcmax, samptot, abundtrans
 

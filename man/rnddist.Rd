@@ -24,7 +24,6 @@ that truncates maximum values to simulate a dissimilarity rather than a distance
 \author{
    David W. Roberts
    \email{droberts@montana.edu}
-   \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{metrify}}, \code{\link[labdsv]{euclidify}}}
 \examples{

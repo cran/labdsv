@@ -29,7 +29,6 @@ or factor vectors, resetting the levels appropriately.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \examples{

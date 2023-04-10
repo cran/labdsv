@@ -34,7 +34,6 @@ factorize(df)
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \seealso{\link[labdsv]{factorize}}

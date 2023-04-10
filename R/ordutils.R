@@ -43,21 +43,21 @@ rgl <- function(ord, ...)
   UseMethod("rgl")
 }
 
-loadings <- function(pca, ...)
+loadings <- function(x, ...)
 {
   UseMethod("loadings")
 }
-varplot <- function(pca, ...)
+varplot <- function(x, ...)
 {
     UseMethod("varplot")
 }
 
-scores <- function(pca, ...)
+scores <- function(x, ...)
 {
   UseMethod("scores")
 }
 
-calibrate <- function(dsvord, ...)
+calibrate <- function(ord, ...)
 {
     UseMethod("calibrate")
 }

@@ -33,7 +33,6 @@ while maintaining the maximum amount of data.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg)   # returns a data.frame of taxon abundance

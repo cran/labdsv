@@ -49,11 +49,9 @@ of communities being analyzed is due to the known joint occurrence of the specie
 
 
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \author{
         David W. Roberts
         \email{droberts@montana.edu}
-        \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{
 \code{indval},\code{isamic}

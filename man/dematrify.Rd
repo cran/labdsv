@@ -26,7 +26,6 @@ form is suitable for input to databases, and more easily edited.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{matrify}}}
 

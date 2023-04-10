@@ -29,7 +29,6 @@ Optionally, you can identify sample plots in the last panel with the mouse.
 \item{max}{the maximum dissimilarity of each sample to all others}
 \item{plots}{a vector of samples identified in the last panel}
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html}}
 \note{Dissimilarity matrices are often large, and difficult to visualize
 directly.  \sQuote{disana} is designed to highlight aspects of interest in these
 large matrices.  If the first panel shows a long limb of constant maximum
@@ -39,7 +38,6 @@ to their nearest neighbor.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg) # returns a data.frame called veg

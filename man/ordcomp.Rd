@@ -28,11 +28,9 @@ calculated from.  Prints the correlation between the two on the graph.
 \note{Ordinations are low dimensional representations of multidimensional spaces.
 This function attempts to portray how well the low dimensional solution approximates the
 full dimensional space.}
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab9/lab9.html}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg) # produces a vegetation data.frame

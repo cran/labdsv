@@ -24,7 +24,6 @@ http://www.dcr.virginia.gov/natural_heritage/ncstatistics.shtml}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[labdsv]{const}}, \code{\link[labdsv]{concov}}
 }

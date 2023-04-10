@@ -14,11 +14,12 @@ tsne <- function (dis, k = 2, perplexity = 30, theta = 0.0, eta = 200)
 }
 
 
-besttsne <- function (dis, k = 2, itr = 100, perplexity = 30, theta = 0.0, eta = 200) 
+besttsne <- function (dis, k = 2, itr = 100, perplexity = 30, 
+           theta = 0.0, eta = 200, pbar=TRUE) 
 {
     if (!inherits(dis,'dist'))
         stop("You must pass an object of class 'dist' as the first argument")
-    if (interactive()) pb <- txtProgressBar(min=0, max=itr, style=3)
+    if (interactive() && pbar) pb <- txtProgressBar(min=0, max=itr, style=3)
 
     kldiv <- rep(0, itr)
     res <- Rtsne(dis, dims = k, perplexity = perplexity, theta = theta, eta = eta,
@@ -35,9 +36,9 @@ besttsne <- function (dis, k = 2, itr = 100, perplexity = 30, theta = 0.0, eta =
             best <- i
             res <- tmp
         }
-        if (interactive()) setTxtProgressBar(pb,i)
+        if (interactive() && pbar) setTxtProgressBar(pb,i)
     }
-    if (interactive()) close(pb)
+    if (interactive() && pbar) close(pb)
     print(kldiv)
     cat(paste("\nbest result =", best))
     cat(paste("\nwith KL-div =",format(kldiv[best],4),"\n"))

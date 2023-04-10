@@ -38,9 +38,6 @@ the fourth plot allows you to identify individual sample units with the mouse.
      (excluding values smaller than minabu)}
 }
 
-\references{
-\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab1/lab1.html}
-}
 \note{It's common in niche theory analyses to calculate the rank abundances 
 of taxa in a sample.  This function is similar, but works on multiple samples simultaneously.
 The spc.plt vector in the returned list can be used anywhere species richness is desired.  
@@ -50,7 +47,6 @@ calculations of sample similarity using \code{\link[labdsv]{dsvdis}} among other
 \author{
 	David W. Roberts
 	\email{droberts@montana.edu}
-        \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{\code{\link[vegan]{fisherfit}}, 
          \code{\link[vegan]{prestonfit}},

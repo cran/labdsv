@@ -40,7 +40,6 @@ of each species in each sample unit.}
 \author{
     David W. Roberts 
     \email{droberts@montana.edu} 
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 \seealso{\link[labdsv]{calibrate} for the complementary function that fits GAM models

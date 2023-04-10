@@ -43,7 +43,6 @@ or possibly the order of species centroids in an ordination.
 \value{a data.frame with species as rows, classes as columns, with fraction
 of occurrence of species in classes.}
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab3/lab3.html}}
 \note{Constancy tables are often used in vegetation classification to
 calculate or present characteristic species for specific classes or types.
 \sQuote{const} may be combined with \sQuote{importance} and \sQuote{vegtab} to achieve a
@@ -51,7 +50,6 @@ vegetation table-oriented analysis.}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{
 \code{\link[labdsv]{importance}},

@@ -14,7 +14,8 @@
 \description{A set of routines for plotting, highlighting points,
 or adding fitted surfaces to ordinations.}
 \usage{
-\method{plot}{dsvord}(x, ax = 1, ay = 2, col = 1, title = "", pch = 1, \dots)
+\method{plot}{dsvord}(x, ax = 1, ay = 2, col = 1, title = "", pch = 1,
+                     xlab = paste(x$type, ax), ylab = paste(x$type, ay), \dots)
 \method{points}{dsvord}(x, which, ax = 1, ay = 2, col = 2, pch = 1, cex = 1, 
                       breaks=FALSE, \dots)
 \method{plotid}{dsvord}(ord, ids = seq(1:nrow(ord$points)), ax = 1, ay = 2,
@@ -26,7 +27,7 @@ or adding fitted surfaces to ordinations.}
 \method{ellip}{dsvord}(ord, overlay, ax = 1, ay = 2, cols=c(2,3,4,5,6,7),
         ltys = c(1,2,3), \dots)
 \method{surf}{dsvord}(ord, var, ax = 1, ay = 2, thinplate = TRUE, col = 2, 
-        labcex = 0.8, family = gaussian, gamma=1, grid=50, \dots)
+        labcex = 0.8, lty = 1, family = gaussian, gamma=1, grid=50, \dots)
 \method{thull}{dsvord}(ord,var,grain,ax=1,ay=2,col=2,grid=51,nlevels=5,
         levels=NULL,lty=1,
      numitr=100,\dots)
@@ -39,12 +40,15 @@ or adding fitted surfaces to ordinations.}
     \item{ax}{the dimension to use for the X axis}
     \item{ay}{the dimension to use for the Y axis}
     \item{title}{a title for the plot}
+    \item{xlab}{label for X axis}
+    \item{ylab}{label for Y axis}
     \item{which}{a logical variable to specify points to be highlighted}
     \item{breaks}{a logical switch to control using variable glyph sizes in \sQuote{points}}
     \item{ord}{an object of class \sQuote{dsvord}}
     \item{overlay}{a factor or integer vector to hilight or distinguish}
     \item{cols}{the sequence of color indices to be used}
     \item{glyph}{the sequence of glyphs (pch) to be used}
+    \item{lty}{the line type to be used}
     \item{ltys}{the sequence of line types to be used}
     \item{var}{a variable to be surfaced or tension hulled}
     \item{thinplate}{a logical variable to control the fitting routine: thinplate=TRUE
@@ -58,7 +62,6 @@ or adding fitted surfaces to ordinations.}
            use in surf}
     \item{grain}{the size of cell to use in calculating the tensioned hull}
     \item{nlevels}{the number of contours to draw in representing the tensioned hull}
-    \item{lty}{the line type to use in drawing tensioned hull contours}
     \item{ids}{identifier labels for samples.  Defaults to 1:n}
     \item{col}{color index for points or contours}
     \item{labcex}{size of contour interval labels}
@@ -138,11 +141,9 @@ suggested by Jari Oksanen.
 }
 
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab9/lab9.html}}
 \author{
 David W. Roberts
 \email{droberts@montana.edu}
-\url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 
 

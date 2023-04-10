@@ -23,7 +23,7 @@ summary.pca <- function(object, dim=length(object$sdev), ...)
         "Cumulative Proportion" = cumsum(vars[1:dim])))
 }
 
-scores.pca <- function (x,labels=NULL,dim=length(x$sdev)) 
+scores.pca <- function (x,labels=NULL,dim=length(x$sdev),...) 
 {
     if (dim>length(x$sdev)) {
         cat("Only",length(x$sdev)," axes available\n")
@@ -36,7 +36,7 @@ scores.pca <- function (x,labels=NULL,dim=length(x$sdev))
     }
 }
 
-loadings.pca <- function (x, dim=length(x$sdev), digits=3, cutoff=0.1)
+loadings.pca <- function (x, dim=length(x$sdev), digits=3, cutoff=0.1, ...)
 {
     if (dim>ncol(x$loadings)) {
         cat("Only",ncol(x$loadings),"axes available\n")
@@ -49,12 +49,12 @@ loadings.pca <- function (x, dim=length(x$sdev), digits=3, cutoff=0.1)
     invisible()
 }
 
-loadings.default <- function(x, ...)
-{
-    stats::loadings(x, ...)
-}
+#loadings.default <- function(x, ...)
+#{
+#    stats::loadings(x, ...)
+#}
 
-varplot.pca <- function(x,dim=length(x$sdev)) 
+varplot.pca <- function(x,dim=length(x$sdev),...) 
 {
     var <- x$sdev^2
     barplot(var[1:dim],ylab="Variance")

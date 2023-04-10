@@ -17,11 +17,9 @@ other analyses.
 
 \value{A data.frame of standardized community data.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \seealso{samptot, abundtrans, hellinger
 

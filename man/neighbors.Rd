@@ -19,11 +19,9 @@ matrix}
 \value{Returns a data.frame with sample units as rows and neighbors as columns,
 listed in order of proximity to the sample unit.
 }
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg) # returns a data.frame called veg

@@ -34,11 +34,9 @@ values.  If n > 1 the function draws arrows for all values with rank <= n.
 
 
 
-\references{\url{http://ecology.msu.montana.edu/labdsv/R/labs/lab9/lab9.html}}
 \author{
     David W. Roberts
     \email{droberts@montana.edu}
-    \url{http://ecology.msu.montana.edu/droberts/droberts.html}
 }
 \examples{
 data(bryceveg) # produces a vegetation data.frame
