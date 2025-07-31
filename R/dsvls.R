@@ -18,76 +18,76 @@ dsvls <- function (frame=NULL,opt='full')
         else if (inherits(tmp,'ordiplot')) ordip <- c(ordip,i)
     }
     if (opt == 'brief') {
-        cat('data.frames\n')
-        for (i in df) cat(paste('    ',i,'\n'))
-        cat('distance/dissimilarity matrices\n')
-        for (i in dis) cat(paste('    ',i,'\n'))
-        cat('ordinations\n')
-        for (i in ord) cat(paste('    ',i,'\n'))
-        cat('classifications\n')
-        for (i in clust) cat(paste('    ',i,'\n'))
-        cat('strides\n')
-        for (i in stride) cat(paste('    ',i,'\n'))
-        cat('vegan ordiplots\n')
-        for (i in ordip) cat(paste('    ',i,'\n'))
+        message('data.frames')
+        for (i in df) message(paste('    ',i))
+        message('distance/dissimilarity matrices')
+        for (i in dis) message(paste('    ',i))
+        message('ordinations')
+        for (i in ord) message(paste('    ',i))
+        message('classifications')
+        for (i in clust) message(paste('    ',i,))
+        message('strides')
+        for (i in stride) message(paste('    ',i))
+        message('vegan ordiplots')
+        for (i in ordip) message(paste('    ',i))
     } else {
         if (length(df) > 0) {
-            cat('data.frames\n')
+            message('data.frames')
             for (i in df) {
-                 cat(paste('    ',i,'\n'))
+                 message(paste('    ',i))
                  tmp <- eval(parse(text=i))
-                 cat(paste('        nrow = ',nrow(tmp)),'\n')
-                 cat(paste('        ncol = ',ncol(tmp)),'\n')
+                 message(paste('        nrow = ',nrow(tmp)))
+                 message(paste('        ncol = ',ncol(tmp)))
             }
         }
         if (length(dis) > 0) {
-            cat('distance/dissimilarity matrices\n')
+            message('distance/dissimilarity matrices')
             for (i in dis) {
-                 cat(paste('    ',i,'\n'))
+                 message(paste('    ',i))
                  tmp <- eval(parse(text=i))
                  if (!is.null(attr(tmp,'call'))) {
                      str <- c(attr(tmp,'call'))
-                     cat(paste('        call     = ',str,'\n'))
+                     message(paste('        call     = ',str))
                  }
-                 cat(paste('        size     = ',attr(tmp,'Size'),'\n'))
+                 message(paste('        size     = ',attr(tmp,'Size')))
                  if (!is.null(attr(tmp,'method')))
-                      cat(paste('        method   = ',attr(tmp,'method'),'\n'))
+                      message(paste('        method   = ',attr(tmp,'method')))
             }
         }
         if (length(ord) > 0) {
-        cat('ordinations\n')
+        message('ordinations\n')
             for (i in ord) {
-                cat(paste('    ',i,'\n'))
+                message(paste('    ',i))
                 tmp <- eval(parse(text=i))
-                cat(paste('        type  = ',tmp$type,'\n'))
-                cat(paste('        dim   = ',ncol(tmp$points)),'\n')
+                message(paste('        type  = ',tmp$type))
+                message(paste('        dim   = ',ncol(tmp$points)))
             }
         }
         if (length(ordip) > 0) {
-            cat('vegan ordiplot\n')
+            message('vegan ordiplot')
             for (i in ordip) {
-                cat(paste('    ',i,'\n'))
+                message(paste('    ',i))
                 tmp <- eval(parse(text=i))
-                cat(paste('        dim   = ',ncol(tmp$sites),'\n'))
+                message(paste('        dim   = ',ncol(tmp$sites)))
             }
         }
         if (length(clust) > 0) {
-        cat('classifications\n')
+        message('classifications')
             for (i in clust) {
                 tmp <- eval(parse(text=i))
-                cat(paste('    ',i,'\n'))
+                message(paste('    ',i))
                 if (inherits(tmp,'hclust')) {
-                    cat(paste('        dis    = ',tmp$dist.method,'\n'))
-                    cat(paste('        method = ',tmp$method,'\n'))
+                    message(paste('        dis    = ',tmp$dist.method))
+                    message(paste('        method = ',tmp$method))
                 } else if (inherits(tmp,'partana')) {
-                    cat(paste('        dis    = ',attr(tmp,'call')[[3]],'\n'))
-                    cat(paste('        numclu = ',attr(tmp,'call')[[2]],'\n'))
-                    cat(paste('        numitr = ',tmp$numitr,'\n'))
-                    cat(paste('        ratio  = ',round(tmp$ratio[tmp$numitr],2),'\n'))
+                    message(paste('        dis    = ',attr(tmp,'call')[[3]]))
+                    message(paste('        numclu = ',attr(tmp,'call')[[2]]))
+                    message(paste('        numitr = ',tmp$numitr,'\n'))
+                    message(paste('        ratio  = ',round(tmp$ratio[tmp$numitr],2)))
                 } else if (inherits(tmp,'partition')) {
-                    cat(paste('        dis    = ',tmp$call[[2]],'\n'))
-                    cat(paste('        method = ',attr(tmp,'class')[[1]],'\n'))
-                    cat(paste('        numclu = ',tmp$call[[3]],'\n'))
+                    message(paste('        dis    = ',tmp$call[[2]]))
+                    message(paste('        method = ',attr(tmp,'class')[[1]]))
+                    message(paste('        numclu = ',tmp$call[[3]]))
                 }
             }
         }

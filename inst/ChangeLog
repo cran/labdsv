@@ -1,3 +1,8 @@
+labdsv_2.2-2
+
+Changed all cat() to message() unless in a summary() or print() function
+
+
 labdsv_2.1-0
 
 This is a simple clean-up of some documentation (deleted broken url links)

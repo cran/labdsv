@@ -5,27 +5,27 @@ dga <- function(z,x,y,step=50,pres="+",abs="-",labcex=1,
     ystep <- seq(min(y),max(y),(max(y)-min(y))/step)
     grid<-expand.grid(x=xstep,y=ystep)
     if (any(is.na(x))) {
-        cat("Omitting plots with missing values \n")
+        message("Omitting plots with missing values")
         y <- y[!is.na(x)]
         z <- z[!is.na(x)]
         x <- x[!is.na(x)]
     }
     if (any(is.na(y))) {
-        cat("Omitting plots with missing values \n")
+        message("Omitting plots with missing values")
         x <- y[!is.na(y)]
         z <- z[!is.na(y)]
         y <- x[!is.na(y)]
     }
     if (any(is.na(z))) {
-        cat("Omitting plots with missing values \n")
+        message("Omitting plots with missing values")
         x <- y[!is.na(z)]
         y <- z[!is.na(z)]
         x <- x[!is.na(z)]
     }
     if (is.logical(z)) {
-        cat(paste(" \n z = ",deparse(substitute(z)), 
+        message(paste(" \n z = ",deparse(substitute(z)), 
             " \n x = ",deparse(substitute(x)), 
-            " \n y = ",deparse(substitute(y)),"\n"))
+            " \n y = ",deparse(substitute(y))))
         tmp.gam <- gam(z ~ s(x) + s(y),family=binomial)
         gam.pred <- matrix(predict.gam(tmp.gam,grid,type="response"),nrow=step+1)
         contour(xstep,ystep,gam.pred,levels=seq(0.2,0.8,0.2),labcex=labcex,

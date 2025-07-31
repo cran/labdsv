@@ -53,7 +53,7 @@ importance <- function (comm, clustering, minval = 0, digits = 2, show = minval,
             print(tmpx)
         }
         if (sort) {
-            cat("\nConstancy Table\n\n")
+            message("\nConstancy Table\n")
             print(tmp)
             repeat {
                 plots <- readline(" enter the species: ")
@@ -82,11 +82,11 @@ importance <- function (comm, clustering, minval = 0, digits = 2, show = minval,
                         print(tmp)
                       }
                       else {
-                        print(paste("species", pnt, "does not exist"))
+                        message(paste("species", pnt, "does not exist"))
                       }
                     }
                     else {
-                      print(paste("species", i, "does not exist"))
+                      message(paste("species", i, "does not exist"))
                     }
                 }
             }
@@ -96,4 +96,3 @@ importance <- function (comm, clustering, minval = 0, digits = 2, show = minval,
         }
     }
 }
-

@@ -81,7 +81,7 @@ surf.dsvord <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2,
     y <- ord$points[,ay]
 
     if (any(is.na(var))) {
-        cat("Omitting plots with missing values \n")
+        message("Omitting plots with missing values")
         x <- x[!is.na(var)]
         y <- y[!is.na(var)]
         var <- var[!is.na(var)]
@@ -107,7 +107,7 @@ surf.dsvord <- function(ord, var, ax=1, ay=2, thinplate=TRUE, col=2,
         add=TRUE,col=col)
     print(tmp)
     d2  <- (tmp$null.deviance-tmp$deviance)/tmp$null.deviance
-    cat(paste("D^2 = ",formatC(d2,width=4),"\n"))
+    message(paste("D^2 = ",formatC(d2,width=4)))
     invisible(tmp)
 }
 
@@ -205,7 +205,7 @@ gamord.dsvord <- function (ord,var,partial=NULL,family='gaussian',thinplate=TRUE
     ord <- ord$points
 
     if (any(is.na(var))) {
-        cat("Omitting plots with missing values \n")
+        message("Omitting plots with missing values")
         ord <- ord[!is.na(var),]
         var <- var[!is.na(var)]
     }
@@ -238,22 +238,22 @@ summary.dsvord <- function(object, round = 4, ...)
     if (!inherits(object,'dsvord'))
     stop("You must pass an argument of type 'dsvord'")
 
-    cat(paste('type       = ',object$type,'\n'))
-    cat(paste('dimensions = ',ncol(object$points),'\n'))
+    message(paste('type       = ',object$type))
+    message(paste('dimensions = ',ncol(object$points)))
     if (inherits(object,'nmds')) 
-        cat(paste('stress = ',object$stress,'\n'))
+        message(paste('stress = ',object$stress))
     if (inherits(object,'pco')) {
-        cat(paste('GOF = ',round(object$GOF[1],round),'\n'))
-        cat(paste('GOF = ',round(object$GOF[2],round),'\n'))
+        message(paste('GOF = ',round(object$GOF[1],round)))
+        message(paste('GOF = ',round(object$GOF[2],round)))
     }
     if (inherits(object,'tsne')) {
-        cat(paste('perplexity = ',object$perplexity,'\n'))
-        cat(paste('theta      = ',object$theta,'\n'))
-        cat(paste('eta        = ',object$eta,'\n'))
-        cat(paste('KL-Div     = ',object$KLdiv,'\n'))
+        message(paste('perplexity = ',object$perplexity))
+        message(paste('theta      = ',object$theta))
+        message(paste('eta        = ',object$eta))
+        message(paste('KL-Div     = ',object$KLdiv))
     }
-    cat(paste('call       = ',deparse(attr(object,'call')),'\n'))
-    cat(paste('created    = ',attr(object,'timestamp'),'\n'))
+    message(paste('call       = ',deparse(attr(object,'call'))))
+    message(paste('created    = ',attr(object,'timestamp')))
     if (inherits(object,'pca')) {
         summary.pca(object,...)
     }
@@ -261,15 +261,12 @@ summary.dsvord <- function(object, round = 4, ...)
 
 print.dsvord <- function(x,numpts=50,...)
 {
-    cat(paste('type       = ',x$type,'\n'))
-    cat(paste('dimensions = ',ncol(x$points),'\n'))
-    cat(paste("\nCall   ",c(attr(x,'call')),"\n"))
+    message(paste('type       = ',x$type))
+    message(paste('dimensions = ',ncol(x$points)))
+    message(paste("\nCall   ",c(attr(x,'call'))))
     
     if (nrow(x$points) <= numpts) {
-        cat("\nPoints\n")
+        message("\nPoints")
         print(x$points)
     }
 }
-
-
-

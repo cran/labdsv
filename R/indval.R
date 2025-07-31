@@ -59,7 +59,7 @@ indval.default <- function(x,clustering,numitr=1000, ...)
     names(out$relabu) <- levels
     names(out$indval) <- levels
     class(out) <- 'indval'
-    if (out$error == 1) cat('WARNING: one or more sample units not assigned to any cluster\n')
+    if (out$error == 1) warning('one or more sample units not assigned to any cluster\n')
     out
 }
 
@@ -78,20 +78,17 @@ indval.stride <- function(x,comm,numitr=1,...)
 summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, sort=FALSE, 
                             too.many = 100, ...) 
 {
-    if (object$error == 1) cat('WARNING: one or more species not assigned to any cluster\n')
+    if (object$error == 1) warning('one or more species not assigned to any cluster\n')
     if (type == 'short') {
         tmp <- data.frame(object$maxcls[object$pval <= p], round(object$indcls[object$pval <= 
             p], 4), object$pval[object$pval <= p])
         names(tmp) <- c("cluster", "indicator_value", "probability")
         if (nrow(tmp) <= too.many) print(tmp[order(tmp$cluster, -tmp$indicator_value), ])
-        cat(paste("\nSum of probabilities                 = ", sum(object$pval),
-            "\n"))
-        cat(paste("\nSum of Indicator Values              = ", round(sum(object$indcls),digits=2),
-            "\n"))
-        cat(paste("\nSum of Significant Indicator Values  = ", round(sum(tmp$indicator_value),digits=2),
-            "\n"))
-        cat(paste("\nNumber of Significant Indicators     = ", nrow(tmp),"\n"))
-        cat(paste("\nSignificant Indicator Distribution\n"))
+        message(paste("\nSum of probabilities                 = ", sum(object$pval)))
+        message(paste("\nSum of Indicator Values              = ", round(sum(object$indcls),digits=2)))
+        message(paste("\nSum of Significant Indicator Values  = ", round(sum(tmp$indicator_value),digits=2)))
+        message(paste("\nNumber of Significant Indicators     = ", nrow(tmp)))
+        message(paste("\nSignificant Indicator Distribution"))
         print(table(tmp$cluster))
 
     } else {
@@ -128,10 +125,10 @@ summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, so
                             tmp <- tmp[ord,]
                             print(tmp)
                         } else {
-                            print(paste('species',pnt,'does not exist'))
+                            message(paste('species',pnt,'does not exist'))
                         }
                     } else {
-                        print(paste('species',i,'does not exist'))
+                        message(paste('species',i,'does not exist'))
                     }
                 }
             }
@@ -139,18 +136,18 @@ summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, so
     }
 }
 
-plot.indval <- function (indval,title='',pch=1,legend=TRUE) 
+plot.indval <- function (x,title='',pch=1,legend=TRUE, ...) 
 {
-    plot(indval$indcls,indval$pval,col=indval$maxcls+1,log='y',
+    plot(x$indcls,x$pval,col=x$maxcls+1,log='y',
          pch=pch,xlab='Indicator Value',ylab='Probability')
     lines(c(0,1),c(0.05,0.05),col=2,lty=2)
     lines(c(0,1),c(0.01,0.01),col=2,lty=2)
-    clusts <- 1:max(indval$maxcls)
+    clusts <- 1:max(x$maxcls)
     if (legend) legend(0.9,0.9,as.character(clusts),
              col=clusts+1,pch=pch)
     test <- readline("Do you want to identify any species [Y or N] : ")
     if (test == 'Y' || test == 'y') {
-        spcs <- identify(indval$indcls,indval$pval,names(indval$indcls))
+        spcs <- identify(x$indcls,x$pval,names(x$indcls))
         return(spcs)
     }
 }

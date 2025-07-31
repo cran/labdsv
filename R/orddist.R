@@ -4,13 +4,12 @@ orddist <- function (x, dim)
 
     if (missing(dim)) dim <- ncol(z)
     if (dim != ncol(z))
-        cat(paste("Only comparing first",dim,"dimensions\n"))
+        message(paste("Only comparing first",dim,"dimensions"))
     if (dim > ncol(z)) {
         dim <- ncol(z)
-        cat(paste("The ordination is only",dim,"dimensionsal."))
+        message(paste("The ordination is only",dim,"dimensionsal."))
     }
 
     tmp <- dist(z[, 1:dim])
     tmp
 }
-

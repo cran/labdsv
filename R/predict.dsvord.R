@@ -30,14 +30,14 @@ predict.dsvord <- function(object,comm,minocc=5,dims=1:ncol(object$points),
     points <- object$points[,dims]
     numdim <- ncol(points)
     if (numdim > 3) {
-        cat("\n truncating to 3D\n")
+        message("\n truncating to 3D")
         points <- points[,1:3]
     }
  
     check <- apply(comm>0,2,sum)>=minocc
     if (sum(check) < ncol(comm)) {
         rare <- ncol(comm)-sum(check)
-        cat(paste("\n deleting",rare,"rare species\n"))
+        message(paste("\n deleting",rare,"rare species"))
         comm <- comm[,check]
     }
     size <- ncol(comm)

@@ -11,7 +11,7 @@ ordcomp <- function(x,dis,dim,xlab="Computed Distance",ylab="Ordination Distance
     y <- as.dist(dis)
 
     if (missing(dim)) dim <- ncol(z)
-    if (ncol(z) > dim) cat(paste("Only comparing first",dim,"dimensions\n"))
+    if (ncol(z) > dim) message(paste("Only comparing first",dim,"dimensions"))
     if (length(y) > 5000 & missing(pch)) pch <- "."
 
     a <- dist(z[,1:dim])

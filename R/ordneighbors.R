@@ -27,15 +27,14 @@ ordneighbors <- function (ord,dis,numnbr=1,ax=1,ay=2,digits=5,length=0.1)
     meannbr <- sum/neighbors
     meandis <- mean(dist(ord$points))
 
-    cat(paste("Mean distance to neighbor = ",
-              round(meannbr,digits),"\n"))
-    cat(paste("Mean matrix distance      = ",
-              round(meandis,digits),"\n"))
-    cat(paste("Ratio                     = ",
-              round(meannbr/meandis,digits),"\n"))
+    message(paste("Mean distance to neighbor = ",
+              round(meannbr,digits)))
+    message(paste("Mean matrix distance      = ",
+              round(meandis,digits)))
+    message(paste("Ratio                     = ",
+              round(meannbr/meandis,digits)))
     out <- list(meaninbrdist=round(meannbr,digits),
                 meanmatdist=round(meandis,digits),
                 ratio=as.numeric(round(meannbr/meandis,digits)))
     invisible(out)
 }
-

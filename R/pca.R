@@ -17,7 +17,7 @@ summary.pca <- function(object, dim=length(object$sdev), ...)
 {
     vars <- object$sdev^2
     vars <- vars/object$totdev
-    cat("Importance of components:\n")
+    message("Importance of components:")
     print(rbind("Standard deviation" = object$sdev[1:dim],
         "Proportion of Variance" = vars[1:dim],
         "Cumulative Proportion" = cumsum(vars[1:dim])))
@@ -26,7 +26,7 @@ summary.pca <- function(object, dim=length(object$sdev), ...)
 scores.pca <- function (x,labels=NULL,dim=length(x$sdev),...) 
 {
     if (dim>length(x$sdev)) {
-        cat("Only",length(x$sdev)," axes available\n")
+        message("Only",length(x$sdev)," axes available")
         dim <- length(x$sdev)
     }
     if (!is.null(labels)) {
@@ -39,10 +39,10 @@ scores.pca <- function (x,labels=NULL,dim=length(x$sdev),...)
 loadings.pca <- function (x, dim=length(x$sdev), digits=3, cutoff=0.1, ...)
 {
     if (dim>ncol(x$loadings)) {
-        cat("Only",ncol(x$loadings),"axes available\n")
+        message("Only",ncol(x$loadings),"axes available")
         dim <- ncol(x$loadings)
     }
-    cat("\nLoadings:\n")
+    message("\nLoadings:")
     cx <- format(round(x$loadings[,1:dim], digits = digits))
     cx[abs(x$loadings[,1:dim]) < cutoff] <- substring("       ",1, nchar(cx[1, 1]))
     print(cx, quote = FALSE)

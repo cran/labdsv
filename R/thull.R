@@ -14,7 +14,7 @@ thull.dsvord <- function (ord,var,grain,ax=1,ay=2,col=2,
     x <- ord$points[,ax]
     y <- ord$points[,ay]
     if (any(is.na(var))) {
-        cat("Omitting plots with missing values \n")
+        message("Omitting plots with missing values")
         x <- x[!is.na(var)]
         y <- y[!is.na(var)]
         var <- var[!is.na(var)]
@@ -64,10 +64,10 @@ thull.dsvord <- function (ord,var,grain,ax=1,ay=2,col=2,
                     PACKAGE='labdsv')
             rndsum[i] <- sum(res$hull) 
         } 
-        cat(paste('\nvolume   = ',format(obssum,digits=5),'\nmean     = ',
+        message(paste('\nvolume   = ',format(obssum,digits=5),'\nmean     = ',
                    format(mean(rndsum),digit=5),
                    '\nfraction = ',format(obssum/mean(rndsum),digits=5)))
-        cat(paste('\np <= ',(sum(rndsum<=obssum)+1)/numitr),'\n')
+        message(paste('\np <= ',(sum(rndsum<=obssum)+1)/numitr))
         out$obs <- obssum
         out$reps <- rndsum
     }
@@ -96,14 +96,13 @@ summary.thull <- function(object,...)
     if (!inherits(object,'thull'))
         stop("You must pass an object of class 'thull'")
 
-    cat(paste('\nvolume   = ',format(object$obs,digits=5),'\nmean     = ',
+    message(paste('\nvolume   = ',format(object$obs,digits=5),'\nmean     = ',
                    format(mean(object$reps),digit=5),
                    '\nfraction = ',format(object$obs/mean(object$reps),digits=5)))
-    cat(paste('\np       <= ',format(
+    message(paste('\np       <= ',format(
               (sum(object$reps<=object$obs)+1)/length(object$reps+1)
               ,digits=2),'\n'))
-    cat(paste('\ncall    = ',deparse(attr(object,'call')),'\n'))
-    cat(paste('created = ',attr(object,'timestamp'),'\n'))
+    message(paste('\ncall    = ',deparse(attr(object,'call'))))
+    message(paste('created = ',attr(object,'timestamp')))
 
 }
-

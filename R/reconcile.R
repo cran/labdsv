@@ -1,32 +1,32 @@
 reconcile <- function (comm, site, exlist = 10) 
 {
     if (identical(row.names(comm), row.names(site))) {
-        cat("You're good to go\n")
+        message("You're good to go")
     }
     else {
         orig_comm <- deparse(substitute(comm))
         orig_site <- deparse(substitute(site))
         extracomm <- nrow(comm) - sum(row.names(comm) %in% row.names(site))
         if (extracomm > 0) {
-            cat(paste("You have", extracomm, "plots in comm not in site\n"))
+            message(paste("You have", extracomm, "plots in comm not in site"))
             if (extracomm <= exlist) 
                 print(row.names(comm)[!row.names(comm) %in% row.names(site)])
-            cat("I'll delete the extra plots in comm in the output\n")
+            message("I'll delete the extra plots in comm in the output")
         }
         extrasite <- nrow(site) - sum(row.names(site) %in% row.names(comm))
         if (extrasite > 0) {
-            cat(paste("You have", extrasite, "plots in site not in comm\n"))
+            message(paste("You have", extrasite, "plots in site not in comm"))
             if (extrasite <= exlist) 
                 print(row.names(site)[!row.names(site) %in% row.names(comm)])
-            cat("I'll delete the extra plots in site in the output\n")
+            message("I'll delete the extra plots in site in the output")
         }
         if (!extracomm && !extrasite) {
-            cat("Your data.frames have the same sample units but are sorted differently\n")
-            cat("I'll fix that\n")
+            message("Your data.frames have the same sample units but are sorted differently")
+            message("I'll fix that")
         }
         if (!extracomm || !extrasite) {
-            cat("Your edited data.frames now have the same sample units but are sorted differently\n")
-            cat("I'll fix that\n")
+            message("Your edited data.frames now have the same sample units but are sorted differently")
+            message("I'll fix that")
         }
         comm <- comm[order(row.names(comm)), ]
         site <- site[order(row.names(site)), ]

@@ -23,7 +23,7 @@ reconciled data.frames.
 \note{Package labdsv (and many other packages in ecological data analysis)
 require two data.frames to structure the data.  One contains the abundance of
 species within samples with samples as rows and species as columns.  This data.frame I
-refer to as the sQuote{comm} data.frame.  The other data.frame contains all the
+refer to as the sQuote(comm) data.frame.  The other data.frame contains all the
 environmental or site data collected at the same samples.  This data.frame I
 refer to as the \sQuote{site} data.frame.  Due to independent subsampling, sorting or
 editing of the data (often outside of R) the two data.frames often lose the necessary

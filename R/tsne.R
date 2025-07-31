@@ -40,8 +40,8 @@ besttsne <- function (dis, k = 2, itr = 100, perplexity = 30,
     }
     if (interactive() && pbar) close(pb)
     print(kldiv)
-    cat(paste("\nbest result =", best))
-    cat(paste("\nwith KL-div =",format(kldiv[best],4),"\n"))
+    message(paste("\nbest result =", best))
+    message(paste("\nwith KL-div =",format(kldiv[best],4)))
     out <- list(points=res$Y,type='t-SNE')
     class(out) <- c('dsvord','tsne')
     attr(out,'perplexity') <- res$perplexity

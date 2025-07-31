@@ -32,13 +32,13 @@ calibrate.dsvord <- function(ord,site,dims=1:ncol(ord$points),
     points <- ord$points[,dims]
     numdim <- ncol(points)
     if (numdim > 3) {
-        cat("\n truncating to 3D\n")
+        message("\n truncating to 3D\n")
         points <- points[,1:3]
     }
 
     check <- sapply(site,class)=="numeric"
     if (sum(check) > 0) {
-        cat("\n omitting factors\n")
+        message("\n omitting factors\n")
         site <- site[,check]
     }
     size <- ncol(site)
