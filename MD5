@@ -1,9 +1,9 @@
-04375ecba94dc9888b13c7802ac1d2ac *DESCRIPTION
-064d714a5be13aec2b0c8c366fe02218 *NAMESPACE
+f35629f692980b27bb224e5d32e4aa3d *DESCRIPTION
+96a9b7be0998d7f43b2e1af20b201517 *NAMESPACE
 5ad7d7f058bcbb4d064b9df2f3d758e7 *R/abundtrans.R
 5294c03579c7630a867fef9c95f71f5c *R/abuocc.R
-728cb28cbd7a1a6878e4fad8b5ee8392 *R/as.dsvord.R
-ad95d4283282fbd65f53660beb06f241 *R/calibrate.R
+3554af9c9cec7e677e633341c56b135b *R/as.dsvord.R
+00836b7eea67943b5d73e7dd06625de5 *R/calibrate.R
 f6d1c5117b02ae2c72cbe0687ef39355 *R/ccm.R
 14e98f0b7dac73ac783e625b4a557b62 *R/clustify.R
 2ff26533751e568cb254a158b8e03e8e *R/compspec.R
@@ -22,7 +22,7 @@ e1deedd0c9747a0cb7dcd7444bc50c9f *R/factorize.R
 91dc93bb249f23ba0f711c454f0f393f *R/gsr.R
 db74379121538a2c1436e46aeeb786e3 *R/homoteneity.R
 c7de118dc7290032a1c2bd17d52cc218 *R/importance.R
-ade54a8de403d522f7792b20b25c6a3d *R/indval.R
+6e7b44dae80b9d445860f56a17b82500 *R/indval.R
 62cdd3bb3b0c39caa9215e6815d71975 *R/isamic.R
 eec05ee4bdbe3027ffe550f4ea1d9e65 *R/matrify.R
 7435a4f085e707a9dc5140e8d63c7ade *R/metrify.R
@@ -54,7 +54,7 @@ aa1b214e6717c16d32140dc5f30974dc *R/vegtab.R
 427b5a28c2b8d455aba55160607e6680 *R/zzz.R
 317374d779f36ff7e2e2a8d8b9bd6887 *data/brycesite.rda
 89c92cba617d6e7faf042ee5cf977604 *data/bryceveg.rda
-42245b9c9334e64c48fe356efe7871be *inst/ChangeLog
+b17121bd956f445ebda5955cc9a4e3d8 *inst/ChangeLog
 4bf49a6c270f4df823a51c6121824a80 *man/abundtrans.Rd
 01d1f8940436c2fa87dbaa12d1141bc3 *man/abuocc.Rd
 673e3ec8f3cc8919b2726aad495b8661 *man/as.dsvord.Rd
@@ -81,8 +81,8 @@ b293df32e12264dc99949025e369d1e0 *man/factorize.Rd
 f92b53fd534082ed86727aa34ea2052d *man/hellinger.Rd
 689f7db22b609c2e2bf7d8d8095b4f84 *man/homoteneity.Rd
 d0b8034264dbaab82fe421f44f528e72 *man/importance.Rd
-eb8451b805c65f473bc39d76c6b08ac5 *man/indval.Rd
-1b9507559b35f2435407eb9caa3dbc10 *man/isamic.Rd
+d377d406e5c225f9092db596eabaa3a8 *man/indval.Rd
+1666f4841c00cb59ffd0178451288da2 *man/isamic.Rd
 3e38052d76e173b264286392e77282f3 *man/labdsv.internal.Rd
 a38207b0cb2860bb15de996809481ce8 *man/matrify.Rd
 3d7a456b7b19928d6b17ca6c6a8c9b9e *man/metrify.Rd
@@ -112,6 +112,7 @@ b19987dd53ba064c9ee2221bcb3283a6 *man/spcdisc.Rd
 7ced6d3bda8e0928512538e66346f0bf *src/dsvdis.f90
 f840bdded87f6cd7c686fbe146c7b982 *src/euclid.f90
 e1de42e2fccdf8736c1bd2e50c714bf5 *src/indval.f90
+3a187b60268c9695cd6901744ca4eb85 *src/init.c
 d3e6cc677ffb24a496b784132fe0771b *src/ismetric.f90
 ea1e982401c8208307a8d1b2dd15a354 *src/metric.f90
 2da8bd5320ae7df5170cada53c73c2ee *src/orddist.f90

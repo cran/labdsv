@@ -12,14 +12,12 @@ always present or always absent within clusters or types.}
     \item{comm}{a matrix or data.frame of samples, species as columns, samples as
                rows}
     \item{clustering}{a vector of numeric cluster memberships for samples, or a
-                 classification object returned from \code{\link[cluster]{pam}}, 
-                 \code{\link[optpart]{partana}}, or \code{\link[optpart]{slice}}}
-    \item{sort}{if TRUE, return in order of highest value to lowest rather than
-                input order}
+                 classification object returned from \code{\link[cluster]{pam}}}
+    \item{sort}{ a switch to control sorting of results by value}
 }
 
 \details{Calculates the constancy (fractional occurrence of each species in
-every type), and then calculates twice the the sum of the absolute values of the
+every type), and then calculates twice the sum of the absolute values of the
 constancy - 0.5, normalized to the number of clusters (columns).}
 
 \value{A data.frame of species indicator values} 

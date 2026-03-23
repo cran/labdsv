@@ -1,3 +1,8 @@
+labdsv_2.3-0
+
+small changes to help files to meet CRAN requests
+
+
 labdsv_2.2-2
 
 Changed all cat() to message() unless in a summary() or print() function

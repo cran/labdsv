@@ -11,20 +11,20 @@ as.dsvord <- function(obj)
 #         out
 #     }
 
-    lvs2dsv <- function (lvs,alpha=0.5)
-    {
-        testcov <- lvs$lv.median %*% t(lvs$lv.coefs.median[, 2:(lvs$num.lv +
-                1)])
-        do.svd <- svd(testcov, lvs$num.lv, lvs$num.lv)
-        choose.lvs <- scale(do.svd$u * matrix(do.svd$d[1:lvs$num.lv]^alpha,
-            nrow = lvs$n, ncol = lvs$num.lv, byrow = TRUE), center = TRUE,
-            scale = FALSE)
-        out <- list()
-        out$points <- choose.lvs
-        out$type <- 'LVS'
-        class(out) <- c('dsvord','lvs')
-        out
-    }
+#    lvs2dsv <- function (lvs,alpha=0.5)
+#    {
+#        testcov <- lvs$lv.median %*% t(lvs$lv.coefs.median[, 2:(lvs$num.lv +
+#                1)])
+#        do.svd <- svd(testcov, lvs$num.lv, lvs$num.lv)
+#        choose.lvs <- scale(do.svd$u * matrix(do.svd$d[1:lvs$num.lv]^alpha,
+#            nrow = lvs$n, ncol = lvs$num.lv, byrow = TRUE), center = TRUE,
+#            scale = FALSE)
+#        out <- list()
+#        out$points <- choose.lvs
+#        out$type <- 'LVS'
+#        class(out) <- c('dsvord','lvs')
+#        out
+#    }
 
     tsne2dsv <- function(tsne)
     {
@@ -129,8 +129,8 @@ as.dsvord <- function(obj)
     } else if (inherits(obj,'ltm.ecol')) {
         #out <- ltm2dsv(obj)
         stop('ltm is not currently supported')
-    } else if (inherits(obj,'boral')) {
-        out <- lvs2dsv(obj)
+#   } else if (inherits(obj,'boral')) {
+#       out <- lvs2dsv(obj)
     } else if (inherits(obj,'metaMDS')) {
         out <- meta2dsv(obj) 
     } else if ('perplexity' %in% names(obj)) {

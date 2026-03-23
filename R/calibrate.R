@@ -37,7 +37,7 @@ calibrate.dsvord <- function(ord,site,dims=1:ncol(ord$points),
     }
 
     check <- sapply(site,class)=="numeric"
-    if (sum(check) > 0) {
+    if (sum(check) < ncol(site)) {
         message("\n omitting factors\n")
         site <- site[,check]
     }

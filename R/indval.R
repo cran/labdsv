@@ -63,18 +63,6 @@ indval.default <- function(x,clustering,numitr=1000, ...)
     out
 }
 
-indval.stride <- function(x,comm,numitr=1,...)
-{
-    res <- rep(NA,ncol(x$clustering))
-    for (i in 1:ncol(x$clustering)) {
-        res[i] <- mean(indval(comm,x$clustering[,i],numitr=numitr)$indcls)
-    }
-    clusters <- x$seq
-    indval <- res
-    out <- data.frame(clusters,indval)
-    out
-}
-
 summary.indval <- function (object, p = 0.05, type='short', digits=2, show=p, sort=FALSE, 
                             too.many = 100, ...) 
 {

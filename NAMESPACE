@@ -113,7 +113,6 @@ S3method(predict,dsvord)
 S3method(calibrate,dsvord)
 
 S3method(indval,default)
-S3method(indval,stride)
 
 S3method(plot,compspec)
 S3method(plot,thull)

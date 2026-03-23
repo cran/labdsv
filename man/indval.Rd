@@ -2,7 +2,6 @@
 \alias{indval}
 \alias{duleg}
 \alias{indval.default}
-\alias{indval.stride}
 \alias{summary.indval}
 
 \title{Dufrene-Legendre Indicator Species Analysis}
@@ -12,23 +11,18 @@ species in clusters or types.}
 \usage{
 indval(x, \dots)
 \method{indval}{default}(x,clustering,numitr=1000,\dots)
-\method{indval}{stride}(x,comm,numitr=1,\dots)
 \method{summary}{indval}(object, p=0.05, type='short', digits=2, show=p,
        sort=FALSE, too.many=100, \dots)
 }
 
 \arguments{
     \item{x}{a matrix or data.frame of samples with species as columns and
-               samples as rows, or an object of class \sQuote{stride} from function
-               \code{\link[optpart]{stride}}}
+               samples as rows, or an object}
     \item{clustering}{a vector of numeric cluster memberships for samples, or a
-                 classification object returned from \code{\link[cluster]{pam}}, 
-                 or \code{\link[optpart]{optpart}}, \code{\link[optpart]{slice}},
-                 or \code{\link[optpart]{archi}}}
+                 classification object returned from \code{\link[cluster]{pam}}}
     
     \item{numitr}{the number of randomizations to iterate to calculate
                   probabilities}
-    \item{comm}{a data.frame with samples as rows and species as columns}
     \item{object}{an object of class \sQuote{indval}}
     \item{p}{the maximum probability for a species to be listed in the summary}
     \item{type}{a switch to choose between \sQuote{short} and \sQuote{long} style summary}
@@ -54,8 +48,6 @@ for cluster \eqn{c \in K}; \cr
 
 \deqn{d_{ic} = f_{ic} \times a_{ic}}
 
-Calculated on a \sQuote{stride} the function calculates the indicator values of
-species for each of the separate partitions in the stride.
 }
 \value{
 The default function returns a list of class \sQuote{indval} with components:
@@ -66,9 +58,6 @@ The default function returns a list of class \sQuote{indval} with components:
     \item{indcls}{the indicator value for each species to its maximum class}
     \item{pval}{the probability of obtaining as high an indicator values as
                 observed over the specified iterations}  
-
-The stride-based function returns a data.frame with the number of clusters
-in the first column and the mean indicator value in the second.
 
 The \sQuote{summary} function has two options.  In \sQuote{short} mode it presents
 a table of indicator species whose probability is less then \sQuote{p}, giving their 
