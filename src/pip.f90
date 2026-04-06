@@ -15,6 +15,7 @@
       double precision expect
       double precision xdiff,ydiff
       double precision pxmin,pxmax
+      double precision r
       integer count
 
       do i=1,lenvec

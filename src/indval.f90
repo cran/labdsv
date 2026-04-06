@@ -153,7 +153,7 @@
       end do   
 
       do i=1,numplt
-        index = unifrnd()*pool+1
+        index = int(unifrnd()*pool+1)
         pclass(i) = tclass(index)
         tclass(index) = tclass(pool)
         pool = pool - 1

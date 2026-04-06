@@ -1,3 +1,10 @@
+labdsv_2.3-1
+
+several small changes to code to correct Fortran argument lists 
+and to eliminate unnecessary comments and warnings from -pedantic compiler
+switch
+
+
 labdsv_2.3-0
 
 small changes to help files to meet CRAN requests

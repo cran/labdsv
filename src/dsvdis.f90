@@ -27,7 +27,7 @@
       else if (index .eq. 7) then
         call chisq(mat,weight,nrow,ncol,dis,rowsum,colsum)
       else if (index .eq. 8) then
-        call hellin(mat,weight,nrow,ncol,dis,rowsum)
+        call hellin(mat,nrow,ncol,dis,rowsum)
       endif
 
       if (stepx .gt. 0.0) then
@@ -82,10 +82,10 @@
           b = 0
           do k=1,ncol
             if (mat(i,k) .gt. 0 .and. mat(j,k) .gt. 0) then
-              a = a + weight(k)
-              b = b + weight(k) 
+              a = a + int(weight(k))
+              b = b + int(weight(k))
             else if (mat(i,k) .gt. 0 .or. mat(j,k) .gt. 0) then
-              b = b + weight(k) 
+              b = b + int(weight(k))
             endif
           end do   
           if (a .eq. 0 .or. b .eq. 0) then
@@ -126,10 +126,10 @@
           b = 0
           do k=1,ncol
             if (mat(i,k) .gt. 0 .and. mat(j,k) .gt. 0) then
-              a = a + 2 * weight(k)
-              b = b + 2 * weight(k)
+              a = a + 2 * int(weight(k))
+              b = b + 2 * int(weight(k))
             else if (mat(i,k) .gt. 0 .or. mat(j,k) .gt. 0) then
-              b = b + weight(k)
+              b = b + int(weight(k))
             endif
           end do    
           if (a .eq. 0 .or. b .eq. 0) then
@@ -172,11 +172,11 @@
           c = 0
           do k=1,ncol
             if (mat(i,k) .gt. 0 .and. mat(j,k) .gt. 0) then
-              a = a + weight(k) 
+              a = a + int(weight(k))
             else if (mat(i,k) .gt. 0 .and. mat(j,k) .eq. 0) then
-              b = b + weight(k) 
+              b = b + int(weight(k)) 
             else if (mat(i,k) .eq. 0 .and. mat(j,k) .gt. 0) then
-              c = c + weight(k) 
+              c = c + int(weight(k)) 
             endif
           end do    
           temp = (a+b) * (a+c)
@@ -373,20 +373,16 @@
 
 !* dsvdis ******************* subroutine hellin **********************
 
-      subroutine hellin(mat,weight,nrow,ncol,dis,rowsum)
+      subroutine hellin(mat,nrow,ncol,dis,rowsum)
 
 !* passed
 
       double precision mat(nrow,ncol)
-      double precision weight(ncol)
       integer nrow,ncol
       double precision dis(nrow,nrow)
       double precision rowsum(nrow)
 
 !* local
-
-      double precision totsum
-      double precision temp
 
       do i=1,nrow
         rowsum(i) = 0.0

@@ -1,5 +1,5 @@
 Package: labdsv
-Version: 2.3-0
+Version: 2.3-1
 Title: Ordination and Multivariate Analysis for Ecology
 Authors@R: person(given = c("David", "W."),
                       family = "Roberts",
@@ -19,5 +19,5 @@ NeedsCompilation: yes
 Repository: CRAN
 Author: David W. Roberts [aut, cre]
 Maintainer: David W. Roberts <droberts@montana.edu>
-Packaged: 2026-03-19 22:12:52 UTC; dvrbts
-Date/Publication: 2026-03-23 14:00:02 UTC
+Packaged: 2026-04-06 02:49:43 UTC; dvrbts
+Date/Publication: 2026-04-06 14:30:02 UTC

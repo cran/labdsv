@@ -10,11 +10,10 @@ extern void F77_NAME(euclid)(void*,void*);
 extern void F77_NAME(duleg)(void*,void*,void*,void*,void*,void*,void*,void*,void*,
                             void*,void*,void*,void*,void*,void*,void*,void*,void*);
 extern void F77_NAME(metric)(void*,void*);
-extern void F77_NAME(ismetric)(void*,void*);
+extern void F77_NAME(ismetric)(void*,void*,void*);
 extern void F77_NAME(pip)(void*,void*,void*,void*,void*,void*,void*);
 extern void F77_NAME(stepdist)(void*,void*);
-extern void F77_NAME(thull)(void*,void*,void*,void*,void*,void*,void*,void*,void*,
-                           void*,void*);
+extern void F77_NAME(thull)(void*,void*,void*,void*,void*,void*,void*,void*,void*);
 
 /* FORTRAN  {"name", MACRO cast, number of arguments}*/
 
@@ -23,10 +22,10 @@ static const R_FortranMethodDef FortranCalls[] = {
     {"euclid",   (DL_FUNC) &F77_NAME(euclid),    2},
     {"duleg",    (DL_FUNC) &F77_NAME(duleg),    18},
     {"metric",   (DL_FUNC) &F77_NAME(metric),    2},
-    {"ismetric", (DL_FUNC) &F77_NAME(ismetric), 18},
+    {"ismetric", (DL_FUNC) &F77_NAME(ismetric),  3},
     {"pip",      (DL_FUNC) &F77_NAME(pip),       7},
     {"stepdist", (DL_FUNC) &F77_NAME(duleg),     2},
-    {"thull",    (DL_FUNC) &F77_NAME(thull),    11},
+    {"thull",    (DL_FUNC) &F77_NAME(thull),     9},
     {NULL, NULL, 0}
 };
 

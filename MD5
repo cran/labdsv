@@ -1,4 +1,4 @@
-f35629f692980b27bb224e5d32e4aa3d *DESCRIPTION
+67f0e4dc4404f69826ccc2955eb91c3f *DESCRIPTION
 96a9b7be0998d7f43b2e1af20b201517 *NAMESPACE
 5ad7d7f058bcbb4d064b9df2f3d758e7 *R/abundtrans.R
 5294c03579c7630a867fef9c95f71f5c *R/abuocc.R
@@ -54,7 +54,7 @@ aa1b214e6717c16d32140dc5f30974dc *R/vegtab.R
 427b5a28c2b8d455aba55160607e6680 *R/zzz.R
 317374d779f36ff7e2e2a8d8b9bd6887 *data/brycesite.rda
 89c92cba617d6e7faf042ee5cf977604 *data/bryceveg.rda
-b17121bd956f445ebda5955cc9a4e3d8 *inst/ChangeLog
+c6ac68381fcb006b2af22329b907c73f *inst/ChangeLog
 4bf49a6c270f4df823a51c6121824a80 *man/abundtrans.Rd
 01d1f8940436c2fa87dbaa12d1141bc3 *man/abuocc.Rd
 673e3ec8f3cc8919b2726aad495b8661 *man/as.dsvord.Rd
@@ -109,14 +109,14 @@ b19987dd53ba064c9ee2221bcb3283a6 *man/spcdisc.Rd
 912741f6ef641412949c5eb6b6870f54 *man/thull.Rd
 65c85d9a4843495c8a8e5f22d4e59fa8 *man/tsne.Rd
 48c78d842b10c402108ac5b3024a427d *man/vegtab.Rd
-7ced6d3bda8e0928512538e66346f0bf *src/dsvdis.f90
+124e219ccf65d8b7d83bb126777df13f *src/dsvdis.f90
 f840bdded87f6cd7c686fbe146c7b982 *src/euclid.f90
-e1de42e2fccdf8736c1bd2e50c714bf5 *src/indval.f90
-3a187b60268c9695cd6901744ca4eb85 *src/init.c
+7c56d33f8a1e0f58e9fd69952098b47c *src/indval.f90
+260804df11e6254955ae104da281f9a5 *src/init.c
 d3e6cc677ffb24a496b784132fe0771b *src/ismetric.f90
 ea1e982401c8208307a8d1b2dd15a354 *src/metric.f90
 2da8bd5320ae7df5170cada53c73c2ee *src/orddist.f90
-3ba537f58d83053ed9e2ee66824ac2cf *src/pip.f90
+41af0c49bffcb03a97687b1242acb112 *src/pip.f90
 c878da0c9e6f4bf574431b61d3ffff84 *src/random.c
 0b972c454b6b14931e8d394fa3610bc4 *src/stepdist.f90
 65ca71b4a19b577e39098c23c9441874 *src/thull.f90
